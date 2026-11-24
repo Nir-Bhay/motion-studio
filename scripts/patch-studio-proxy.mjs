@@ -32,3 +32,34 @@ if (existsSync(originPolicyFile)) {
     console.log("Patched origin-policy.js for HTTPS reverse proxy.");
   }
 }
+
+const liveEventsFile = path.join(
+  root,
+  "node_modules/@remotion/studio-server/dist/preview-server/live-events.js"
+);
+if (existsSync(liveEventsFile)) {
+  let src = readFileSync(liveEventsFile, "utf8");
+  let changed = false;
+  if (!src.includes("'x-accel-buffering': 'no'")) {
+    src = src.replace(
+      "'cache-control': 'no-cache',",
+      "'cache-control': 'no-cache',\n            'x-accel-buffering': 'no',"
+    );
+    changed = true;
+  }
+  if (!src.includes("': ping\\n\\n'")) {
+    src = src.replace(
+      "        clients.push(newClient);",
+      "        clients.push(newClient);\n        const pingTimer = setInterval(() => { try { response.write(': ping\\n\\n'); } catch (_e) {} }, 15000);"
+    );
+    src = src.replace(
+      "        request.on('close', () => {",
+      "        request.on('close', () => {\n            clearInterval(pingTimer);"
+    );
+    changed = true;
+  }
+  if (changed) {
+    writeFileSync(liveEventsFile, src);
+    console.log("Patched live-events.js with SSE keepalive & no-buffering.");
+  }
+}
