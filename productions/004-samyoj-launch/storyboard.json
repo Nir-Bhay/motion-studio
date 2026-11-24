@@ -1,0 +1,32 @@
+{
+  "productionId": "004-samyoj-launch",
+  "version": "4.0",
+  "fps": 60,
+  "bpm": 120,
+  "width": 1920,
+  "height": 1080,
+  "totalFrames": 4320,
+  "durationSeconds": 72.0,
+  "transitionFrames": 10,
+  "audio": {
+    "masterA": "public/audio/samyoj-master-a.mp3",
+    "masterB": "public/audio/samyoj-master-b.mp3",
+    "cut45": "public/audio/samyoj-cut-45.mp3",
+    "teaser15": "public/audio/samyoj-teaser-15.mp3",
+    "voiceId": "voice-01",
+    "loudnessLufs": -14.0
+  },
+  "scenes": [
+    { "id": "S01", "name": "Hook", "startFrame": 0, "endFrame": 220, "durationFrames": 230, "voFile": "vo_v4_scenes/s01.wav", "summary": "Centered modern Samyoj mobile Inbox showing 6h 25m unreplied WhatsApp inquiry." },
+    { "id": "S02", "name": "Chaos", "startFrame": 220, "endFrame": 672, "durationFrames": 462, "voFile": "vo_v4_scenes/s02.wav", "summary": "Sequential camera pan across WhatsApp, Instagram, Messenger, Meta Ads & Email before pull-back." },
+    { "id": "S03", "name": "Bloom", "startFrame": 672, "endFrame": 962, "durationFrames": 300, "voFile": "vo_v4_scenes/s03.wav", "summary": "Warm white bloom + large Samyoj mark + 5 connected channel pills." },
+    { "id": "S04", "name": "Inbox", "startFrame": 962, "endFrame": 1548, "durationFrames": 596, "voFile": "vo_v4_scenes/s04.wav", "summary": "Real Samyoj desktop & mobile Unified Inbox (#EFEAE2 canvas, Unread filter, instant reply)." },
+    { "id": "S05", "name": "AiStudio", "startFrame": 1548, "endFrame": 2206, "durationFrames": 668, "voFile": "vo_v4_scenes/s05.wav", "summary": "AI Chatting + AI Calling Studio + Hinglish qualification + human handoff." },
+    { "id": "S06", "name": "Flows", "startFrame": 2206, "endFrame": 2550, "durationFrames": 354, "voFile": "vo_v4_scenes/s06.wav", "summary": "Visual automation canvas + confirmed-lead follow-up email workflow." },
+    { "id": "S07", "name": "Campaigns", "startFrame": 2550, "endFrame": 2874, "durationFrames": 334, "voFile": "vo_v4_scenes/s07.wav", "summary": "Campaign delivery telemetry + Read/Unread recipient filtering + follow-up dispatch." },
+    { "id": "S08", "name": "DashboardAndIG", "startFrame": 2874, "endFrame": 3416, "durationFrames": 552, "voFile": "vo_v4_scenes/s08.wav", "summary": "Live Dashboard + Meta Ads performance analytics + Instagram Post Scheduler & Comment Automation." },
+    { "id": "S09", "name": "Burst", "startFrame": 3416, "endFrame": 3740, "durationFrames": 334, "voFile": "vo_v4_scenes/s09.wav", "summary": "8-card rapid showcase of verified multi-channel capabilities." },
+    { "id": "S10", "name": "Trust", "startFrame": 3740, "endFrame": 4004, "durationFrames": 274, "voFile": "vo_v4_scenes/s10.wav", "summary": "Official Meta Cloud API · Zero markup on Meta fees · Built in India." },
+    { "id": "S11", "name": "Close", "startFrame": 4004, "endFrame": 4320, "durationFrames": 316, "voFile": "vo_v4_scenes/s11.wav", "summary": "Samyoj lockup + Start your 14-day free trial at app.samyoj.com." }
+  ]
+}

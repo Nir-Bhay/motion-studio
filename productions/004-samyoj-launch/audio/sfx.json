@@ -1,0 +1,105 @@
+{
+  "sample_rate": 48000,
+  "events": [
+    {
+      "time": 0.4,
+      "type": "ping",
+      "label": "S01 11:47 PM message ping (non-WhatsApp generic glass)"
+    },
+    {
+      "time": 1.6,
+      "type": "whoosh",
+      "label": "S01 clock advance 11:47 PM -> 6:12 AM"
+    },
+    {
+      "time": 6.8,
+      "type": "click",
+      "label": "S02 chaos window 1 click"
+    },
+    {
+      "time": 7.75,
+      "type": "click",
+      "label": "S02 chaos window 2 click"
+    },
+    {
+      "time": 8.75,
+      "type": "click",
+      "label": "S02 chaos window 3 click"
+    },
+    {
+      "time": 9.83,
+      "type": "click",
+      "label": "S02 chaos window 4 click"
+    },
+    {
+      "time": 12.5,
+      "type": "chime",
+      "label": "S03 bloom coral->indigo->mint morph chime"
+    },
+    {
+      "time": 18.0,
+      "type": "whoosh",
+      "label": "S04 unified inbox sweep"
+    },
+    {
+      "time": 20.6,
+      "type": "click",
+      "label": "S04 select Meera thread"
+    },
+    {
+      "time": 23.0,
+      "type": "click",
+      "label": "S04 click reply"
+    },
+    {
+      "time": 28.4,
+      "type": "ping",
+      "label": "S05 Hinglish query arrives"
+    },
+    {
+      "time": 30.8,
+      "type": "chime",
+      "label": "S05 AI replies <5s + HOT lead route"
+    },
+    {
+      "time": 38.0,
+      "type": "whoosh",
+      "label": "S06 workflow canvas sweep"
+    },
+    {
+      "time": 41.2,
+      "type": "click",
+      "label": "S06 node wire lock"
+    },
+    {
+      "time": 47.0,
+      "type": "click",
+      "label": "S07 launch broadcast"
+    },
+    {
+      "time": 51.8,
+      "type": "chime",
+      "label": "S07 UPI payment received ding"
+    },
+    {
+      "time": 58.2,
+      "type": "click",
+      "label": "S08 Kanban card drop into Won"
+    },
+    {
+      "time": 59.5,
+      "type": "whoosh",
+      "label": "S08 horizontal pan to analytics"
+    },
+    {
+      "time": 70.0,
+      "type": "chime",
+      "label": "S10 trust pillars lock"
+    },
+    {
+      "time": 81.0,
+      "type": "click",
+      "label": "S11 CTA pill click app.samyoj.com"
+    }
+  ]
+}

@@ -12,3 +12,8 @@ references/
 .env
 .env.*
 !.env.example
+# large intermediate WAV stems & secondary unvoiced MP4 duplicate (available locally & regenerable)
+productions/004-samyoj-launch/audio/*.wav
+productions/004-samyoj-launch/audio/vo_v4/
+productions/004-samyoj-launch/audio/vo_v4_tight/
+productions/004-samyoj-launch/out/samyoj-master-a-1080p60.mp4

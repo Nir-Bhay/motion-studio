@@ -9,6 +9,16 @@ import { Asi05V2 } from "./compositions/asi05v2/Asi05V2";
 import { Asi05StyleSample } from "./compositions/asi05v2/Asi05StyleSample";
 import { Asi05Premium } from "./compositions/asi05v3/Asi05Premium";
 import { ASI05_FPS, ASI05_TOTAL_FRAMES } from "./compositions/asi05v3/shots";
+import { SamyojMaster } from "./samyoj/SamyojMaster";
+import {
+  SamyojCut45,
+  SamyojLoop6,
+  SamyojSquare,
+  SamyojTeaser15,
+  SamyojThumbnail,
+  SamyojVertical,
+} from "./samyoj/SamyojCuts";
+import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./samyoj/timeline";
 
 /**
  * Saari compositions yahan register hoti hain.
@@ -19,6 +29,76 @@ import { ASI05_FPS, ASI05_TOTAL_FRAMES } from "./compositions/asi05v3/shots";
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="SamyojMaster"
+        component={SamyojMaster}
+        durationInFrames={TOTAL_FRAMES}
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+        defaultProps={{ audioSrc: "audio/samyoj-master-a.mp3" }}
+      />
+      <Composition
+        id="SamyojMasterB"
+        component={SamyojMaster}
+        durationInFrames={TOTAL_FRAMES}
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+        defaultProps={{ audioSrc: "audio/samyoj-master-b.mp3" }}
+      />
+      <Composition
+        id="SamyojCut45"
+        component={SamyojCut45}
+        durationInFrames={45 * FPS}
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+        defaultProps={{ audioSrc: "audio/samyoj-cut-45.mp3" }}
+      />
+      <Composition
+        id="SamyojTeaser15"
+        component={SamyojTeaser15}
+        durationInFrames={15 * FPS}
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+        defaultProps={{ audioSrc: "audio/samyoj-teaser-15.mp3" }}
+      />
+      <Composition
+        id="SamyojLoop6"
+        component={SamyojLoop6}
+        durationInFrames={6 * FPS}
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+      />
+      <Composition
+        id="SamyojSquare"
+        component={SamyojSquare}
+        durationInFrames={TOTAL_FRAMES}
+        fps={FPS}
+        width={1080}
+        height={1080}
+        defaultProps={{ audioSrc: "audio/samyoj-master-a.mp3" }}
+      />
+      <Composition
+        id="SamyojVertical"
+        component={SamyojVertical}
+        durationInFrames={TOTAL_FRAMES}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        defaultProps={{ audioSrc: "audio/samyoj-master-a.mp3" }}
+      />
+      <Composition
+        id="SamyojThumbnail"
+        component={SamyojThumbnail}
+        durationInFrames={1}
+        fps={FPS}
+        width={1270}
+        height={760}
+      />
       {/* P001 — pehla asal production (documents: productions/001-chatgpt-google-connect/) */}
       <Composition
         id="P001ChatGptConnect"
