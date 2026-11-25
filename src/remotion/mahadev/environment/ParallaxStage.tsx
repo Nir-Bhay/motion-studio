@@ -1,5 +1,6 @@
 import React from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { clothWave, fireTurbulence } from "../motion/physics";
 
 interface ParallaxStageProps {
   mode: "devaloka" | "vishnu" | "shamshan";
@@ -23,12 +24,17 @@ export const ParallaxStage: React.FC<ParallaxStageProps> = ({
   children,
 }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const t = frame / fps;
+  const f1 = fireTurbulence(t, 1);
+  const f2 = fireTurbulence(t, 2);
+  const garlandSway = clothWave(t, 0.5, 9);
 
   const isShamshan = mode === "shamshan";
   const isVishnu = mode === "vishnu";
 
   const bgGradient = isShamshan
-    ? "radial-gradient(ellipse at 50% 25%, #232b52 0%, #10152d 48%, #070914 100%)"
+    ? "radial-gradient(ellipse at 50% 24%, #293668 0%, #151c3b 48%, #090c1a 100%)"
     : isVishnu
     ? "radial-gradient(ellipse at 50% 30%, #fff0b8 0%, #f5b96b 34%, #6a3472 72%, #24133d 100%)"
     : "radial-gradient(ellipse at 50% 22%, #ffe99e 0%, #f79d4b 36%, #9b3556 72%, #2a113b 100%)";
@@ -248,21 +254,55 @@ export const ParallaxStage: React.FC<ParallaxStageProps> = ({
               <stop offset="0%" stopColor="#262c44" />
               <stop offset="100%" stopColor="#0b0d17" />
             </linearGradient>
+            <radialGradient id="pyreGroundGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#ff7b00" stopOpacity="0.42" />
+              <stop offset="60%" stopColor="#ea580c" stopOpacity="0.16" />
+              <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="moonGroundGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#93c5fd" stopOpacity="0.22" />
+              <stop offset="100%" stopColor="#93c5fd" stopOpacity="0" />
+            </radialGradient>
           </defs>
           {!isShamshan ? (
-            <path
-              d="M -100,835 Q 960,775 2020,835 L 2020,1150 L -100,1150 Z"
-              fill="url(#devaFloor)"
-            />
+            <g>
+              {/* Carved Devaloka Marble Floor & Mandapa Pillars with Mangala Kalash */}
+              <path
+                d="M -100,835 Q 960,775 2020,835 L 2020,1150 L -100,1150 Z"
+                fill="url(#devaFloor)"
+              />
+              {[95, 1825].map((px, idx) => (
+                <g key={idx} transform={`translate(${px}, 430)`} opacity={0.85}>
+                  <rect x={-32} y={-280} width={64} height={680} fill="#5b2149" stroke="#fbbf24" strokeWidth={2.5} />
+                  <rect x={-44} y={-280} width={88} height={36} rx={6} fill="#92400e" stroke="#fde047" strokeWidth={2} />
+                  <rect x={-46} y={365} width={92} height={44} rx={6} fill="#92400e" stroke="#fde047" strokeWidth={2} />
+                  {/* Marigold Spiral Garland on Pillar */}
+                  <path d={`M -32,-180 Q ${garlandSway},-120 32,-60 M -32,-40 Q ${-garlandSway},20 32,80`} fill="none" stroke="#f97316" strokeWidth={11} strokeDasharray="8 6" strokeLinecap="round" />
+                  {/* Mangala Kalash Pot at Pillar Base */}
+                  <g transform={`translate(${idx === 0 ? 75 : -75}, 395)`}>
+                    <ellipse cx={0} cy={12} rx={22} ry={20} fill="#d97706" stroke="#fde047" strokeWidth={2} />
+                    <path d="M -14,-6 L 14,-6 L 10,-14 L -10,-14 Z" fill="#fbbf24" />
+                    <circle cx={0} cy={-18} r={10} fill="#78350f" />
+                    <path d="M -18,-10 Q -8,-28 0,-12 Q 8,-28 18,-10" fill="#16a34a" />
+                  </g>
+                </g>
+              ))}
+            </g>
           ) : (
             <g>
               <path
                 d="M -100,835 Q 480,795 960,825 T 2020,810 L 2020,1150 L -100,1150 Z"
                 fill="url(#shamshanFloor)"
               />
-              {/* Basalt rocks & glowing smoldering pyre embers */}
-              <ellipse cx={360} cy={875} rx={120} ry={22} fill="#ff5400" opacity={0.18 + 0.1 * Math.sin(frame * 0.18)} />
-              <ellipse cx={1540} cy={885} rx={135} ry={24} fill="#ff6d00" opacity={0.15 + 0.08 * Math.cos(frame * 0.15)} />
+              {/* Warm Pyre Firelight Ground Bounce & Physics-Driven Flames */}
+              <ellipse cx={330} cy={860} rx={240} ry={62} fill="url(#pyreGroundGlow)" opacity={0.75 + 0.25 * f1.scaleY} />
+              <ellipse cx={1590} cy={865} rx={240} ry={62} fill="url(#pyreGroundGlow)" opacity={0.75 + 0.25 * f2.scaleY} />
+              <ellipse cx={960} cy={840} rx={440} ry={72} fill="url(#moonGroundGlow)" />
+              {/* Stone Shiva Shrine Altar Silhouette on Far Left */}
+              <g transform="translate(170, 770)" opacity={0.72}>
+                <rect x={-38} y={24} width={76} height={18} rx={4} fill="#334155" stroke="#64748b" strokeWidth={1.5} />
+                <rect x={-12} y={-14} width={24} height={40} rx={12} fill="#475569" stroke="#94a3b8" strokeWidth={1.5} />
+              </g>
             </g>
           )}
         </svg>

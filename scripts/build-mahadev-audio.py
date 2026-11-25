@@ -141,16 +141,51 @@ def shankh_blow(dur=2.4):
 add_stereo(shankh_blow(2.2), 0.05, pan=0.0, gain=0.65)
 add_stereo(shankh_blow(2.5), 34.05, pan=0.0, gain=0.72)
 
-# 4. Temple Manjira / Bell shimmer & Damaru beats
-def temple_bell(freq=1180.0, dur=2.2):
+# 4. Temple Ghanta (Deep Brass Bell), Manjira Cymbals & Mridangam / Damaru Beats
+def temple_bell(freq=920.0, dur=2.6):
     tt = np.arange(int(dur * SR)) / SR
-    sig = 0.5 * np.sin(2 * np.pi * freq * tt) * np.exp(-tt * 1.9)
-    sig += 0.3 * np.sin(2 * np.pi * freq * 2.01 * tt) * np.exp(-tt * 2.8)
-    sig += 0.2 * np.sin(2 * np.pi * freq * 2.76 * tt) * np.exp(-tt * 3.6)
-    return sig * np.minimum(tt / 0.004, 1.0) * 0.16
+    sig = 0.48 * np.sin(2 * np.pi * freq * tt) * np.exp(-tt * 1.45)
+    sig += 0.32 * np.sin(2 * np.pi * freq * 2.0 * tt) * np.exp(-tt * 2.3)
+    sig += 0.22 * np.sin(2 * np.pi * freq * 2.756 * tt) * np.exp(-tt * 3.1)
+    sig += 0.14 * np.sin(2 * np.pi * freq * 4.07 * tt) * np.exp(-tt * 4.4)
+    return sig * np.minimum(tt / 0.004, 1.0) * 0.19
+
+def manjira_chime(freq=3450.0, dur=0.55):
+    tt = np.arange(int(dur * SR)) / SR
+    sig = (0.5 * np.sin(2 * np.pi * freq * tt) + 0.35 * np.sin(2 * np.pi * freq * 1.48 * tt) + 0.25 * np.sin(2 * np.pi * freq * 2.13 * tt))
+    return sig * np.minimum(tt / 0.002, 1.0) * np.exp(-tt * 7.5) * 0.11
+
+def mridangam_bass(dur=0.28):
+    tt = np.arange(int(dur * SR)) / SR
+    f = 78.0 * (1.0 + 0.65 * np.exp(-tt * 24.0))
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 9.5) * np.minimum(tt / 0.004, 1.0) * 0.28
 
 for bt in [0.4, 8.2, 15.2, 22.0, 32.0, 34.3, 46.5, 56.2, 80.7, 98.0, 118.5]:
-    add_stereo(temple_bell(1120 if bt < 66 else 880, 2.2), bt, pan=0.32 if int(bt) % 2 == 0 else -0.32, gain=0.55)
+    add_stereo(temple_bell(980 if bt < 66 else 740, 2.5), bt, pan=0.32 if int(bt) % 2 == 0 else -0.32, gain=0.62)
+
+# Manjira shimmering accents during Apsara dance & S07 Gana dance
+for mt in np.arange(15.4, 33.8, 0.75):
+    add_stereo(manjira_chime(3400 if int(mt*2)%2==0 else 3720), float(mt), pan=0.38 if int(mt*2)%2==0 else -0.38, gain=0.55)
+for mt in np.arange(98.8, 119.2, 0.7):
+    add_stereo(manjira_chime(3550), float(mt), pan=-0.35, gain=0.5)
+
+# Mridangam bass Ghe strokes on celebratory downbeats
+for gb in np.arange(15.2, 34.0, 0.75):
+    add_stereo(mridangam_bass(), float(gb), pan=0.0, gain=0.58)
+for gb in np.arange(99.4, 119.5, 0.7):
+    add_stereo(mridangam_bass(), float(gb), pan=0.0, gain=0.62)
+
+# Subtle ceremonial swoosh on Vimana flyby & Shiv Gana burst-in
+def swoosh_sfx(dur=0.65):
+    tt = np.arange(int(dur * SR)) / SR
+    n = np.random.default_rng(19).normal(0, 0.14, len(tt))
+    b, a = butter(2, [220 / (SR/2), 1400 / (SR/2)], btype="band")
+    env = np.sin(np.pi * tt / dur) ** 1.4
+    return filtfilt(b, a, n) * env
+
+add_stereo(swoosh_sfx(0.75), 3.4, pan=-0.3, gain=0.5)
+add_stereo(swoosh_sfx(0.8), 33.9, pan=0.0, gain=0.55)
+add_stereo(swoosh_sfx(0.65), 97.9, pan=0.0, gain=0.65)
 
 def damaru_hit(pitch=155.0, dur=0.18):
     tt = np.arange(int(dur * SR)) / SR

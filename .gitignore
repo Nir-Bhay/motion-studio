@@ -19,4 +19,5 @@ productions/004-samyoj-launch/audio/vo_v4_tight/
 productions/004-samyoj-launch/out/samyoj-master-a-1080p60.mp4
 productions/005-mahadev-barat/audio/*.wav
 productions/005-mahadev-barat/audio/vo/
+productions/005-mahadev-barat/audio/vo_p*/
 productions/005-mahadev-barat/out/*.mp4

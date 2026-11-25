@@ -1,5 +1,6 @@
 import React from "react";
-import { useCurrentFrame } from "remotion";
+import { useCurrentFrame, useVideoConfig } from "remotion";
+import { clothWave, squashStretch } from "../motion/physics";
 
 export const ApsaraRig: React.FC<{
   x: number;
@@ -10,11 +11,14 @@ export const ApsaraRig: React.FC<{
   energy?: number;
 }> = ({ x, y, scale = 1, colorScheme = "rose", phase = 0, energy = 0.5 }) => {
   const frame = useCurrentFrame();
-  const sway = Math.sin(frame * 0.09 + phase) * 14;
-  const bounce = Math.abs(Math.sin(frame * 0.09 + phase)) * (10 + energy * 10);
-  const armL = -24 + Math.sin(frame * 0.11 + phase) * 28;
-  const armR = 24 + Math.cos(frame * 0.11 + phase) * 28;
-  const veilWave = Math.sin(frame * 0.12 + phase) * 18;
+  const { fps } = useVideoConfig();
+  const t = frame / fps;
+  const sway = Math.sin(t * 4.6 + phase) * 14;
+  const sq = squashStretch(t, 4.6, phase, 0.05 + energy * 0.03);
+  const bounce = sq.hopY * 0.65;
+  const armL = -24 + Math.sin(t * 5.2 + phase) * 28;
+  const armR = 24 + Math.cos(t * 5.2 + phase) * 28;
+  const veilWave = clothWave(t, phase, 20);
 
   const palette =
     colorScheme === "emerald"

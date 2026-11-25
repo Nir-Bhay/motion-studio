@@ -1,5 +1,6 @@
 import React from "react";
-import { useCurrentFrame } from "remotion";
+import { useCurrentFrame, useVideoConfig } from "remotion";
+import { clothWave, pendulumSwing, wingFlap } from "../motion/physics";
 
 export const BrahmaRig: React.FC<{ x: number; y: number; scale?: number; speakingEnergy?: number }> = ({
   x,
@@ -8,9 +9,11 @@ export const BrahmaRig: React.FC<{ x: number; y: number; scale?: number; speakin
   speakingEnergy = 0,
 }) => {
   const frame = useCurrentFrame();
-  const hover = Math.sin(frame * 0.055) * 10;
-  const wing = Math.sin(frame * 0.14) * 18;
-  const blink = Math.sin(frame * 0.04 + 0.5) > 0.965 ? 0.12 : 1;
+  const { fps } = useVideoConfig();
+  const t = frame / fps;
+  const hover = Math.sin(t * 2.9) * 10;
+  const wing = wingFlap(t, 4.2, 22);
+  const blink = Math.sin(t * 2.2 + 0.5) > 0.965 ? 0.12 : 1;
 
   return (
     <div
@@ -142,10 +145,13 @@ export const IndraOnAiravataRig: React.FC<{ x: number; y: number; scale?: number
   scale = 1,
 }) => {
   const frame = useCurrentFrame();
-  const march = Math.sin(frame * 0.08) * 6;
-  const trunkWave = Math.sin(frame * 0.1) * 14;
-  const earFlap = Math.sin(frame * 0.12) * 8;
-  const vajraSpark = 0.6 + 0.4 * Math.sin(frame * 0.45);
+  const { fps } = useVideoConfig();
+  const t = frame / fps;
+  const march = Math.sin(t * 4.4) * 6;
+  const trunkWave = clothWave(t, 0.2, 16);
+  const earFlap = wingFlap(t, 3.8, 9);
+  const vajraSpark = 0.6 + 0.4 * Math.sin(t * 16);
+  const umbrellaSway = pendulumSwing(t, 2.2, 3);
 
   return (
     <div
@@ -201,8 +207,8 @@ export const IndraOnAiravataRig: React.FC<{ x: number; y: number; scale?: number
           </g>
         </g>
 
-        {/* Royal Chatra (Umbrella) above Indra */}
-        <g transform="translate(8, -175)">
+        {/* Royal Chatra (Umbrella) above Indra with Subtle Sway */}
+        <g transform={`translate(8, -175) rotate(${umbrellaSway}, 54, 155)`}>
           <line x1={54} y1={-32} x2={54} y2={155} stroke="#fcd34d" strokeWidth={5} />
           <path d="M -40,-20 Q 54,-65 148,-20 Z" fill="#f59e0b" stroke="#fffbeb" strokeWidth={2.5} />
           <circle cx={54} cy={-50} r={7} fill="#fff3c4" />

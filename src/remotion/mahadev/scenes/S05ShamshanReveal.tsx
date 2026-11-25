@@ -1,21 +1,24 @@
 import React from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { BrahmaRig, IndraOnAiravataRig } from "../characters/BrahmaIndraRigs";
 import { MahadevRig } from "../characters/MahadevRig";
+import { fireTurbulence } from "../motion/physics";
 import { getSmoothVoEnergy } from "../timeline";
 
 // S05 (01:06 - 01:20.5, 870 frames): "लेकिन तभी सब ने पूछा बोले कि दूल्हा राजा कहां है?... अभी भी श्मशान में ही बैठे हैं! बाघंबर लपेटे, हाथ की तकिया लगाए!"
 export const S05ShamshanReveal: React.FC<{ globalStartFrame: number }> = ({ globalStartFrame }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const t = frame / fps;
   const gf = globalStartFrame + frame;
   const vo = getSmoothVoEnergy(gf);
 
-  // Part A (0 - 270f): Devaloka confusion ("दूल्हा राजा कहां हैं?")
-  // Part B (270 - 870f): Cross-dissolve & downward camera reveal into moonlit Shamshan!
-  const toShamshan = interpolate(frame, [245, 310], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const qBounce = Math.sin(frame * 0.16) * 12;
-  const camZoom = interpolate(frame, [280, 870], [0.95, 1.12], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  // Part A (0 - 250f): Devaloka confusion ("दूल्हा राजा कहां हैं?")
+  // Part B (250 - 870f): Crisp cross-dissolve & downward camera reveal into moonlit Shamshan!
+  const toShamshan = interpolate(frame, [240, 275], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const qBounce = Math.sin(t * 7.5) * 12;
+  const camZoom = interpolate(frame, [265, 870], [0.97, 1.12], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
     <AbsoluteFill>
@@ -78,23 +81,23 @@ export const S05ShamshanReveal: React.FC<{ globalStartFrame: number }> = ({ glob
             cameraY={interpolate(frame, [280, 440], [-70, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}
             zoom={camZoom}
           >
-            {/* Smoldering Pyre Flames on Far Left & Right */}
+            {/* Smoldering Pyre Flames with Physics Turbulence */}
             <svg viewBox="0 0 1920 1080" width="100%" height="100%" style={{ position: "absolute", inset: 0 }}>
               {[320, 1590].map((fx, idx) => {
-                const fl = 1 + Math.sin(frame * 0.28 + idx * 2) * 0.16;
+                const ft = fireTurbulence(t, idx + 1);
                 return (
                   <g key={idx} transform={`translate(${fx}, 810)`}>
-                    <line x1={-45} y1={14} x2={45} y2={6} stroke="#3b2618" strokeWidth={12} strokeLinecap="round" />
-                    <line x1={-36} y1={4} x2={38} y2={18} stroke="#291a10" strokeWidth={10} strokeLinecap="round" />
+                    <line x1={-48} y1={14} x2={48} y2={6} stroke="#3b2618" strokeWidth={13} strokeLinecap="round" />
+                    <line x1={-38} y1={4} x2={40} y2={18} stroke="#291a10" strokeWidth={11} strokeLinecap="round" />
                     <path
-                      d={`M -28,6 Q -18,${-42 * fl} 0,${-68 * fl} Q 18,${-42 * fl} 28,6 Z`}
+                      d={`M ${-30 * ft.scaleX},6 Q ${-18 + ft.leanX * 0.4},${-46 * ft.scaleY} ${ft.leanX},${-74 * ft.scaleY} Q ${18 + ft.leanX * 0.4},${-46 * ft.scaleY} ${30 * ft.scaleX},6 Z`}
                       fill="#f97316"
-                      opacity={0.78}
+                      opacity={0.85}
                     />
                     <path
-                      d={`M -14,6 Q -8,${-26 * fl} 0,${-44 * fl} Q 8,${-26 * fl} 14,6 Z`}
+                      d={`M ${-15 * ft.scaleX},6 Q ${-8 + ft.leanX * 0.3},${-28 * ft.scaleY} ${ft.leanX * 0.7},${-48 * ft.scaleY} Q ${8 + ft.leanX * 0.3},${-28 * ft.scaleY} ${15 * ft.scaleX},6 Z`}
                       fill="#fde047"
-                      opacity={0.88}
+                      opacity={0.94}
                     />
                   </g>
                 );

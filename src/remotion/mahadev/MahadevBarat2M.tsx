@@ -24,7 +24,7 @@ const SCENE_HUD: Record<string, { title: string; subtitle: string }> = {
   S07: { title: "७. शिव-गणों का प्रवेश एवं हठ", subtitle: "श्रृंगी-भृंगी • भोले भंडारी की स्वीकृति" },
 };
 
-export const MahadevBarat2M: React.FC = () => {
+export const MahadevBaratPart01: React.FC = () => {
   const frame = useCurrentFrame();
   const activeScene = SCENES.find((s) => frame >= s.startFrame && frame < s.startFrame + s.durationFrames) ?? SCENES[0];
   const hud = SCENE_HUD[activeScene.id];
