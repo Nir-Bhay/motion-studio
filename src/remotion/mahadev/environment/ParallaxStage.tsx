@@ -3,7 +3,7 @@ import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remo
 import { clothWave, fireTurbulence } from "../motion/physics";
 
 interface ParallaxStageProps {
-  mode: "devaloka" | "vishnu" | "shamshan";
+  mode: "devaloka" | "vishnu" | "shamshan" | "himalaya";
   cameraX?: number;
   cameraY?: number;
   zoom?: number;
@@ -32,9 +32,12 @@ export const ParallaxStage: React.FC<ParallaxStageProps> = ({
 
   const isShamshan = mode === "shamshan";
   const isVishnu = mode === "vishnu";
+  const isHimalaya = mode === "himalaya";
 
   const bgGradient = isShamshan
     ? "radial-gradient(ellipse at 50% 24%, #314280 0%, #19224a 48%, #0d1226 100%)"
+    : isHimalaya
+    ? "radial-gradient(ellipse at 50% 20%, #fde68a 0%, #f97316 32%, #831843 68%, #1e1b4b 100%)"
     : isVishnu
     ? "radial-gradient(ellipse at 50% 30%, #fff0b8 0%, #f5b96b 34%, #6a3472 72%, #24133d 100%)"
     : "radial-gradient(ellipse at 50% 22%, #ffe99e 0%, #f79d4b 36%, #9b3556 72%, #2a113b 100%)";
@@ -155,6 +158,15 @@ export const ParallaxStage: React.FC<ParallaxStageProps> = ({
                   </g>
                 );
               })}
+              {/* Distant Snow-Capped Himalaya Peaks & Golden Palace City */}
+              {isHimalaya && (
+                <g opacity={0.86}>
+                  <path d="M -80,830 L 220,440 L 470,630 L 860,340 L 1220,620 L 1540,410 L 1980,640 L 2040,1150 L -80,1150 Z" fill="#4c1d95" />
+                  <path d="M 860,340 L 765,455 L 825,445 L 865,482 L 915,438 L 970,462 Z" fill="#fef3c7" opacity={0.85} />
+                  <path d="M 220,440 L 150,525 L 205,515 L 235,542 L 285,515 Z" fill="#fde68a" opacity={0.75} />
+                  <path d="M 1540,410 L 1465,500 L 1525,492 L 1555,522 L 1605,495 Z" fill="#fde68a" opacity={0.75} />
+                </g>
+              )}
               {/* Distant Heavenly Shikhara Silhouettes & Palaces */}
               {[160, 480, 960, 1440, 1760].map((tx, idx) => (
                 <g key={idx} transform={`translate(${tx}, 700)`} opacity={idx === 2 ? 0.35 : 0.58}>

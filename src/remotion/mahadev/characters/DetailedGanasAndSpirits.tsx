@@ -241,24 +241,30 @@ export const DetailedSpiritRig: React.FC<{
  * fills the midground/background so NO scene ever looks empty!
  */
 export const BackgroundCrowdBand: React.FC<{
-  mode: "devaloka" | "shamshan" | "bhoot_army";
+  mode: "devaloka" | "shamshan" | "bhoot_army" | "himalaya_citizens";
   y?: number;
 }> = ({ mode, y = 695 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
 
-  const count = mode === "bhoot_army" ? 14 : 10;
+  const count = mode === "bhoot_army" ? 14 : 12;
 
   return (
-    <div style={{ position: "absolute", left: 0, right: 0, top: y, height: 220, pointerEvents: "none", opacity: 0.72 }}>
+    <div style={{ position: "absolute", left: 0, right: 0, top: y, height: 220, pointerEvents: "none", opacity: 0.78 }}>
       <svg viewBox="0 0 1920 220" width="100%" height="100%" overflow="visible">
         {Array.from({ length: count }).map((_, i) => {
           const cx = 110 + (i / (count - 1)) * 1700;
           const cy = 60 + (i % 2) * 24 + Math.sin(t * 4.5 + i * 1.1) * 8;
           const armL = Math.sin(t * 6 + i) * 18;
           const fill =
-            mode === "devaloka"
+            mode === "himalaya_citizens"
+              ? i % 3 === 0
+                ? "#be123c"
+                : i % 3 === 1
+                ? "#d97706"
+                : "#7c3aed"
+              : mode === "devaloka"
               ? i % 2 === 0
                 ? "#7c2d12"
                 : "#831843"
@@ -272,12 +278,12 @@ export const BackgroundCrowdBand: React.FC<{
               <circle cx={0} cy={-4} r={14} fill={fill} stroke="#0b1120" strokeWidth={2} />
               <path d={`M -16,14 Q -32,${-4 + armL} -36,-18`} fill="none" stroke={fill} strokeWidth={8} strokeLinecap="round" />
               <path d={`M 16,14 Q 32,${-4 - armL} 36,-18`} fill="none" stroke={fill} strokeWidth={8} strokeLinecap="round" />
-              {/* Distant Torch / Kalash / Trishul */}
-              {mode !== "devaloka" && i % 3 === 0 && (
+              {/* Distant Torch / Kalash / Trishul / Flower Garlands */}
+              {mode !== "devaloka" && mode !== "himalaya_citizens" && i % 3 === 0 && (
                 <circle cx={36} cy={-24} r={7} fill="#fb923c" opacity={0.85} />
               )}
-              {mode === "devaloka" && (
-                <polygon points="-10,-16 0,-34 10,-16" fill="#fbbf24" opacity={0.85} />
+              {(mode === "devaloka" || mode === "himalaya_citizens") && (
+                <polygon points="-10,-16 0,-34 10,-16" fill="#fbbf24" opacity={0.9} />
               )}
             </g>
           );
