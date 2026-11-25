@@ -8,6 +8,8 @@ import { MahadevBaratPart05 } from "./mahadev/part5/MahadevBaratPart05";
 import { MahadevBaratPart06 } from "./mahadev/part6/MahadevBaratPart06";
 import { MahadevBaratPart07 } from "./mahadev/part7/MahadevBaratPart07";
 import { MahadevBaratPart08 } from "./mahadev/part8/MahadevBaratPart08";
+import { MahadevBaratPart09 } from "./mahadev/part9/MahadevBaratPart09";
+import { MahadevBaratPart10 } from "./mahadev/part10/MahadevBaratPart10";
 import {
   MAHADEV_DURATION_FRAMES,
   MAHADEV_FPS,
@@ -21,6 +23,8 @@ import { P5_DURATION_FRAMES, P5_FPS } from "./mahadev/part5/timelineP5";
 import { P6_DURATION_FRAMES, P6_FPS } from "./mahadev/part6/timelineP6";
 import { P7_DURATION_FRAMES, P7_FPS } from "./mahadev/part7/timelineP7";
 import { P8_DURATION_FRAMES, P8_FPS } from "./mahadev/part8/timelineP8";
+import { P9_DURATION_FRAMES, P9_FPS } from "./mahadev/part9/timelineP9";
+import { P10_DURATION_FRAMES, P10_FPS } from "./mahadev/part10/timelineP10";
 
 /**
  * Mahadev Barat — Episodic 2-Minute 2.5D Animated Series
@@ -90,6 +94,22 @@ export const RemotionRoot: React.FC = () => {
         component={MahadevBaratPart08}
         durationInFrames={P8_DURATION_FRAMES}
         fps={P8_FPS}
+        width={MAHADEV_WIDTH}
+        height={MAHADEV_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratPart09"
+        component={MahadevBaratPart09}
+        durationInFrames={P9_DURATION_FRAMES}
+        fps={P9_FPS}
+        width={MAHADEV_WIDTH}
+        height={MAHADEV_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratPart10"
+        component={MahadevBaratPart10}
+        durationInFrames={P10_DURATION_FRAMES}
+        fps={P10_FPS}
         width={MAHADEV_WIDTH}
         height={MAHADEV_HEIGHT}
       />
