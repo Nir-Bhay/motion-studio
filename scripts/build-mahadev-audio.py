@@ -7,18 +7,19 @@ from scipy.signal import butter, filtfilt, resample_poly
 from indian_classical_audio import layer_classical_indian_bed
 
 SR = 48000
-DUR = 120.000
+DUR = 126.000
 N_SAMPLES = int(SR * DUR)
 
-# Scene placements matching exact timeline (seconds)
+# Scene placements matching exact timeline (seconds) — 6.00s Cold Open Hook + S01..S07 shifted +6.00s
 CLIPS = [
-    ("p01-prep.wav", 1.00),          # S01: 0.0 - 15.0 (clip 12.92s -> 1.00 - 13.92)
-    ("p02-apsara-vadya.wav", 15.60), # S02: 15.0 - 34.0 (clip 16.20s -> 15.60 - 31.80, +2.2s music)
-    ("p03-vishnu.wav", 34.60),       # S03: 34.0 - 56.0 (clip 20.28s -> 34.60 - 54.88)
-    ("p04-brahma-indra.wav", 56.80), # S04: 56.0 - 66.0 (clip 7.84s  -> 56.80 - 64.64)
-    ("p05-shamshan.wav", 66.80),     # S05: 66.0 - 80.5 (clip 12.76s -> 66.80 - 79.56)
-    ("p06-vishnu-advice.wav", 81.10),# S06: 80.5 - 98.0 (clip 16.24s -> 81.10 - 97.34)
-    ("p07-shiv-gana.wav", 98.10),    # S07: 98.0 - 120.0 (clip 21.80s -> 98.10 - 119.90)
+    ("p00-hook.wav", 0.25),          # S00 Hook: 0.0 - 6.0 (clip 5.525s -> 0.25 - 5.775)
+    ("p01-prep.wav", 7.00),          # S01: 6.0 - 21.0
+    ("p02-apsara-vadya.wav", 21.60), # S02: 21.0 - 40.0
+    ("p03-vishnu.wav", 40.60),       # S03: 40.0 - 62.0
+    ("p04-brahma-indra.wav", 62.80), # S04: 62.0 - 72.0
+    ("p05-shamshan.wav", 72.80),     # S05: 72.0 - 86.5
+    ("p06-vishnu-advice.wav", 87.10),# S06: 86.5 - 104.0
+    ("p07-shiv-gana.wav", 104.10),   # S07: 104.0 - 126.0
 ]
 
 os.makedirs("productions/005-mahadev-barat/audio", exist_ok=True)
@@ -92,8 +93,8 @@ tanpura_cycle = [207.65, 277.18, 277.18, 138.59]
 for idx_cycle in range(int(DUR / 0.85)):
     st = idx_cycle * 0.85
     f = tanpura_cycle[idx_cycle % 4]
-    # Softer in shamshan (66-98s)
-    g = 0.22 if (66.0 <= st < 98.0) else 0.34
+    # Softer in shamshan (72-104s)
+    g = 0.22 if (72.0 <= st < 104.0) else 0.34
     add_stereo(tanpura_pluck(f, 2.4), st, pan=0.18 if idx_cycle % 2 == 0 else -0.18, gain=g)
 
 # 2. Celebratory Shehnai / Bansuri melodic phrases (Raga Bhupali: C#4, D#4, F4, G#4, A#4, C#5)
@@ -108,24 +109,26 @@ def shehnai_note(freq, dur=0.75, vibrato=5.2, bright=True):
     return sig * np.maximum(env, 0.0) * 0.18
 
 melody_events = [
-    # S01 joyful opening fanfare
-    (0.2, scale[0], 0.8, True), (1.0, scale[2], 0.7, True), (12.8, scale[3], 1.1, True), (13.9, scale[4], 1.1, True),
-    # S02 musical celebration + 31.8-34.0s flourish
-    (15.0, scale[5], 0.9, True), (29.5, scale[3], 0.7, True), (30.2, scale[4], 0.7, True),
-    (31.8, scale[2], 0.55, True), (32.35, scale[3], 0.55, True), (32.9, scale[4], 0.55, True), (33.45, scale[5], 1.2, True),
+    # S00 Cold-open hook dramatic stingers
+    (0.15, scale[3], 0.55, True), (2.25, scale[5], 0.65, True), (4.70, scale[4], 0.9, True),
+    # S01 joyful opening fanfare (+6.0s)
+    (6.2, scale[0], 0.8, True), (7.0, scale[2], 0.7, True), (18.8, scale[3], 1.1, True), (19.9, scale[4], 1.1, True),
+    # S02 musical celebration + 37.8-40.0s flourish
+    (21.0, scale[5], 0.9, True), (35.5, scale[3], 0.7, True), (36.2, scale[4], 0.7, True),
+    (37.8, scale[2], 0.55, True), (38.35, scale[3], 0.55, True), (38.9, scale[4], 0.55, True), (39.45, scale[5], 1.2, True),
     # S03 Vishnu radiance (warm bansuri)
-    (35.0, scale[5], 1.5, False), (44.0, scale[4], 1.2, False), (54.7, scale[5], 1.4, False),
+    (41.0, scale[5], 1.5, False), (50.0, scale[4], 1.2, False), (60.7, scale[5], 1.4, False),
     # S04 Brahma & Indra royal march
-    (56.1, scale[3], 0.9, True), (64.6, scale[4], 0.7, True), (65.3, scale[2], 0.8, True),
+    (62.1, scale[3], 0.9, True), (70.6, scale[4], 0.7, True), (71.3, scale[2], 0.8, True),
     # S05-S06 contemplative flute in Shamshan
-    (67.2, scale[0], 1.8, False), (79.4, scale[1], 1.4, False), (96.8, scale[2], 1.3, False),
+    (73.2, scale[0], 1.8, False), (85.4, scale[1], 1.4, False), (102.8, scale[2], 1.3, False),
     # S07 festive playful finale
-    (118.2, scale[3], 0.6, True), (118.8, scale[5], 1.1, True),
+    (124.2, scale[3], 0.6, True), (124.8, scale[5], 1.1, True),
 ]
 for st, f, d, br in melody_events:
     add_stereo(shehnai_note(f, d, bright=br), st, pan=-0.12 if br else 0.15, gain=0.65)
 
-# 3. Shankh (Conch) resonant blow at S01 start (0.1s) & Vishnu arrival (34.1s)
+# 3. Shankh (Conch) resonant blow at S01 start (6.0s) & Vishnu arrival (40.05s)
 def shankh_blow(dur=2.4):
     tt = np.arange(int(dur * SR)) / SR
     f0 = 185.0 * (1.0 + 0.04 * np.exp(-tt * 3.0))
@@ -139,8 +142,8 @@ def shankh_blow(dur=2.4):
     env = np.minimum(tt / 0.28, 1.0) * np.minimum((dur - tt) / 0.45, 1.0)
     return sig * np.maximum(env, 0.0) * 0.22
 
-add_stereo(shankh_blow(2.2), 0.05, pan=0.0, gain=0.65)
-add_stereo(shankh_blow(2.5), 34.05, pan=0.0, gain=0.72)
+add_stereo(shankh_blow(1.8), 5.65, pan=0.0, gain=0.72)
+add_stereo(shankh_blow(2.5), 40.05, pan=0.0, gain=0.72)
 
 # 4. Temple Ghanta (Deep Brass Bell), Manjira Cymbals & Mridangam / Damaru Beats
 def temple_bell(freq=920.0, dur=2.6):
@@ -161,22 +164,24 @@ def mridangam_bass(dur=0.28):
     f = 78.0 * (1.0 + 0.65 * np.exp(-tt * 24.0))
     return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 9.5) * np.minimum(tt / 0.004, 1.0) * 0.28
 
-for bt in [0.4, 8.2, 15.2, 22.0, 32.0, 34.3, 46.5, 56.2, 80.7, 98.0, 118.5]:
-    add_stereo(temple_bell(980 if bt < 66 else 740, 2.5), bt, pan=0.32 if int(bt) % 2 == 0 else -0.32, gain=0.62)
+for bt in [0.15, 1.38, 2.25, 3.45, 4.70, 6.0, 14.2, 21.2, 28.0, 38.0, 40.3, 52.5, 62.2, 86.7, 104.0, 124.5]:
+    add_stereo(temple_bell(980 if bt < 72 else 740, 2.5), bt, pan=0.32 if int(bt) % 2 == 0 else -0.32, gain=0.62)
 
 # Manjira shimmering accents during Apsara dance & S07 Gana dance
-for mt in np.arange(15.4, 33.8, 0.75):
+for mt in np.arange(21.4, 39.8, 0.75):
     add_stereo(manjira_chime(3400 if int(mt*2)%2==0 else 3720), float(mt), pan=0.38 if int(mt*2)%2==0 else -0.38, gain=0.55)
-for mt in np.arange(98.8, 119.2, 0.7):
+for mt in np.arange(104.8, 125.2, 0.7):
     add_stereo(manjira_chime(3550), float(mt), pan=-0.35, gain=0.5)
 
-# Mridangam bass Ghe strokes on celebratory downbeats
-for gb in np.arange(15.2, 34.0, 0.75):
+# Mridangam bass Ghe strokes on celebratory downbeats + hook cuts
+for gb in [0.22, 1.40, 2.25, 3.45, 4.70, 5.85]:
+    add_stereo(mridangam_bass(), float(gb), pan=0.0, gain=0.72)
+for gb in np.arange(21.2, 40.0, 0.75):
     add_stereo(mridangam_bass(), float(gb), pan=0.0, gain=0.58)
-for gb in np.arange(99.4, 119.5, 0.7):
+for gb in np.arange(105.4, 125.5, 0.7):
     add_stereo(mridangam_bass(), float(gb), pan=0.0, gain=0.62)
 
-# Subtle ceremonial swoosh on Vimana flyby & Shiv Gana burst-in
+# Subtle ceremonial swoosh on Hook cuts, Vimana flyby & Shiv Gana burst-in
 def swoosh_sfx(dur=0.65):
     tt = np.arange(int(dur * SR)) / SR
     n = np.random.default_rng(19).normal(0, 0.14, len(tt))
@@ -184,9 +189,11 @@ def swoosh_sfx(dur=0.65):
     env = np.sin(np.pi * tt / dur) ** 1.4
     return filtfilt(b, a, n) * env
 
-add_stereo(swoosh_sfx(0.75), 3.4, pan=-0.3, gain=0.5)
-add_stereo(swoosh_sfx(0.8), 33.9, pan=0.0, gain=0.55)
-add_stereo(swoosh_sfx(0.65), 97.9, pan=0.0, gain=0.65)
+for swt in [1.35, 2.20, 3.40, 4.65, 5.80]:
+    add_stereo(swoosh_sfx(0.35), swt, pan=0.0, gain=0.68)
+add_stereo(swoosh_sfx(0.75), 9.4, pan=-0.3, gain=0.5)
+add_stereo(swoosh_sfx(0.8), 39.9, pan=0.0, gain=0.55)
+add_stereo(swoosh_sfx(0.65), 103.9, pan=0.0, gain=0.65)
 
 def damaru_hit(pitch=155.0, dur=0.18):
     tt = np.arange(int(dur * SR)) / SR
@@ -194,20 +201,22 @@ def damaru_hit(pitch=155.0, dur=0.18):
     sig = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 22.0)
     return sig * np.minimum(tt / 0.002, 1.0) * 0.24
 
-# Rhythmic Damaru/Dholak pulse in S02 (15-34s), S04 (56-66s), and energetic S07 (98-120s)
+# Rhythmic Damaru/Dholak pulse in Hook (2.2-5.8s), S02 (21-40s), S04 (62-72s), and energetic S07 (104-126s)
 rng = np.random.default_rng(42)
-for t_beat in np.arange(15.2, 34.0, 0.375):
+for k in range(10):
+    add_stereo(damaru_hit(180 + (k % 3) * 35, 0.14), 2.25 + k * 0.11, pan=(k % 2 - 0.5) * 0.5, gain=0.55)
+for t_beat in np.arange(21.2, 40.0, 0.375):
     add_stereo(damaru_hit(165 if int(t_beat*4)%2==0 else 210), float(t_beat), pan=-0.22 if int(t_beat*4)%2==0 else 0.22, gain=0.45)
-for t_beat in np.arange(56.2, 65.8, 0.45):
+for t_beat in np.arange(62.2, 71.8, 0.45):
     add_stereo(damaru_hit(140 if int(t_beat*2)%2==0 else 190), float(t_beat), pan=0.2, gain=0.42)
-# Rapid playful Shiv Gana damaru roll at 98.0s + bouncy beat!
+# Rapid playful Shiv Gana damaru roll at 104.0s + bouncy beat!
 for k in range(14):
-    add_stereo(damaru_hit(180 + (k % 3) * 35, 0.14), 98.0 + k * 0.085, pan=(k % 2 - 0.5) * 0.6, gain=0.55)
-for t_beat in np.arange(99.4, 119.5, 0.35):
+    add_stereo(damaru_hit(180 + (k % 3) * 35, 0.14), 104.0 + k * 0.085, pan=(k % 2 - 0.5) * 0.6, gain=0.55)
+for t_beat in np.arange(105.4, 125.5, 0.35):
     add_stereo(damaru_hit(160 if int(t_beat*3)%2==0 else 215), float(t_beat), pan=-0.25 if int(t_beat*3)%2==0 else 0.25, gain=0.48)
 
-# 5. Shamshan crackling embers & cool wind (66.0 - 98.0s)
-sh_i0, sh_i1 = int(66.0 * SR), int(98.0 * SR)
+# 5. Shamshan crackling embers & cool wind (72.0 - 104.0s)
+sh_i0, sh_i1 = int(72.0 * SR), int(104.0 * SR)
 sh_len = sh_i1 - sh_i0
 wind_noise = rng.normal(0, 0.04, sh_len)
 bw, aw = butter(2, [160 / (SR/2), 520 / (SR/2)], btype="band")
@@ -218,7 +227,7 @@ left[sh_i0:sh_i1] += wind * 0.45
 right[sh_i0:sh_i1] += wind * 0.35
 
 # Layer authentic Raga Bhupali Sitar, Swarmandal, Sanskrit Om pad & Tabla Bols
-layer_classical_indian_bed(left, right, DUR, tabla_start=1.0, tabla_end=119.0, raga="bhupali", seed=101)
+layer_classical_indian_bed(left, right, DUR, tabla_start=6.0, tabla_end=125.0, raga="bhupali", seed=101)
 
 # Apply smooth VO ducking to music bed (duck down to 0.28 during active speech, swell to 0.92 in pauses)
 duck = 1.0 - 0.72 * vo_env_smooth

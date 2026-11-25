@@ -5,6 +5,7 @@ import "@fontsource/noto-sans-devanagari/700.css";
 import "@fontsource/yatra-one/400.css";
 import "@fontsource/rozha-one/400.css";
 import { SCENES } from "./timeline";
+import { S00Hook } from "./scenes/S00Hook";
 import { S01Prep } from "./scenes/S01Prep";
 import { S02ApsaraVadya } from "./scenes/S02ApsaraVadya";
 import { S03Vishnu } from "./scenes/S03Vishnu";
@@ -15,6 +16,7 @@ import { S07ShivGana } from "./scenes/S07ShivGana";
 import { DevanagariCaptions, SceneTitleBanner } from "./ui/DevanagariCaptions";
 
 const SCENE_HUD: Record<string, { title: string; subtitle: string }> = {
+  S00: { title: "०. महा-रहस्य (प्रसंग आरंभ)", subtitle: "देवता • भूत-प्रेत • आज किसकी शादी है?" },
   S01: { title: "१. बारात की तैयारी", subtitle: "देवलोक • शगुन व मंगल गान" },
   S02: { title: "२. अप्सरा गान एवं मंगल वाद्य", subtitle: "डुमडुमिया • शहनाई • सजे हुए विमान" },
   S03: { title: "३. भगवान श्री नारायण पधारे", subtitle: "शंख • चक्र • गदा • पद्म • गरुड़ आरूढ़" },
@@ -32,39 +34,43 @@ export const MahadevBaratPart01: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#0a0714" }}>
-      {/* Master 2-Minute Synchronized Katha Audio + Devotional Score */}
+      {/* Master Synchronized Katha Audio + Devotional Score */}
       <Audio src={staticFile("audio/mahadev-barat-2m-master.mp3")} volume={1} />
 
       <Sequence from={SCENES[0].startFrame} durationInFrames={SCENES[0].durationFrames}>
-        <S01Prep />
+        <S00Hook />
       </Sequence>
 
       <Sequence from={SCENES[1].startFrame} durationInFrames={SCENES[1].durationFrames}>
-        <S02ApsaraVadya globalStartFrame={SCENES[1].startFrame} />
+        <S01Prep />
       </Sequence>
 
       <Sequence from={SCENES[2].startFrame} durationInFrames={SCENES[2].durationFrames}>
-        <S03Vishnu globalStartFrame={SCENES[2].startFrame} />
+        <S02ApsaraVadya globalStartFrame={SCENES[2].startFrame} />
       </Sequence>
 
       <Sequence from={SCENES[3].startFrame} durationInFrames={SCENES[3].durationFrames}>
-        <S04BrahmaIndra globalStartFrame={SCENES[3].startFrame} />
+        <S03Vishnu globalStartFrame={SCENES[3].startFrame} />
       </Sequence>
 
       <Sequence from={SCENES[4].startFrame} durationInFrames={SCENES[4].durationFrames}>
-        <S05ShamshanReveal globalStartFrame={SCENES[4].startFrame} />
+        <S04BrahmaIndra globalStartFrame={SCENES[4].startFrame} />
       </Sequence>
 
       <Sequence from={SCENES[5].startFrame} durationInFrames={SCENES[5].durationFrames}>
-        <S06VishnuAdvice globalStartFrame={SCENES[5].startFrame} />
+        <S05ShamshanReveal globalStartFrame={SCENES[5].startFrame} />
       </Sequence>
 
       <Sequence from={SCENES[6].startFrame} durationInFrames={SCENES[6].durationFrames}>
-        <S07ShivGana globalStartFrame={SCENES[6].startFrame} />
+        <S06VishnuAdvice globalStartFrame={SCENES[6].startFrame} />
       </Sequence>
 
-      {/* Fixed Top-Left HUD Banner (never clipped by camera zooms) */}
-      {(activeScene.id !== "S05" || localFrame >= 290) && (
+      <Sequence from={SCENES[7].startFrame} durationInFrames={SCENES[7].durationFrames}>
+        <S07ShivGana globalStartFrame={SCENES[7].startFrame} />
+      </Sequence>
+
+      {/* Fixed Top-Left HUD Banner (hidden during S00 rapid hook so full screen pops!) */}
+      {activeScene.id !== "S00" && (activeScene.id !== "S05" || localFrame >= 290) && (
         <SceneTitleBanner
           title={hud.title}
           subtitle={hud.subtitle}

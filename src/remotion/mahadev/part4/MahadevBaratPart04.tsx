@@ -203,10 +203,11 @@ const P4S05NandiArrival: React.FC<{ gf: number }> = ({ gf }) => {
     <ParallaxStage mode="shamshan" cameraX={0} zoom={1.04}>
       <BackgroundCrowdBand mode="bhoot_army" y={665} />
       {/* Mahadev Riding Sacred Nandi Bull! */}
+      <NandiBullRig x={nandiX + 12} y={660} scale={1.22} walking={frame < 340} />
       <MahadevBaratGroomRig
         x={nandiX - 10}
-        y={540}
-        scale={0.9}
+        y={498}
+        scale={0.94}
         sehraProgress={1}
         bichhuProgress={1}
         panchmukhiProgress={1}
@@ -215,7 +216,6 @@ const P4S05NandiArrival: React.FC<{ gf: number }> = ({ gf }) => {
         pose="calm"
         seatedOnNandi
       />
-      <NandiBullRig x={nandiX + 12} y={660} scale={1.22} walking={frame < 340} />
       <DetailedSpiritRig x={nandiX - 240} y={695} kind="chhatra_gana" scale={0.92} phase={0} />
 
       {/* Weeping Bhoot-Prets, Asurs & Ghosts waiting in the field */}
