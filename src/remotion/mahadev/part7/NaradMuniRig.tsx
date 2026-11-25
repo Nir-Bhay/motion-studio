@@ -150,20 +150,21 @@ export const TossedSerpentArc: React.FC<{
   );
 };
 
-// Festive Pitambari Deva Baratis Marching Ahead of Narayan
+// Festive Pitambari Deva Baratis Marching Ahead of Narayan (with Shankh, Chanvar, Dhol & Kalash)
 export const PitambariBaratiCrowd: React.FC<{ baseX: number; y: number }> = ({ baseX, y }) => {
   const frame = useCurrentFrame();
-  const baratis = [
+  const baratis: Array<{ dx: number; dy: number; s: number; instrument: "shankh" | "chanvar" | "dhol" | "kalash" }> = [
     { dx: 0, dy: 0, s: 0.92, instrument: "shankh" },
-    { dx: 150, dy: 12, s: 0.9, instrument: "chanvar" },
-    { dx: 300, dy: -4, s: 0.94, instrument: "dhol" },
-    { dx: 455, dy: 10, s: 0.88, instrument: "kalash" },
+    { dx: 145, dy: 12, s: 0.9, instrument: "chanvar" },
+    { dx: 295, dy: -4, s: 0.94, instrument: "dhol" },
+    { dx: 445, dy: 10, s: 0.88, instrument: "kalash" },
   ];
 
   return (
     <>
       {baratis.map((b, i) => {
         const bounce = Math.abs(Math.sin(frame * 0.16 + i * 1.1)) * 7;
+        const armSwing = Math.sin(frame * 0.18 + i) * 8;
         return (
           <div
             key={i}
@@ -174,21 +175,55 @@ export const PitambariBaratiCrowd: React.FC<{ baseX: number; y: number }> = ({ b
               transform: `translate(-50%, -50%) scale(${b.s})`,
             }}
           >
-            <svg width={130} height={220} viewBox="-65 -110 130 220" overflow="visible">
+            <svg width={140} height={220} viewBox="-70 -110 140 220" overflow="visible">
               <ellipse cx={0} cy={98} rx={34} ry={8} fill="#090414" opacity={0.32} />
+              {/* Pitambari Dhoti & Golden Angavastra */}
               <path d="M-22,10 L22,10 L26,88 L-26,88 Z" fill="#facc15" stroke={OUTLINE} strokeWidth={2.5} />
+              <path d="M-24,78 L24,78" stroke="#ea580c" strokeWidth={4} />
               <path d="M-24,-42 Q0,-48 24,-42 L22,10 L-22,10 Z" fill="#fde047" stroke={OUTLINE} strokeWidth={2.5} />
-              <path d="M-20,-42 L20,8" stroke="#f97316" strokeWidth={4} />
-              <path d="M-24,-34 Q-38,-14 -34,6" fill="none" stroke="#fdba74" strokeWidth={10} strokeLinecap="round" />
-              <path d="M24,-34 Q40,-18 42,-36" fill="none" stroke="#fdba74" strokeWidth={10} strokeLinecap="round" />
-              <circle cx={43} cy={-39} r={5} fill="#fbbf24" stroke={OUTLINE} strokeWidth={1.5} />
+              <path d="M-20,-42 L20,8" stroke="#ea580c" strokeWidth={5} />
+              <path d="M-12,-42 Q0,-26 12,-42" fill="none" stroke="#f43f5e" strokeWidth={3.5} />
+
+              {/* Left Arm */}
+              <path d="M-24,-34 Q-38,-14 -30,8" fill="none" stroke="#fdba74" strokeWidth={10} strokeLinecap="round" />
+              <path d="M-24,-34 Q-38,-14 -30,8" fill="none" stroke={OUTLINE} strokeWidth={2.2} strokeLinecap="round" />
+
+              {/* Right Arm + Ceremonial Instrument/Prop */}
+              <g transform={`translate(24, -34) rotate(${armSwing})`}>
+                <path d="M0,0 Q18,-8 22,-24" fill="none" stroke="#fdba74" strokeWidth={10} strokeLinecap="round" />
+                <path d="M0,0 Q18,-8 22,-24" fill="none" stroke={OUTLINE} strokeWidth={2.2} strokeLinecap="round" />
+                {b.instrument === "shankh" && (
+                  <path d="M18,-28 Q36,-42 42,-24 Q30,-14 18,-22 Z" fill="#fffbeb" stroke={OUTLINE} strokeWidth={2} />
+                )}
+                {b.instrument === "chanvar" && (
+                  <g transform="translate(22, -26)">
+                    <line x1={0} y1={0} x2={4} y2={-22} stroke="#b45309" strokeWidth={3.5} />
+                    <path d="M-6,-22 Q4,-48 16,-22 Z" fill="#f8fafc" stroke={OUTLINE} strokeWidth={1.8} />
+                  </g>
+                )}
+                {b.instrument === "dhol" && (
+                  <g transform="translate(-14, 18) rotate(-14)">
+                    <rect x={-16} y={-10} width={34} height={22} rx={6} fill="#92400e" stroke="#fde047" strokeWidth={2} />
+                    <ellipse cx={-16} cy={1} rx={4} ry={11} fill="#fef3c7" stroke={OUTLINE} strokeWidth={1.5} />
+                    <ellipse cx={18} cy={1} rx={4} ry={11} fill="#fef3c7" stroke={OUTLINE} strokeWidth={1.5} />
+                  </g>
+                )}
+                {b.instrument === "kalash" && (
+                  <g transform="translate(22, -28)">
+                    <circle cx={0} cy={0} r={10} fill="#f59e0b" stroke={OUTLINE} strokeWidth={2} />
+                    <path d="M-6,-8 Q0,-20 6,-8" fill="#16a34a" stroke={OUTLINE} strokeWidth={1.5} />
+                  </g>
+                )}
+              </g>
+
+              {/* Head & Royal Golden Pagri */}
               <circle cx={0} cy={-64} r={20} fill="#fdba74" stroke={OUTLINE} strokeWidth={2.5} />
-              {/* Golden Pagri */}
-              <path d="M-21,-70 Q0,-96 21,-70 Z" fill="#ea580c" stroke={OUTLINE} strokeWidth={2.5} />
-              <circle cx={0} cy={-85} r={5} fill="#fef08a" />
-              <circle cx={-6} cy={-65} r={2.5} fill={OUTLINE} />
-              <circle cx={6} cy={-65} r={2.5} fill={OUTLINE} />
-              <path d="M-5,-56 Q0,-52 5,-56" fill="none" stroke={OUTLINE} strokeWidth={2} />
+              <path d="M-21,-70 Q0,-98 21,-70 Z" fill="#ea580c" stroke={OUTLINE} strokeWidth={2.5} />
+              <circle cx={0} cy={-86} r={5} fill="#fef08a" stroke={OUTLINE} strokeWidth={1.5} />
+              <line x1={0} y1={-72} x2={0} y2={-64} stroke="#dc2626" strokeWidth={2} />
+              <circle cx={-6} cy={-63} r={2.5} fill={OUTLINE} />
+              <circle cx={6} cy={-63} r={2.5} fill={OUTLINE} />
+              <path d="M-5,-54 Q0,-49 5,-54" fill="none" stroke={OUTLINE} strokeWidth={2} />
             </svg>
           </div>
         );
