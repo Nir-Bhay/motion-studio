@@ -4,6 +4,7 @@ import subprocess
 import numpy as np
 import soundfile as sf
 from scipy.signal import butter, filtfilt, resample_poly
+from indian_classical_audio import layer_classical_indian_bed
 
 SR = 48000
 DUR = 86.000
@@ -133,6 +134,8 @@ for bt in [0.2, 20.4, 37.5, 52.2, 68.5, 83.6]:
 # March rhythm (0..37s) & Nandi approach (74..85s)
 for tb in list(np.arange(0.5, 36.5, 0.42)) + list(np.arange(74.0, 85.4, 0.44)):
     add_stereo(damaru_hit(172 if int(tb*2.4)%2==0 else 212), float(tb), pan=-0.22 if int(tb*2.4)%2==0 else 0.22, gain=0.45)
+
+layer_classical_indian_bed(left, right, DUR, tabla_start=1.0, tabla_end=85.0, raga="shivaranjani", seed=104)
 
 duck = 1.0 - 0.72 * vo_env_smooth
 bed_l = left * duck

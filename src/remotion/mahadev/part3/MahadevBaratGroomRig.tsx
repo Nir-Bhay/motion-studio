@@ -65,20 +65,19 @@ export const MahadevBaratGroomRig: React.FC<MahadevBaratGroomRigProps> = ({
         transform: `translate(-50%, -50%) scale(${scale})`,
         transformOrigin: "center center",
         pointerEvents: "none",
-        filter: `drop-shadow(0 0 ${22 + bhasmaGlowProgress * 28}px rgba(${bhasmaGlowProgress > 0.3 ? "254, 249, 195" : "186, 230, 253"}, ${0.5 + bhasmaGlowProgress * 0.42}))`,
       }}
     >
       <svg width={620} height={700} viewBox="-310 -350 620 700" overflow="visible">
         <defs>
           <radialGradient id="p3Aura" cx="50%" cy="40%" r="52%">
-            <stop offset="0%" stopColor={bhasmaGlowProgress > 0.35 ? "#fef9c3" : "#e0f2fe"} stopOpacity={0.68 + bhasmaGlowProgress * 0.25} />
-            <stop offset="55%" stopColor={bhasmaGlowProgress > 0.35 ? "#fde047" : "#7dd3fc"} stopOpacity={0.26 + bhasmaGlowProgress * 0.22} />
+            <stop offset="0%" stopColor={bhasmaGlowProgress > 0.35 ? "#fef9c3" : "#bae6fd"} stopOpacity={0.44 + bhasmaGlowProgress * 0.25} />
+            <stop offset="55%" stopColor={bhasmaGlowProgress > 0.35 ? "#f59e0b" : "#38bdf8"} stopOpacity={0.18 + bhasmaGlowProgress * 0.16} />
             <stop offset="100%" stopColor="#0f172a" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="p3Skin" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="50%" stopColor={bhasmaGlowProgress > 0.4 ? "#f8fafc" : "#dbeafe"} />
-            <stop offset="100%" stopColor={bhasmaGlowProgress > 0.4 ? "#e2e8f0" : "#94b3d6"} />
+            <stop offset="0%" stopColor="#f8fafc" />
+            <stop offset="50%" stopColor={bhasmaGlowProgress > 0.4 ? "#e2e8f0" : "#cbd5e1"} />
+            <stop offset="100%" stopColor="#94a3b8" />
           </linearGradient>
           <linearGradient id="p3Bagh" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#fbbf24" />
@@ -92,7 +91,7 @@ export const MahadevBaratGroomRig: React.FC<MahadevBaratGroomRigProps> = ({
           </linearGradient>
         </defs>
 
-        <circle cx={0} cy={-100} r={auraR} fill="url(#p3Aura)" />
+        <circle cx={0} cy={-125} r={auraR * 0.78} fill="url(#p3Aura)" />
 
         {/* Radiant Bhasma Sparkle Halo */}
         {bhasmaGlowProgress > 0.15 && (
@@ -107,18 +106,20 @@ export const MahadevBaratGroomRig: React.FC<MahadevBaratGroomRigProps> = ({
 
         {/* Standing Legs + Baghambar + Live Cobra Belt */}
         <g transform="translate(0, 62)">
+          <path d="M -32,0 Q -42,68 -36,142" stroke="#0b1120" strokeWidth={32} strokeLinecap="round" fill="none" />
+          <path d="M 32,0 Q 42,68 36,142" stroke="#0b1120" strokeWidth={32} strokeLinecap="round" fill="none" />
           <path d="M -32,0 Q -42,68 -36,142" stroke="url(#p3Skin)" strokeWidth={26} strokeLinecap="round" fill="none" />
           <path d="M 32,0 Q 42,68 36,142" stroke="url(#p3Skin)" strokeWidth={26} strokeLinecap="round" fill="none" />
           <ellipse cx={-36} cy={136} rx={14} ry={5} fill="none" stroke="#f8fafc" strokeWidth={4} />
           <ellipse cx={36} cy={136} rx={14} ry={5} fill="none" stroke="#f8fafc" strokeWidth={4} />
-          <ellipse cx={-36} cy={150} rx={20} ry={10} fill="#e2e8f0" />
-          <ellipse cx={36} cy={150} rx={20} ry={10} fill="#e2e8f0" />
+          <ellipse cx={-36} cy={150} rx={20} ry={10} fill="#cbd5e1" stroke="#0b1120" strokeWidth={2.5} />
+          <ellipse cx={36} cy={150} rx={20} ry={10} fill="#cbd5e1" stroke="#0b1120" strokeWidth={2.5} />
 
           <path
             d="M -48,0 L 48,0 L 66,120 Q 0,138 -66,120 Z"
             fill="url(#p3Bagh)"
-            stroke="#fde047"
-            strokeWidth={2.5}
+            stroke="#0b1120"
+            strokeWidth={3}
           />
           {[-28, 0, 28].map((sx, idx) => (
             <path key={idx} d={`M ${sx},12 Q ${sx - 6},58 ${sx + 5},105`} stroke="#291202" strokeWidth={4.5} strokeLinecap="round" fill="none" opacity={0.82} />
@@ -136,18 +137,20 @@ export const MahadevBaratGroomRig: React.FC<MahadevBaratGroomRigProps> = ({
 
         {/* Muscular Torso */}
         <g transform={`translate(0, ${br.chestExpand * 0.35})`}>
-          <path d="M -62,-58 Q 0,-72 62,-58 L 48,64 L -48,64 Z" fill="url(#p3Skin)" stroke={bhasmaGlowProgress > 0.3 ? "#fef08a" : "#e0f2fe"} strokeWidth={2.4} />
-          <path d="M -42,-26 Q -18,-12 -4,-24 M 4,-24 Q 18,-12 42,-26" fill="none" stroke="#6488b4" strokeWidth={2.5} opacity={0.55} />
-          <path d="M -20,4 Q 0,9 20,4 M -18,24 Q 0,29 18,24 M -15,42 Q 0,46 15,42" fill="none" stroke="#6488b4" strokeWidth={2} opacity={0.42} />
+          <path d="M -62,-58 Q 0,-72 62,-58 L 48,64 L -48,64 Z" fill="url(#p3Skin)" stroke="#0b1120" strokeWidth={3.2} />
+          <path d="M -42,-26 Q -18,-12 -4,-24 M 4,-24 Q 18,-12 42,-26" fill="none" stroke="#475569" strokeWidth={2.6} opacity={0.7} />
+          <path d="M -20,4 Q 0,9 20,4 M -18,24 Q 0,29 18,24 M -15,42 Q 0,46 15,42" fill="none" stroke="#475569" strokeWidth={2.2} opacity={0.55} />
           <path d="M -30,-32 Q 0,-38 30,-32 M -28,-22 Q 0,-28 28,-22 M -26,-12 Q 0,-18 26,-12" fill="none" stroke="#ffffff" strokeWidth={3.6} strokeLinecap="round" />
 
           {/* Symmetrical Arms */}
           <g transform={`translate(-60, -44) rotate(${leftArmRot})`}>
+            <path d="M 0,0 Q -26,42 -22,92" fill="none" stroke="#0b1120" strokeWidth={31} strokeLinecap="round" />
             <path d="M 0,0 Q -26,42 -22,92" fill="none" stroke="url(#p3Skin)" strokeWidth={25} strokeLinecap="round" />
             <ellipse cx={-16} cy={36} rx={13} ry={5} transform="rotate(14, -16, 36)" fill="none" stroke="#fbbf24" strokeWidth={4.2} />
             <ellipse cx={-21} cy={78} rx={12} ry={4.5} fill="none" stroke="#9a3412" strokeWidth={4.5} />
           </g>
           <g transform={`translate(60, -44) rotate(${rightArmRot})`}>
+            <path d="M 0,0 Q 32,36 30,86" fill="none" stroke="#0b1120" strokeWidth={31} strokeLinecap="round" />
             <path d="M 0,0 Q 32,36 30,86" fill="none" stroke="url(#p3Skin)" strokeWidth={25} strokeLinecap="round" />
             <ellipse cx={20} cy={34} rx={13} ry={5} transform="rotate(-14, 20, 34)" fill="none" stroke="#fbbf24" strokeWidth={4.2} />
             <ellipse cx={29} cy={74} rx={12} ry={4.5} fill="none" stroke="#9a3412" strokeWidth={4.5} />
@@ -201,7 +204,7 @@ export const MahadevBaratGroomRig: React.FC<MahadevBaratGroomRigProps> = ({
             </g>
 
             {/* Face */}
-            <ellipse cx={0} cy={0} rx={32} ry={36} fill="url(#p3Skin)" stroke={bhasmaGlowProgress > 0.3 ? "#fef08a" : "#e0f2fe"} strokeWidth={2} />
+            <ellipse cx={0} cy={0} rx={32} ry={36} fill="url(#p3Skin)" stroke="#0b1120" strokeWidth={3} />
             <ellipse cx={0} cy={34} rx={13} ry={8} fill="#2563eb" opacity={0.88} />
 
             {/* Live Scorpion Earrings (P3S02+) or Rudraksha Studs */}

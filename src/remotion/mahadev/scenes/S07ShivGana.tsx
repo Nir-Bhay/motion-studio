@@ -4,6 +4,7 @@ import { ParallaxStage } from "../environment/ParallaxStage";
 import { MahadevRig } from "../characters/MahadevRig";
 import { VishnuRig } from "../characters/VishnuRig";
 import { ShivGanaRig } from "../characters/ShivGanaRig";
+import { BackgroundCrowdBand, DetailedSpiritRig } from "../characters/DetailedGanasAndSpirits";
 import { getBedEnergy, getSmoothVoEnergy } from "../timeline";
 
 // S07 (01:38 - 02:00, 1320 frames): "इतने में शिव गण आ गए सारे... आज अपने तरीके का श्रृंगार हम करेंगे! महादेव बोले — जाको रुचि लग रही हो वही कर लो!"
@@ -42,6 +43,9 @@ export const S07ShivGana: React.FC<{ globalStartFrame: number }> = ({ globalStar
           />
         </svg>
       )}
+
+      {/* Rich Background Cheering Gana Crowd */}
+      <BackgroundCrowdBand mode="shamshan" y={635} />
 
       {/* Center Hero: Mahadev (Lounging -> Sitting Smiling & Blessing!) */}
       <MahadevRig
@@ -107,6 +111,10 @@ export const S07ShivGana: React.FC<{ globalStartFrame: number }> = ({ globalStar
         phase={1.8}
         flipX
       />
+      {/* Extra Detailed Narsingha Horn, Vetala & Dakini Spirits */}
+      <DetailedSpiritRig x={interpolate(burst, [0, 1], [-320, 95])} y={605} kind="narsingha" scale={0.78} phase={0.4} />
+      <DetailedSpiritRig x={interpolate(burst, [0, 1], [2300, 1810])} y={625} kind="dakini" scale={0.76} phase={1.7} flipX />
+      <DetailedSpiritRig x={interpolate(burst, [0, 1], [-180, 600])} y={755} kind="dhol_gana" scale={0.82} phase={2.1} />
 
       {/* Closing Hook Crest in Final 3.5 Seconds */}
       {frame > 1110 && (

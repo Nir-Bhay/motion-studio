@@ -4,6 +4,7 @@ import subprocess
 import numpy as np
 import soundfile as sf
 from scipy.signal import butter, filtfilt, resample_poly
+from indian_classical_audio import layer_classical_indian_bed
 
 SR = 48000
 DUR = 120.000
@@ -215,6 +216,9 @@ sh_t = np.arange(sh_len) / SR
 wind *= np.minimum(sh_t / 1.5, 1.0) * np.minimum((32.0 - sh_t) / 1.5, 1.0)
 left[sh_i0:sh_i1] += wind * 0.45
 right[sh_i0:sh_i1] += wind * 0.35
+
+# Layer authentic Raga Bhupali Sitar, Swarmandal, Sanskrit Om pad & Tabla Bols
+layer_classical_indian_bed(left, right, DUR, tabla_start=1.0, tabla_end=119.0, raga="bhupali", seed=101)
 
 # Apply smooth VO ducking to music bed (duck down to 0.28 during active speech, swell to 0.92 in pauses)
 duck = 1.0 - 0.72 * vo_env_smooth

@@ -34,7 +34,7 @@ export const ParallaxStage: React.FC<ParallaxStageProps> = ({
   const isVishnu = mode === "vishnu";
 
   const bgGradient = isShamshan
-    ? "radial-gradient(ellipse at 50% 24%, #293668 0%, #151c3b 48%, #090c1a 100%)"
+    ? "radial-gradient(ellipse at 50% 24%, #314280 0%, #19224a 48%, #0d1226 100%)"
     : isVishnu
     ? "radial-gradient(ellipse at 50% 30%, #fff0b8 0%, #f5b96b 34%, #6a3472 72%, #24133d 100%)"
     : "radial-gradient(ellipse at 50% 22%, #ffe99e 0%, #f79d4b 36%, #9b3556 72%, #2a113b 100%)";
@@ -294,14 +294,51 @@ export const ParallaxStage: React.FC<ParallaxStageProps> = ({
                 d="M -100,835 Q 480,795 960,825 T 2020,810 L 2020,1150 L -100,1150 Z"
                 fill="url(#shamshanFloor)"
               />
-              {/* Warm Pyre Firelight Ground Bounce & Physics-Driven Flames */}
-              <ellipse cx={330} cy={860} rx={240} ry={62} fill="url(#pyreGroundGlow)" opacity={0.75 + 0.25 * f1.scaleY} />
-              <ellipse cx={1590} cy={865} rx={240} ry={62} fill="url(#pyreGroundGlow)" opacity={0.75 + 0.25 * f2.scaleY} />
-              <ellipse cx={960} cy={840} rx={440} ry={72} fill="url(#moonGroundGlow)" />
-              {/* Stone Shiva Shrine Altar Silhouette on Far Left */}
-              <g transform="translate(170, 770)" opacity={0.72}>
-                <rect x={-38} y={24} width={76} height={18} rx={4} fill="#334155" stroke="#64748b" strokeWidth={1.5} />
-                <rect x={-12} y={-14} width={24} height={40} rx={12} fill="#475569" stroke="#94a3b8" strokeWidth={1.5} />
+              <ellipse cx={310} cy={860} rx={260} ry={66} fill="url(#pyreGroundGlow)" opacity={0.82 + 0.18 * f1.scaleY} />
+              <ellipse cx={1610} cy={865} rx={260} ry={66} fill="url(#pyreGroundGlow)" opacity={0.82 + 0.18 * f2.scaleY} />
+              <ellipse cx={960} cy={840} rx={480} ry={78} fill="url(#moonGroundGlow)" />
+
+              {/* Twin Blazing Dhuni / Havan Fire Cauldrons with Animated Flame Tongues */}
+              {[
+                { cx: 290, cy: 792, f: f1 },
+                { cx: 1630, cy: 792, f: f2 },
+              ].map((dh, idx) => (
+                <g key={idx} transform={`translate(${dh.cx}, ${dh.cy})`}>
+                  <path d="M -40,0 L 40,0 L 28,28 L -28,28 Z" fill="#1e293b" stroke="#fbbf24" strokeWidth={2.2} />
+                  <g transform={`scale(${dh.f.scaleX}, ${dh.f.scaleY}) skewX(${dh.f.leanX})`}>
+                    <path d="M -26,0 Q -20,-42 0,-66 Q 20,-42 26,0 Z" fill="#ea580c" />
+                    <path d="M -16,0 Q -12,-28 0,-48 Q 12,-28 16,0 Z" fill="#facc15" />
+                    <path d="M -7,0 Q -4,-16 0,-26 Q 4,-16 7,0 Z" fill="#fffbeb" />
+                  </g>
+                </g>
+              ))}
+
+              {/* Carved Stone Shamshan Pillars + Hanging Brass Bells + Saffron Toran */}
+              {[82, 1838].map((px, idx) => (
+                <g key={idx} transform={`translate(${px}, 460)`} opacity={0.88}>
+                  <rect x={-26} y={-260} width={52} height={620} fill="#1e293b" stroke="#64748b" strokeWidth={2.2} />
+                  <rect x={-36} y={-260} width={72} height={30} rx={5} fill="#334155" stroke="#fbbf24" strokeWidth={1.8} />
+                  {/* Hanging Brass Temple Bell */}
+                  <g transform={`translate(${idx === 0 ? 46 : -46}, -195) rotate(${garlandSway * 0.4})`}>
+                    <line x1={0} y1={-35} x2={0} y2={0} stroke="#fbbf24" strokeWidth={3} />
+                    <path d="M -16,18 Q -14,-4 0,-8 Q 14,-4 16,18 Z" fill="#fbbf24" stroke="#78350f" strokeWidth={1.8} />
+                    <circle cx={0} cy={20} r={4} fill="#fde047" />
+                  </g>
+                  {/* Warm Saffron Pataka Banner */}
+                  <polygon
+                    points={`${idx === 0 ? 26 : -26},-240 ${idx === 0 ? 92 + garlandSway * 0.4 : -92 - garlandSway * 0.4},-226 ${idx === 0 ? 26 : -26},-210`}
+                    fill="#ea580c"
+                    stroke="#fde047"
+                    strokeWidth={1.5}
+                  />
+                </g>
+              ))}
+
+              {/* Stone Shiva Lingam Shrine on Left */}
+              <g transform="translate(175, 772)" opacity={0.88}>
+                <rect x={-38} y={24} width={76} height={18} rx={4} fill="#334155" stroke="#94a3b8" strokeWidth={1.8} />
+                <rect x={-12} y={-14} width={24} height={40} rx={12} fill="#475569" stroke="#cbd5e1" strokeWidth={1.8} />
+                <path d="M -6,-2 Q 0,-4 6,-2 M -6,3 Q 0,1 6,3" stroke="#ffffff" strokeWidth={1.8} fill="none" />
               </g>
             </g>
           )}

@@ -55,21 +55,19 @@ export const VishnuRig: React.FC<VishnuRigProps> = ({
         transform: `translate(-50%, -50%) scale(${flipX ? -scale : scale}, ${scale})`,
         transformOrigin: "center center",
         pointerEvents: "none",
-        // Radiant golden rim glow ensures Vishnu Ji pops brightly even in night Shamshan scenes!
-        filter: "drop-shadow(0 0 22px rgba(253, 224, 71, 0.48))",
       }}
     >
       <svg width={580} height={640} viewBox="-290 -330 580 640" overflow="visible">
         <defs>
           <radialGradient id="vishnuAuraStrong" cx="50%" cy="45%" r="52%">
-            <stop offset="0%" stopColor="#fffbeb" stopOpacity="0.92" />
-            <stop offset="45%" stopColor="#fde047" stopOpacity="0.38" />
+            <stop offset="0%" stopColor="#fffbeb" stopOpacity="0.62" />
+            <stop offset="45%" stopColor="#fde047" stopOpacity="0.24" />
             <stop offset="100%" stopColor="#f59e0b" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="vishnuSkin" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#9ee4ff" />
-            <stop offset="50%" stopColor="#4bb3f2" />
-            <stop offset="100%" stopColor="#1e70ba" />
+            <stop offset="0%" stopColor="#7dd3fc" />
+            <stop offset="50%" stopColor="#2563eb" />
+            <stop offset="100%" stopColor="#1e3a8a" />
           </linearGradient>
           <linearGradient id="pitambara" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#fef08a" />
@@ -148,16 +146,17 @@ export const VishnuRig: React.FC<VishnuRigProps> = ({
 
         {/* BACK LEFT ARM — Shankh + Golden Keyura Armlet */}
         <g transform={`translate(-54, -38) rotate(${-14 + Math.sin(t * 2.8) * 4})`}>
-          <path d="M 0,0 Q -56,-20 -80,-64" fill="none" stroke="url(#vishnuSkin)" strokeWidth={25} strokeLinecap="round" />
+          <path d="M 0,0 Q -56,-20 -80,-64" fill="none" stroke="#0b1120" strokeWidth={30} strokeLinecap="round" />
+          <path d="M 0,0 Q -56,-20 -80,-64" fill="none" stroke="url(#vishnuSkin)" strokeWidth={24} strokeLinecap="round" />
           <ellipse cx={-34} cy={-14} rx={5} ry={13} transform="rotate(-18, -34, -14)" fill="none" stroke="#fde047" strokeWidth={4.5} />
-          <circle cx={-80} cy={-64} r={12} fill="#7dd3fc" />
+          <circle cx={-80} cy={-64} r={12} fill="#60a5fa" stroke="#0b1120" strokeWidth={2.5} />
           <g transform="translate(-88, -88) rotate(-25)">
             {isHl("shankh") && <circle cx={0} cy={0} r={46} fill="#fffbeb" opacity={0.5 + 0.25 * Math.sin(t * 10)} />}
             <path
               d="M -17,23 Q -23,-5 0,-32 Q 17,-15 15,15 Q 8,29 -17,23 Z"
               fill="#fffaf0"
-              stroke="#fbbf24"
-              strokeWidth={2.8}
+              stroke="#0b1120"
+              strokeWidth={2.6}
             />
             <path d="M -9,8 Q 2,2 9,8 M -7,-4 Q 2,-10 8,-3 M -4,-14 Q 2,-18 6,-13" fill="none" stroke="#d4b483" strokeWidth={2} />
           </g>
@@ -165,9 +164,10 @@ export const VishnuRig: React.FC<VishnuRigProps> = ({
 
         {/* BACK RIGHT ARM — Blazing Sudarshan Chakra + Keyura Armlet */}
         <g transform={`translate(54, -38) rotate(${14 - Math.sin(t * 2.8) * 4})`}>
-          <path d="M 0,0 Q 56,-20 80,-66" fill="none" stroke="url(#vishnuSkin)" strokeWidth={25} strokeLinecap="round" />
+          <path d="M 0,0 Q 56,-20 80,-66" fill="none" stroke="#0b1120" strokeWidth={30} strokeLinecap="round" />
+          <path d="M 0,0 Q 56,-20 80,-66" fill="none" stroke="url(#vishnuSkin)" strokeWidth={24} strokeLinecap="round" />
           <ellipse cx={34} cy={-14} rx={5} ry={13} transform="rotate(18, 34, -14)" fill="none" stroke="#fde047" strokeWidth={4.5} />
-          <circle cx={80} cy={-66} r={12} fill="#7dd3fc" />
+          <circle cx={80} cy={-66} r={12} fill="#60a5fa" stroke="#0b1120" strokeWidth={2.5} />
           <g transform="translate(88, -100)">
             {isHl("chakra") && <circle cx={0} cy={0} r={58} fill="#fde047" opacity={0.55 + 0.25 * Math.sin(t * 12)} />}
             <circle cx={0} cy={0} r={36} fill="#fbbf24" opacity={0.28} />
@@ -191,27 +191,27 @@ export const VishnuRig: React.FC<VishnuRigProps> = ({
           <path
             d="M -48,0 L 48,0 L 60,126 Q 25,138 0,124 Q -25,138 -60,126 Z"
             fill="url(#pitambara)"
-            stroke="#fde047"
-            strokeWidth={2.5}
+            stroke="#0b1120"
+            strokeWidth={3}
           />
-          <path d="M 0,4 L -12,122 M 0,4 L 12,122 M -26,8 L -35,124 M 26,8 L 35,124" stroke="#b45309" strokeWidth={2.2} opacity={0.75} />
-          <rect x={-50} y={-8} width={100} height={19} rx={8} fill="url(#goldOrnament)" stroke="#92400e" strokeWidth={2} />
-          <circle cx={0} cy={1.5} r={7.5} fill="#ef4444" stroke="#fff3c4" strokeWidth={2} />
-          <ellipse cx={-24} cy={135} rx={18} ry={9} fill="#60bdf5" stroke="#bae6fd" strokeWidth={1.2} />
-          <ellipse cx={24} cy={135} rx={18} ry={9} fill="#60bdf5" stroke="#bae6fd" strokeWidth={1.2} />
+          <path d="M 0,4 L -12,122 M 0,4 L 12,122 M -26,8 L -35,124 M 26,8 L 35,124" stroke="#92400e" strokeWidth={2.2} opacity={0.8} />
+          <rect x={-50} y={-8} width={100} height={19} rx={8} fill="url(#goldOrnament)" stroke="#0b1120" strokeWidth={2.4} />
+          <circle cx={0} cy={1.5} r={7.5} fill="#ef4444" stroke="#0b1120" strokeWidth={1.8} />
+          <ellipse cx={-24} cy={135} rx={18} ry={9} fill="#38bdf8" stroke="#0b1120" strokeWidth={2.5} />
+          <ellipse cx={24} cy={135} rx={18} ry={9} fill="#38bdf8" stroke="#0b1120" strokeWidth={2.5} />
         </g>
 
         {/* Sculpted Broad-Chested Muscular Torso */}
         <path
           d="M -60,-54 Q 0,-66 60,-54 L 46,54 L -46,54 Z"
           fill="url(#vishnuSkin)"
-          stroke="#bae6fd"
-          strokeWidth={2}
+          stroke="#0b1120"
+          strokeWidth={3.2}
         />
         {/* Pectoral & Abdominal Muscular Definition + Golden Srivatsa Mark */}
-        <path d="M -38,-22 Q -18,-10 -4,-20 M 4,-20 Q 18,-10 38,-22" fill="none" stroke="#1d5f9e" strokeWidth={2.4} opacity={0.55} />
-        <path d="M -18,6 Q 0,10 18,6 M -16,24 Q 0,28 16,24" fill="none" stroke="#1d5f9e" strokeWidth={2} opacity={0.45} />
-        <path d="M 22,-32 Q 28,-26 22,-20" fill="none" stroke="#fde047" strokeWidth={2.6} strokeLinecap="round" />
+        <path d="M -38,-22 Q -18,-10 -4,-20 M 4,-20 Q 18,-10 38,-22" fill="none" stroke="#0c2d5c" strokeWidth={2.6} opacity={0.75} />
+        <path d="M -18,6 Q 0,10 18,6 M -16,24 Q 0,28 16,24" fill="none" stroke="#0c2d5c" strokeWidth={2.2} opacity={0.65} />
+        <path d="M 22,-32 Q 28,-26 22,-20" fill="none" stroke="#fde047" strokeWidth={2.8} strokeLinecap="round" />
 
         {/* Vaijayanti Garland */}
         <path
@@ -233,31 +233,33 @@ export const VishnuRig: React.FC<VishnuRigProps> = ({
 
         {/* Multi-Strand Pearl Necklace & Kaustubha Ruby */}
         <path d="M -34,-46 Q 0,-16 34,-46" fill="none" stroke="url(#goldOrnament)" strokeWidth={8} strokeLinecap="round" />
-        <polygon points="0,-24 11,-11 0,2 -11,-11" fill="#ff2e63" stroke="#fffbeb" strokeWidth={2} />
+        <polygon points="0,-24 11,-11 0,2 -11,-11" fill="#ff2e63" stroke="#0b1120" strokeWidth={2} />
 
         {/* FRONT LEFT ARM — Kaumodaki Gada + Kankana Wristlet */}
         <g transform={`translate(-50, -32) rotate(${gestureMode === "advising" ? -speakGesture * 0.5 : 0})`}>
-          <path d="M 0,0 Q -34,38 -38,86" fill="none" stroke="url(#vishnuSkin)" strokeWidth={24} strokeLinecap="round" />
+          <path d="M 0,0 Q -34,38 -38,86" fill="none" stroke="#0b1120" strokeWidth={29} strokeLinecap="round" />
+          <path d="M 0,0 Q -34,38 -38,86" fill="none" stroke="url(#vishnuSkin)" strokeWidth={23} strokeLinecap="round" />
           <ellipse cx={-24} cy={38} rx={12} ry={4.5} transform="rotate(24, -24, 38)" fill="none" stroke="#fde047" strokeWidth={4} />
           <ellipse cx={-35} cy={74} rx={11} ry={4} fill="none" stroke="#fde047" strokeWidth={4} />
-          <circle cx={-38} cy={86} r={11} fill="#7dd3fc" />
+          <circle cx={-38} cy={86} r={11} fill="#60a5fa" stroke="#0b1120" strokeWidth={2.4} />
           <g transform="translate(-46, 74) rotate(12)">
             {isHl("gada") && <circle cx={0} cy={45} r={48} fill="#fde047" opacity={0.5 + 0.25 * Math.sin(t * 11)} />}
-            <rect x={-4.5} y={-28} width={9} height={74} rx={4} fill="url(#goldOrnament)" />
-            <ellipse cx={0} cy={62} rx={23} ry={29} fill="url(#goldOrnament)" stroke="#92400e" strokeWidth={2.2} />
-            <path d="M -19,62 L 19,62 M -15,48 L 15,48 M -15,76 L 15,76" stroke="#b45309" strokeWidth={2.2} />
+            <rect x={-4.5} y={-28} width={9} height={74} rx={4} fill="url(#goldOrnament)" stroke="#0b1120" strokeWidth={1.8} />
+            <ellipse cx={0} cy={62} rx={23} ry={29} fill="url(#goldOrnament)" stroke="#0b1120" strokeWidth={2.6} />
+            <path d="M -19,62 L 19,62 M -15,48 L 15,48 M -15,76 L 15,76" stroke="#92400e" strokeWidth={2.2} />
           </g>
         </g>
 
         {/* FRONT RIGHT ARM — Blooming Padma Lotus OR Advising Hand */}
         <g transform={`translate(50, -32) rotate(${gestureMode === "advising" ? -28 - speakGesture : 0})`}>
-          <path d="M 0,0 Q 36,34 50,74" fill="none" stroke="url(#vishnuSkin)" strokeWidth={24} strokeLinecap="round" />
+          <path d="M 0,0 Q 36,34 50,74" fill="none" stroke="#0b1120" strokeWidth={29} strokeLinecap="round" />
+          <path d="M 0,0 Q 36,34 50,74" fill="none" stroke="url(#vishnuSkin)" strokeWidth={23} strokeLinecap="round" />
           <ellipse cx={28} cy={32} rx={12} ry={4.5} transform="rotate(-24, 28, 32)" fill="none" stroke="#fde047" strokeWidth={4} />
-          <circle cx={50} cy={74} r={11} fill="#7dd3fc" />
+          <circle cx={50} cy={74} r={11} fill="#60a5fa" stroke="#0b1120" strokeWidth={2.4} />
           {gestureMode !== "advising" && (
             <g transform="translate(58, 52)">
               {isHl("padma") && <circle cx={0} cy={0} r={42} fill="#ff85a1" opacity={0.5 + 0.25 * Math.sin(t * 11)} />}
-              <path d="M 0,15 Q -26,0 -19,-19 Q -4,-6 0,-28 Q 4,-6 19,-19 Q 26,0 0,15 Z" fill="#ff5c8a" stroke="#ffd6e0" strokeWidth={1.8} />
+              <path d="M 0,15 Q -26,0 -19,-19 Q -4,-6 0,-28 Q 4,-6 19,-19 Q 26,0 0,15 Z" fill="#ff5c8a" stroke="#0b1120" strokeWidth={2} />
               <path d="M 0,15 Q -11,-4 0,-23 Q 11,-4 0,15 Z" fill="#ff85a1" />
             </g>
           )}
@@ -265,12 +267,12 @@ export const VishnuRig: React.FC<VishnuRigProps> = ({
 
         {/* Head & Sculpted Divine Face */}
         <g transform={`translate(0, ${-100 + br.shoulderLift * 0.5})`}>
-          <rect x={-14} y={24} width={28} height={24} rx={8} fill="#4bb3f2" />
+          <rect x={-14} y={24} width={28} height={24} rx={8} fill="#2563eb" stroke="#0b1120" strokeWidth={2.5} />
           {/* Makara Kundal Earrings with Pendulum Micro-Swing */}
-          <ellipse cx={-35} cy={9} rx={7.5} ry={14} transform={`rotate(${kundalSwing}, -35, 0)`} fill="url(#goldOrnament)" />
-          <ellipse cx={35} cy={9} rx={7.5} ry={14} transform={`rotate(${-kundalSwing}, 35, 0)`} fill="url(#goldOrnament)" />
+          <ellipse cx={-35} cy={9} rx={7.5} ry={14} transform={`rotate(${kundalSwing}, -35, 0)`} fill="url(#goldOrnament)" stroke="#0b1120" strokeWidth={2} />
+          <ellipse cx={35} cy={9} rx={7.5} ry={14} transform={`rotate(${-kundalSwing}, 35, 0)`} fill="url(#goldOrnament)" stroke="#0b1120" strokeWidth={2} />
           {/* Face */}
-          <ellipse cx={0} cy={0} rx={33} ry={37} fill="url(#vishnuSkin)" stroke="#bae6fd" strokeWidth={1.8} />
+          <ellipse cx={0} cy={0} rx={33} ry={37} fill="url(#vishnuSkin)" stroke="#0b1120" strokeWidth={3} />
           {/* Urdhva Pundra Tilak */}
           <path d="M -6,-27 L -4,-10 Q 0,-7 4,-10 L 6,-27" fill="none" stroke="#fffbeb" strokeWidth={3.2} strokeLinecap="round" />
           <line x1={0} y1={-25} x2={0} y2={-11} stroke="#ef4444" strokeWidth={2.8} strokeLinecap="round" />

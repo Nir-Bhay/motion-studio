@@ -41,22 +41,20 @@ export const MahadevRig: React.FC<MahadevRigProps> = ({
         transform: `translate(-50%, -50%) scale(${scale})`,
         transformOrigin: "center center",
         pointerEvents: "none",
-        // Crisp silver-lunar + warm pyre rim glow so Mahadev pops clearly against dark Shamshan night
-        filter: "drop-shadow(0 0 22px rgba(186, 230, 253, 0.45))",
       }}
     >
       <svg width={820} height={620} viewBox="-410 -320 820 620" overflow="visible">
         <defs>
           <radialGradient id="shivaAuraStrong" cx="50%" cy="45%" r="52%">
-            <stop offset="0%" stopColor="#e0f2fe" stopOpacity="0.68" />
-            <stop offset="45%" stopColor="#7dd3fc" stopOpacity="0.26" />
+            <stop offset="0%" stopColor="#bae6fd" stopOpacity="0.42" />
+            <stop offset="55%" stopColor="#38bdf8" stopOpacity="0.14" />
             <stop offset="100%" stopColor="#0f172a" stopOpacity="0" />
           </radialGradient>
-          {/* Luminous bhasma-clad skin with crisp silver rim-light */}
+          {/* Luminous bhasma-clad skin with sculpted slate shading */}
           <linearGradient id="shivaSkin" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="45%" stopColor="#dbeafe" />
-            <stop offset="100%" stopColor="#94b3d6" />
+            <stop offset="0%" stopColor="#f8fafc" />
+            <stop offset="50%" stopColor="#cbd5e1" />
+            <stop offset="100%" stopColor="#94a3b8" />
           </linearGradient>
           <linearGradient id="shivaMuscleShadow" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#93b4d8" stopOpacity="0.55" />
@@ -194,6 +192,7 @@ export const MahadevRig: React.FC<MahadevRigProps> = ({
             <ellipse cx={-141} cy={6} rx={14} ry={11} fill="#e2e8f0" stroke="#94a3b8" strokeWidth={1.5} />
 
             {/* Relaxed Draped Arm with Muscle Contour & Wristlet */}
+            <path d="M 10,44 Q 68,58 98,94" fill="none" stroke="#0b1120" strokeWidth={30} strokeLinecap="round" />
             <path
               d="M 10,44 Q 68,58 98,94"
               fill="none"
@@ -239,7 +238,7 @@ export const MahadevRig: React.FC<MahadevRigProps> = ({
                 opacity={0.85}
               />
               {/* Face */}
-              <ellipse cx={0} cy={0} rx={31} ry={35} fill="url(#shivaSkin)" stroke="#e0f2fe" strokeWidth={2} />
+              <ellipse cx={0} cy={0} rx={31} ry={35} fill="url(#shivaSkin)" stroke="#0b1120" strokeWidth={3} />
               {/* Neelkanth Sapphire Blue Throat */}
               <ellipse cx={0} cy={32} rx={13} ry={8} fill="#2563eb" opacity={0.85} />
               {/* Rudraksha Ear Kundals & Neck Mala */}
@@ -266,19 +265,21 @@ export const MahadevRig: React.FC<MahadevRigProps> = ({
           <g transform={`translate(0, ${br.chestExpand * 0.4})`}>
             <circle cx={0} cy={-78} r={178} fill="url(#shivaAuraStrong)" />
             {/* Tiger-skin Dhoti & Crossed Padmasana Legs */}
-            <path d="M -98,96 Q 0,134 98,96 Q 114,54 46,48 L -46,48 Q -114,54 -98,96 Z" fill="url(#baghambarRich)" stroke="#fbbf24" strokeWidth={2.5} />
+            <path d="M -98,96 Q 0,134 98,96 Q 114,54 46,48 L -46,48 Q -114,54 -98,96 Z" fill="url(#baghambarRich)" stroke="#0b1120" strokeWidth={3} />
             {[-58, -22, 22, 58].map((sx, i) => (
               <path key={i} d={`M ${sx},60 Q ${sx + 6},85 ${sx - 6},106`} fill="none" stroke="#291202" strokeWidth={5} strokeLinecap="round" opacity={0.8} />
             ))}
             {/* Sculpted Muscular Torso */}
-            <path d="M -54,-38 Q 0,-50 54,-38 L 42,56 L -42,56 Z" fill="url(#shivaSkin)" stroke="#e0f2fe" strokeWidth={2.2} />
-            <path d="M -36,-14 Q -18,-6 -4,-16 M 4,-16 Q 18,-6 36,-14" fill="none" stroke="#6488b4" strokeWidth={2.2} opacity={0.55} />
+            <path d="M -54,-38 Q 0,-50 54,-38 L 42,56 L -42,56 Z" fill="url(#shivaSkin)" stroke="#0b1120" strokeWidth={3} />
+            <path d="M -36,-14 Q -18,-6 -4,-16 M 4,-16 Q 18,-6 36,-14" fill="none" stroke="#475569" strokeWidth={2.4} opacity={0.7} />
             <path d="M -28,-22 Q 0,-28 28,-22 M -26,-12 Q 0,-18 26,-12" fill="none" stroke="#ffffff" strokeWidth={3.2} />
             {/* Left Arm + Keyura Armlet */}
+            <path d="M -50,-28 Q -78,28 -60,78" fill="none" stroke="#0b1120" strokeWidth={30} strokeLinecap="round" />
             <path d="M -50,-28 Q -78,28 -60,78" fill="none" stroke="url(#shivaSkin)" strokeWidth={24} strokeLinecap="round" />
             <ellipse cx={-66} cy={4} rx={12} ry={5} transform="rotate(14, -66, 4)" fill="none" stroke="#fbbf24" strokeWidth={4} />
             {/* Right Arm Raised in Abhaya Blessing */}
             <g transform={`translate(50, -28) rotate(${-15 - Math.sin(t * 3.8) * 7})`}>
+              <path d="M 0,0 Q 36,-14 48,-56" fill="none" stroke="#0b1120" strokeWidth={30} strokeLinecap="round" />
               <path d="M 0,0 Q 36,-14 48,-56" fill="none" stroke="url(#shivaSkin)" strokeWidth={24} strokeLinecap="round" />
               <ellipse cx={28} cy={-16} rx={6} ry={13} transform="rotate(-48, 28, -16)" fill="none" stroke="#fbbf24" strokeWidth={4} />
               <ellipse cx={50} cy={-66} rx={12} ry={15} fill="#f8fafc" />
@@ -300,7 +301,7 @@ export const MahadevRig: React.FC<MahadevRigProps> = ({
               <path d="M -31,-10 Q -37,-58 0,-68 Q 37,-58 31,-10 Z" fill="#291d18" />
               <ellipse cx={0} cy={-58} rx={21} ry={17} fill="#3f2c22" />
               <path d="M 10,-64 A 12,12 0 1,0 26,-49 A 9,9 0 1,1 10,-64 Z" fill="#ffffff" />
-              <ellipse cx={0} cy={0} rx={31} ry={35} fill="url(#shivaSkin)" stroke="#e0f2fe" strokeWidth={2} />
+              <ellipse cx={0} cy={0} rx={31} ry={35} fill="url(#shivaSkin)" stroke="#0b1120" strokeWidth={3} />
               <ellipse cx={0} cy={32} rx={13} ry={8} fill="#2563eb" opacity={0.85} />
               <path d="M -17,-16 Q 0,-20 17,-16 M -16,-11 Q 0,-15 16,-11" fill="none" stroke="#ffffff" strokeWidth={2.5} />
               <ellipse cx={0} cy={-13} rx={2.8} ry={5.5} fill="#ef4444" />

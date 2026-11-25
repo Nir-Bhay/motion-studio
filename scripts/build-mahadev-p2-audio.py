@@ -4,6 +4,7 @@ import subprocess
 import numpy as np
 import soundfile as sf
 from scipy.signal import butter, filtfilt, resample_poly
+from indian_classical_audio import layer_classical_indian_bed
 
 SR = 48000
 DUR = 110.000
@@ -144,6 +145,8 @@ for bt in [0.3, 11.6, 41.2, 66.8, 79.2, 93.2, 107.8]:
 # Energetic Damaru rhythm during Mahadev Shringar (67.2s - 109.5s)
 for tb in np.arange(67.5, 109.5, 0.36):
     add_stereo(damaru_hit(165 if int(tb*3)%2==0 else 215), float(tb), pan=-0.25 if int(tb*3)%2==0 else 0.25, gain=0.52)
+
+layer_classical_indian_bed(left, right, DUR, tabla_start=1.0, tabla_end=109.0, raga="shivaranjani", seed=102)
 
 duck = 1.0 - 0.72 * vo_env_smooth
 bed_l = left * duck

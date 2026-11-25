@@ -4,6 +4,7 @@ import subprocess
 import numpy as np
 import soundfile as sf
 from scipy.signal import butter, filtfilt, resample_poly
+from indian_classical_audio import layer_classical_indian_bed
 
 SR = 48000
 DUR = 90.000
@@ -148,6 +149,8 @@ for tb in np.arange(57.2, 89.6, 0.38):
     add_stereo(damaru_hit(195), float(tb) + 0.19, pan=0.28, gain=0.52)
     if int(tb * 2.6) % 2 == 0:
         add_stereo(manjira_chime(), float(tb), pan=-0.35, gain=0.55)
+
+layer_classical_indian_bed(left, right, DUR, tabla_start=1.0, tabla_end=89.0, raga="bhairav", seed=103)
 
 duck = 1.0 - 0.72 * vo_env_smooth
 bed_l = left * duck

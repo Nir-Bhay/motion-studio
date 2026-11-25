@@ -6,6 +6,7 @@ import "@fontsource/yatra-one/400.css";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { VishnuRig } from "../characters/VishnuRig";
 import { ShivGanaRig } from "../characters/ShivGanaRig";
+import { BackgroundCrowdBand, DetailedSpiritRig } from "../characters/DetailedGanasAndSpirits";
 import { SceneTitleBanner } from "../ui/DevanagariCaptions";
 import { MahadevGroomRig } from "./MahadevGroomRig";
 import { HimalayaFlipBubble, KamdevFlashbackBubble } from "./KamdevAndHimalayaProps";
@@ -62,20 +63,56 @@ const P2S01Ekant: React.FC<{ gf: number }> = ({ gf }) => {
   );
 };
 
-// P2-S02: Kamdev Bhasm Flashback & Saliyan Warning
+// P2-S02: Multi-Clip Kamdev Bhasm Flashback & Playful Saliyan Warning!
 const P2S02Kamdev: React.FC<{ gf: number }> = ({ gf }) => {
   const frame = useCurrentFrame();
   const vo = getSmoothVoP2(gf);
-  // Kamdev blast hits around local frame 375..540 (24s..29.5s)
-  const showKamdev = frame >= 340 && frame <= 780;
+  // Clip A (0..345): Vishnu & Shiv talking; Clip B (345..545): Kamdev Flashback; Clip C (545..885): Playful Saliyan & Ganas!
+  const isKamdevCut = frame >= 345 && frame < 550;
+  const isSaliyanCut = frame >= 550;
   const blastProgress = interpolate(frame, [385, 515], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const beam = frame >= 395 && frame <= 465 ? interpolate(frame, [395, 420, 465], [0, 1, 0]) : 0;
 
+  if (isKamdevCut) {
+    return (
+      <ParallaxStage mode="devaloka" cameraX={Math.sin(frame * 0.4) * beam * 8} zoom={interpolate(frame, [345, 545], [1.05, 1.14])}>
+        <BackgroundCrowdBand mode="devaloka" y={680} />
+        <MahadevGroomRig x={1280} y={540} scale={1.18} thirdEyeBeam={beam} gesture="heroic" />
+        <KamdevFlashbackBubble x={560} y={440} blastProgress={blastProgress} />
+      </ParallaxStage>
+    );
+  }
+
   return (
-    <ParallaxStage mode="shamshan" cameraX={0} zoom={interpolate(frame, [0, 885], [1.02, 1.1])}>
-      <MahadevGroomRig x={700} y={550} scale={1.14} thirdEyeBeam={beam} speakingEnergy={vo * 0.35} />
+    <ParallaxStage mode="shamshan" cameraX={0} zoom={interpolate(frame, [0, 885], [1.02, 1.08])}>
+      <BackgroundCrowdBand mode="shamshan" y={655} />
+      <MahadevGroomRig x={700} y={550} scale={1.14} speakingEnergy={vo * 0.35} />
       <VishnuRig x={1250} y={530} scale={1.14} flipX speakingEnergy={vo} gestureMode="advising" />
-      {showKamdev && <KamdevFlashbackBubble x={320} y={325} blastProgress={blastProgress} />}
+      {isSaliyanCut && (
+        <>
+          {/* Playful Giggling Saliyan & Restless Ganas during "साली-सरहज ने मज़ाक कर दी... गणों को संभालना!" */}
+          <DetailedSpiritRig x={240} y={660} kind="shringi" scale={0.92} phase={0} />
+          <DetailedSpiritRig x={410} y={710} kind="pishacha" scale={0.85} phase={1.3} />
+          <svg viewBox="0 0 1920 1080" width="100%" height="100%" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+            {[1560, 1730].map((sx, idx) => (
+              <g key={idx} transform={`translate(${sx}, ${580 + Math.sin(frame * 0.14 + idx) * 8})`}>
+                <path d="M -20,-24 Q -46,-10 -52,-30" fill="none" stroke="#0b1120" strokeWidth={13} strokeLinecap="round" />
+                <path d="M -20,-24 Q -46,-10 -52,-30" fill="none" stroke="#f7be9c" strokeWidth={8} strokeLinecap="round" />
+                <path d="M 20,-24 Q 46,-10 52,-30" fill="none" stroke="#0b1120" strokeWidth={13} strokeLinecap="round" />
+                <path d="M 20,-24 Q 46,-10 52,-30" fill="none" stroke="#f7be9c" strokeWidth={8} strokeLinecap="round" />
+                <circle cx={-54} cy={-34} r={7} fill="#fb7185" stroke="#fde047" strokeWidth={1.5} />
+                <path d="M -28,16 L 28,16 L 44,106 Q 0,120 -44,106 Z" fill={idx === 0 ? "#ec4899" : "#f59e0b"} stroke="#0b1120" strokeWidth={3} />
+                <path d="M -20,-30 L 20,-30 L 16,18 L -16,18 Z" fill="#fbcfe8" stroke="#0b1120" strokeWidth={2.5} />
+                <circle cx={0} cy={-54} r={22} fill="#f7be9c" stroke="#0b1120" strokeWidth={2.5} />
+                <circle cx={-7} cy={-56} r={2.5} fill="#0b1120" />
+                <circle cx={7} cy={-56} r={2.5} fill="#0b1120" />
+                <path d="M -7,-44 Q 0,-38 7,-44" fill="none" stroke="#be123c" strokeWidth={2.5} />
+                <circle cx={0} cy={-74} r={10} fill="#1e1b4b" />
+              </g>
+            ))}
+          </svg>
+        </>
+      )}
     </ParallaxStage>
   );
 };
@@ -126,12 +163,15 @@ const P2S05JataMukut: React.FC<{ gf: number }> = ({ gf }) => {
 
   return (
     <ParallaxStage mode="shamshan" cameraX={0} zoom={interpolate(frame, [0, 420], [1.04, 1.15])}>
+      <BackgroundCrowdBand mode="shamshan" y={655} />
       <MahadevGroomRig x={960} y={555} scale={1.22} jataCrownProgress={crownProg} speakingEnergy={vo * 0.25} gesture="heroic" />
       {/* Shringi & Bhringi leaping beside Mahadev's crown weaving Jata! */}
       <ShivGanaRig x={620} y={595} variant="shringi" scale={1.08} phase={0} />
       <ShivGanaRig x={1300} y={595} variant="bhringi" scale={1.06} phase={1.4} flipX />
       <ShivGanaRig x={360} y={710} variant="drummer" scale={0.98 + bed * 0.05} phase={2.5} />
       <ShivGanaRig x={1560} y={710} variant="chubby" scale={1.0} phase={0.8} flipX />
+      <DetailedSpiritRig x={170} y={605} kind="vetala" scale={0.84} phase={0.4} />
+      <DetailedSpiritRig x={1750} y={605} kind="narsingha" scale={0.84} phase={1.7} flipX />
     </ParallaxStage>
   );
 };
@@ -146,6 +186,7 @@ const P2S06SarpShringar: React.FC<{ gf: number }> = ({ gf }) => {
 
   return (
     <ParallaxStage mode="shamshan" cameraX={0} zoom={interpolate(frame, [0, 510], [1.06, 1.16])}>
+      <BackgroundCrowdBand mode="shamshan" y={665} />
       <MahadevGroomRig
         x={960}
         y={555}
@@ -160,6 +201,8 @@ const P2S06SarpShringar: React.FC<{ gf: number }> = ({ gf }) => {
       <ShivGanaRig x={1380} y={665} variant="bhringi" scale={1.08} phase={1.5} flipX />
       <ShivGanaRig x={310} y={735} variant="drummer" scale={1.0 + bed * 0.05} phase={2.2} />
       <ShivGanaRig x={1610} y={735} variant="tall" scale={1.0} phase={0.7} flipX />
+      <DetailedSpiritRig x={160} y={600} kind="narsingha" scale={0.86} phase={0.3} />
+      <DetailedSpiritRig x={1760} y={605} kind="dakini" scale={0.84} phase={1.6} flipX />
 
       {frame > 410 && (
         <div

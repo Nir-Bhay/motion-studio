@@ -7,6 +7,7 @@ import { ParallaxStage } from "../environment/ParallaxStage";
 import { VishnuRig } from "../characters/VishnuRig";
 import { BrahmaRig, IndraOnAiravataRig } from "../characters/BrahmaIndraRigs";
 import { ShivGanaRig } from "../characters/ShivGanaRig";
+import { BackgroundCrowdBand, DetailedSpiritRig } from "../characters/DetailedGanasAndSpirits";
 import { SceneTitleBanner } from "../ui/DevanagariCaptions";
 import { MahadevBaratGroomRig } from "../part3/MahadevBaratGroomRig";
 import { NandiBullRig, PretCreatureRig, VajraLightning } from "./BhootPretAndNandiRigs";
@@ -85,6 +86,7 @@ const P4S02VishwaPret: React.FC<{ gf: number }> = ({ gf }) => {
 
   return (
     <ParallaxStage mode="shamshan" cameraX={0} zoom={1.04}>
+      <BackgroundCrowdBand mode="bhoot_army" y={665} />
       <MahadevBaratGroomRig
         x={520}
         y={545}
@@ -98,11 +100,14 @@ const P4S02VishwaPret: React.FC<{ gf: number }> = ({ gf }) => {
       />
       <ShivGanaRig x={220} y={670} variant="shringi" scale={1.0} phase={0} />
 
-      {/* Flying Global Ghosts & Top-Hat London/America Prets! */}
-      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2080, 1080])} y={360} variant="classic" scale={1.05} phase={0} />
-      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2180, 1340])} y={540} variant="dakini" scale={1.05} phase={1.1} />
-      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2280, 1600])} y={380} variant="london" scale={1.12} phase={2.2} />
-      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2340, 1740])} y={640} variant="classic" scale={0.95} phase={0.7} />
+      {/* Flying Global Ghosts, Dakini, Vetala, Pishacha & Top-Hat London/America Prets! */}
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2050, 960])} y={640} kind="vetala" scale={0.96} phase={0.2} flipX />
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2160, 1210])} y={695} kind="pishacha" scale={0.94} phase={1.3} flipX />
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2250, 1490])} y={670} kind="dakini" scale={0.96} phase={2.0} flipX />
+      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2080, 1080])} y={340} variant="classic" scale={1.05} phase={0} />
+      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2180, 1340])} y={460} variant="dakini" scale={1.02} phase={1.1} />
+      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2280, 1600])} y={360} variant="london" scale={1.12} phase={2.2} />
+      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2340, 1740])} y={540} variant="classic" scale={0.95} phase={0.7} />
     </ParallaxStage>
   );
 };
@@ -192,6 +197,7 @@ const P4S05NandiArrival: React.FC<{ gf: number }> = ({ gf }) => {
 
   return (
     <ParallaxStage mode="shamshan" cameraX={0} zoom={1.04}>
+      <BackgroundCrowdBand mode="bhoot_army" y={665} />
       {/* Mahadev Riding Sacred Nandi Bull! */}
       <MahadevBaratGroomRig
         x={nandiX - 10}
@@ -208,9 +214,10 @@ const P4S05NandiArrival: React.FC<{ gf: number }> = ({ gf }) => {
       <ShivGanaRig x={nandiX - 240} y={695} variant="shringi" scale={0.92} phase={0} />
 
       {/* Weeping Bhoot-Prets waiting in the field */}
-      <PretCreatureRig x={1150} y={630} variant="weeping" scale={1.12} phase={0} />
-      <PretCreatureRig x={1390} y={660} variant="weeping" scale={1.05} phase={1.1} />
-      <PretCreatureRig x={1630} y={620} variant="weeping" scale={1.08} phase={2.0} />
+      <DetailedSpiritRig x={960} y={690} kind="vetala" scale={0.86} phase={0.4} flipX />
+      <PretCreatureRig x={1170} y={625} variant="weeping" scale={1.12} phase={0} />
+      <PretCreatureRig x={1410} y={655} variant="weeping" scale={1.05} phase={1.1} />
+      <PretCreatureRig x={1650} y={615} variant="weeping" scale={1.08} phase={2.0} />
 
       {frame > 430 && (
         <div

@@ -21,31 +21,34 @@ export const NandiBullRig: React.FC<{
         top: y + bob,
         transform: `translate(-50%, -50%) scale(${scale})`,
         pointerEvents: "none",
-        filter: "drop-shadow(0 0 18px rgba(226, 232, 240, 0.45))",
       }}
     >
       <svg width={360} height={240} viewBox="-180 -120 360 240" overflow="visible">
-        {/* Sacred Bull Legs */}
-        <line x1={-68} y1={28} x2={-72 - stride} y2={95} stroke="#e2e8f0" strokeWidth={18} strokeLinecap="round" />
-        <line x1={-40} y1={28} x2={-38 + stride} y2={95} stroke="#f8fafc" strokeWidth={18} strokeLinecap="round" />
-        <line x1={48} y1={28} x2={46 - stride} y2={95} stroke="#e2e8f0" strokeWidth={18} strokeLinecap="round" />
-        <line x1={74} y1={28} x2={78 + stride} y2={95} stroke="#f8fafc" strokeWidth={18} strokeLinecap="round" />
+        {/* Sacred Bull Legs with Dark-Ink Outlines */}
+        <line x1={-68} y1={28} x2={-72 - stride} y2={95} stroke="#0b1120" strokeWidth={23} strokeLinecap="round" />
+        <line x1={-68} y1={28} x2={-72 - stride} y2={95} stroke="#e2e8f0" strokeWidth={17} strokeLinecap="round" />
+        <line x1={-40} y1={28} x2={-38 + stride} y2={95} stroke="#0b1120" strokeWidth={23} strokeLinecap="round" />
+        <line x1={-40} y1={28} x2={-38 + stride} y2={95} stroke="#f8fafc" strokeWidth={17} strokeLinecap="round" />
+        <line x1={48} y1={28} x2={46 - stride} y2={95} stroke="#0b1120" strokeWidth={23} strokeLinecap="round" />
+        <line x1={48} y1={28} x2={46 - stride} y2={95} stroke="#e2e8f0" strokeWidth={17} strokeLinecap="round" />
+        <line x1={74} y1={28} x2={78 + stride} y2={95} stroke="#0b1120" strokeWidth={23} strokeLinecap="round" />
+        <line x1={74} y1={28} x2={78 + stride} y2={95} stroke="#f8fafc" strokeWidth={17} strokeLinecap="round" />
 
         {/* Body & Hump */}
-        <ellipse cx={0} cy={12} rx={92} ry={44} fill="#f8fafc" stroke="#cbd5e1" strokeWidth={2.5} />
-        <ellipse cx={45} cy={-26} rx={28} ry={22} fill="#f8fafc" />
+        <ellipse cx={0} cy={12} rx={92} ry={44} fill="#f8fafc" stroke="#0b1120" strokeWidth={3} />
+        <ellipse cx={45} cy={-26} rx={28} ry={22} fill="#f8fafc" stroke="#0b1120" strokeWidth={2.5} />
 
         {/* Crimson Silk Jhool Saddlecloth */}
-        <path d="M -58,-28 Q 0,-38 50,-22 L 54,28 Q 0,40 -58,26 Z" fill="#dc2626" stroke="#fde047" strokeWidth={3} />
+        <path d="M -58,-28 Q 0,-38 50,-22 L 54,28 Q 0,40 -58,26 Z" fill="#dc2626" stroke="#0b1120" strokeWidth={2.8} />
         <path d="M -52,20 Q 0,32 48,22" fill="none" stroke="#fde047" strokeWidth={3.5} strokeDasharray="6 5" />
 
         {/* Neck & Brass Bell Garland */}
-        <path d="M 65,-20 Q 98,-46 112,-28 L 106,14 Q 80,26 65,10 Z" fill="#f1f5f9" />
+        <path d="M 65,-20 Q 98,-46 112,-28 L 106,14 Q 80,26 65,10 Z" fill="#f1f5f9" stroke="#0b1120" strokeWidth={2.5} />
         <path d="M 65,-10 Q 82,8 98,-8" fill="none" stroke="#fbbf24" strokeWidth={5} />
-        <circle cx={82} cy={10} r={6} fill="#fde047" />
+        <circle cx={82} cy={10} r={6} fill="#fde047" stroke="#0b1120" strokeWidth={1.5} />
 
         {/* Head, Golden-Tipped Horns, Gentle Eyes */}
-        <ellipse cx={118} cy={-24} rx={26} ry={20} fill="#ffffff" stroke="#cbd5e1" strokeWidth={2} />
+        <ellipse cx={118} cy={-24} rx={26} ry={20} fill="#ffffff" stroke="#0b1120" strokeWidth={2.8} />
         <path d="M 104,-40 Q 92,-76 116,-84" fill="none" stroke="#e2e8f0" strokeWidth={8} strokeLinecap="round" />
         <path d="M 106,-72 Q 112,-82 116,-84" fill="none" stroke="#fbbf24" strokeWidth={8} strokeLinecap="round" />
         <path d="M 128,-40 Q 144,-72 132,-82" fill="none" stroke="#f8fafc" strokeWidth={8} strokeLinecap="round" />

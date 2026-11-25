@@ -7,6 +7,7 @@ import { ParallaxStage } from "../environment/ParallaxStage";
 import { VishnuRig } from "../characters/VishnuRig";
 import { BrahmaRig, IndraOnAiravataRig } from "../characters/BrahmaIndraRigs";
 import { ShivGanaRig } from "../characters/ShivGanaRig";
+import { BackgroundCrowdBand, DetailedSpiritRig } from "../characters/DetailedGanasAndSpirits";
 import { SceneTitleBanner } from "../ui/DevanagariCaptions";
 import { MahadevBaratGroomRig } from "./MahadevBaratGroomRig";
 import { getBedP3, getSmoothVoP3, P3_FPS, P3_SCENES, SUBTITLES_P3 } from "./timelineP3";
@@ -53,9 +54,12 @@ const P3S01Sehra: React.FC<{ gf: number }> = ({ gf }) => {
 
   return (
     <ParallaxStage mode="shamshan" cameraX={0} zoom={interpolate(frame, [0, 366], [1.08, 1.18])}>
+      <BackgroundCrowdBand mode="shamshan" y={655} />
       <MahadevBaratGroomRig x={960} y={540} scale={1.26} sehraProgress={sehra} />
       <ShivGanaRig x={520} y={640} variant="shringi" scale={1.1} phase={0} />
       <ShivGanaRig x={1400} y={640} variant="bhringi" scale={1.08 + bed * 0.04} phase={1.3} flipX />
+      <DetailedSpiritRig x={210} y={685} kind="narsingha" scale={0.92} phase={0.4} />
+      <DetailedSpiritRig x={1710} y={685} kind="dhol_gana" scale={0.92} phase={1.8} flipX />
     </ParallaxStage>
   );
 };
@@ -67,9 +71,12 @@ const P3S02Bichhu: React.FC<{ gf: number }> = ({ gf }) => {
 
   return (
     <ParallaxStage mode="shamshan" cameraX={0} zoom={interpolate(frame, [0, 384], [1.14, 1.24])}>
+      <BackgroundCrowdBand mode="shamshan" y={655} />
       <MahadevBaratGroomRig x={960} y={540} scale={1.28} sehraProgress={1} bichhuProgress={bichhu} />
       <ShivGanaRig x={480} y={660} variant="chubby" scale={1.08 + bed * 0.04} phase={0.5} />
       <ShivGanaRig x={1440} y={660} variant="shringi" scale={1.1} phase={1.8} flipX />
+      <DetailedSpiritRig x={200} y={685} kind="vetala" scale={0.9} phase={0.2} />
+      <DetailedSpiritRig x={1710} y={685} kind="dakini" scale={0.9} phase={1.5} flipX />
     </ParallaxStage>
   );
 };
@@ -81,9 +88,12 @@ const P3S03Panchmukhi: React.FC<{ gf: number }> = ({ gf }) => {
 
   return (
     <ParallaxStage mode="shamshan" cameraX={0} zoom={1.15}>
+      <BackgroundCrowdBand mode="shamshan" y={655} />
       <MahadevBaratGroomRig x={960} y={545} scale={1.26} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={panch} speakingEnergy={vo * 0.4} />
       <ShivGanaRig x={510} y={655} variant="bhringi" scale={1.1} phase={0.2} />
       <ShivGanaRig x={1410} y={655} variant="drummer" scale={1.06} phase={1.5} flipX />
+      <DetailedSpiritRig x={210} y={685} kind="pishacha" scale={0.92} phase={0.7} />
+      <DetailedSpiritRig x={1710} y={685} kind="narsingha" scale={0.92} phase={2.1} flipX />
     </ParallaxStage>
   );
 };
