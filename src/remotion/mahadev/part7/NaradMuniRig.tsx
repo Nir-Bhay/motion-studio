@@ -3,7 +3,8 @@ import { interpolate, useCurrentFrame } from "remotion";
 
 const OUTLINE = "#1a0b2e";
 
-// Devarishi Narad Muni Rig — Cel-shaded with Veena, Khartal, Shikha, Saffron Pitambar & Expressive Gestures
+// Devarishi Narad Muni Rig — Richly Detailed Sage with Flowing Hair, Shikha, Rudraksha Mala,
+// Saffron Silk Angavastra, Pleated Pitambar Dhoti, Ornate Mahati Veena & Brass Khartal
 export const NaradMuniRig: React.FC<{
   x: number;
   y: number;
@@ -14,7 +15,7 @@ export const NaradMuniRig: React.FC<{
 }> = ({ x, y, scale = 1, speakingEnergy = 0, gesture = "explaining", flipX = false }) => {
   const frame = useCurrentFrame();
   const bob = Math.sin(frame * 0.08) * 3;
-  const handWave = gesture === "denying" ? Math.sin(frame * 0.35) * 22 : Math.sin(frame * 0.14) * 10;
+  const handWave = gesture === "denying" ? Math.sin(frame * 0.35) * 20 : Math.sin(frame * 0.14) * 9;
   const mouthOpen = 2.5 + speakingEnergy * 8;
 
   return (
@@ -26,73 +27,121 @@ export const NaradMuniRig: React.FC<{
         transform: `translate(-50%, -50%) scale(${flipX ? -scale : scale}, ${scale})`,
       }}
     >
-      <svg width={260} height={360} viewBox="-130 -190 260 360" overflow="visible">
-        <ellipse cx={0} cy={148} rx={58} ry={13} fill="#090414" opacity={0.35} />
+      <svg width={280} height={380} viewBox="-140 -200 280 380" overflow="visible">
+        <ellipse cx={0} cy={156} rx={64} ry={13} fill="#090414" opacity={0.38} />
 
-        {/* Radiant Sage Halo */}
-        <circle cx={0} cy={-98} r={54} fill="#fde68a" opacity={0.28} />
-        <circle cx={0} cy={-98} r={42} fill="#fef08a" opacity={0.35} />
+        {/* Radiant Divine Sage Halo */}
+        <circle cx={0} cy={-106} r={58} fill="#fde68a" opacity={0.26} />
+        <circle cx={0} cy={-106} r={44} fill="#fef08a" opacity={0.36} />
+        <circle cx={0} cy={-106} r={52} fill="none" stroke="#fbbf24" strokeWidth={1.8} strokeDasharray="6 6" opacity={0.65} />
 
-        {/* Saffron Dhoti & Feet */}
-        <path d="M-32,12 L32,12 L42,130 L-42,130 Z" fill="#f59e0b" stroke={OUTLINE} strokeWidth={3} />
-        <path d="M0,16 L0,130" stroke="#b45309" strokeWidth={2.5} />
-        <path d="M-36,118 L36,118" stroke="#fef08a" strokeWidth={4} />
-        <ellipse cx={-18} cy={136} rx={15} ry={8} fill="#fdba74" stroke={OUTLINE} strokeWidth={2.5} />
-        <ellipse cx={18} cy={136} rx={15} ry={8} fill="#fdba74" stroke={OUTLINE} strokeWidth={2.5} />
+        {/* Pleated Saffron Silk Dhoti & Wooden Paduka Sandals */}
+        <path d="M-36,12 L36,12 Q46,72 48,136 Q0,146 -48,136 Q-46,72 -36,12 Z" fill="#f59e0b" stroke={OUTLINE} strokeWidth={3} />
+        {/* Center Dhoti Pleats & Gold Zari Hem */}
+        {[-18, 0, 18].map((px, i) => (
+          <path key={i} d={`M${px * 0.6},14 L${px * 1.1},138`} stroke="#b45309" strokeWidth={2.2} opacity={0.75} />
+        ))}
+        <path d="M-44,122 Q0,132 44,122" fill="none" stroke="#fef08a" strokeWidth={5} />
+        <path d="M-42,114 Q0,124 42,114" fill="none" stroke="#dc2626" strokeWidth={2} />
+        {/* Kamarbandh Belt */}
+        <rect x={-38} y={6} width={76} height={11} rx={4} fill="#ea580c" stroke="#fde047" strokeWidth={2} />
 
-        {/* Torso + Sacred Janeu Thread + Saffron Angavastra */}
-        <path d="M-36,-62 Q0,-70 36,-62 L32,16 L-32,16 Z" fill="#fed7aa" stroke={OUTLINE} strokeWidth={3} />
-        <path d="M-24,-62 L24,14" stroke="#fffbeb" strokeWidth={3.5} />
-        <path d="M-36,-60 Q-48,-10 -34,35 L-18,32 Q-26,-15 -22,-60 Z" fill="#ea580c" stroke={OUTLINE} strokeWidth={2.5} />
-        <path d="M36,-60 Q48,-10 34,35 L18,32 Q26,-15 22,-60 Z" fill="#ea580c" stroke={OUTLINE} strokeWidth={2.5} />
-        <circle cx={0} cy={-44} r={7} fill="#dc2626" stroke="#fde047" strokeWidth={2} />
+        {/* Bare Feet + Carved Wooden Padukas */}
+        <ellipse cx={-20} cy={144} rx={17} ry={8} fill="#92400e" stroke={OUTLINE} strokeWidth={2.5} />
+        <ellipse cx={-20} cy={140} rx={13} ry={6} fill="#fdba74" stroke={OUTLINE} strokeWidth={2} />
+        <ellipse cx={20} cy={144} rx={17} ry={8} fill="#92400e" stroke={OUTLINE} strokeWidth={2.5} />
+        <ellipse cx={20} cy={140} rx={13} ry={6} fill="#fdba74" stroke={OUTLINE} strokeWidth={2} />
 
-        {/* Right Arm + Mahati Veena */}
-        <g transform={`translate(-34, -50) rotate(${gesture === "playing" ? -12 : 8})`}>
-          <path d="M0,0 Q-26,28 -18,58" fill="none" stroke="#fed7aa" strokeWidth={15} strokeLinecap="round" />
-          <path d="M0,0 Q-26,28 -18,58" fill="none" stroke={OUTLINE} strokeWidth={2.5} strokeLinecap="round" />
-          {/* Golden Veena resting diagonally */}
+        {/* Flowing Silver-White Rishi Locks Behind Shoulders */}
+        <path d="M-32,-98 Q-54,-65 -44,-32 Q-30,-42 -26,-78 Z" fill="#e2e8f0" stroke={OUTLINE} strokeWidth={2.4} />
+        <path d="M32,-98 Q54,-65 44,-32 Q30,-42 26,-78 Z" fill="#e2e8f0" stroke={OUTLINE} strokeWidth={2.4} />
+
+        {/* Sculpted Torso, Neck, Sacred Janeu & Rudraksha Mala */}
+        <rect x={-10} y={-80} width={20} height={16} rx={5} fill="#fed7aa" stroke={OUTLINE} strokeWidth={2.2} />
+        <path d="M-38,-62 Q0,-72 38,-62 L35,10 L-35,10 Z" fill="#fed7aa" stroke={OUTLINE} strokeWidth={3} />
+        {/* Subtle Chest Contour & Tilak on Chest */}
+        <path d="M-20,-42 Q-10,-35 -2,-40 M2,-40 Q10,-35 20,-42" fill="none" stroke="#ea580c" strokeWidth={1.6} opacity={0.45} />
+        <circle cx={0} cy={-44} r={5} fill="#dc2626" stroke="#fde047" strokeWidth={1.5} />
+        {/* Three-Strand Sacred Janeu */}
+        <path d="M-26,-64 L26,8" stroke="#fffbeb" strokeWidth={3.5} />
+        <path d="M-22,-65 L30,7" stroke="#fef08a" strokeWidth={1.5} />
+        {/* Rudraksha Necklace Beads */}
+        {[-16, -8, 0, 8, 16].map((bx, i) => (
+          <circle key={i} cx={bx} cy={-60 + Math.abs(bx) * -0.2 + 8} r={3.6} fill="#78350f" stroke={OUTLINE} strokeWidth={1.2} />
+        ))}
+
+        {/* Layered Saffron Silk Angavastra Shawl with Zari Trim */}
+        <path d="M-38,-64 Q-52,-12 -38,44 L-18,38 Q-28,-12 -22,-64 Z" fill="#ea580c" stroke={OUTLINE} strokeWidth={2.6} />
+        <path d="M-34,36 L-20,32" stroke="#fde047" strokeWidth={4} />
+        <path d="M38,-64 Q52,-12 38,44 L18,38 Q28,-12 22,-64 Z" fill="#ea580c" stroke={OUTLINE} strokeWidth={2.6} />
+        <path d="M34,36 L20,32" stroke="#fde047" strokeWidth={4} />
+
+        {/* Right Arm Cradling Ornate Golden Mahati Veena */}
+        <g transform={`translate(-36, -52) rotate(${gesture === "playing" ? -14 : 6})`}>
+          <path d="M0,0 Q-28,28 -20,56" fill="none" stroke={OUTLINE} strokeWidth={17} strokeLinecap="round" />
+          <path d="M0,0 Q-28,28 -20,56" fill="none" stroke="#fed7aa" strokeWidth={11} strokeLinecap="round" />
+          <circle cx={-20} cy={58} r={7.5} fill="#fed7aa" stroke={OUTLINE} strokeWidth={2} />
+          {/* Ornate Mahati Veena with Twin Carved Gourds, Frets & Lotus Scroll */}
           <g transform="translate(-14, 42) rotate(-32)">
-            <circle cx={-16} cy={42} r={20} fill="#d97706" stroke={OUTLINE} strokeWidth={2.5} />
-            <circle cx={-16} cy={42} r={11} fill="#fef3c7" stroke={OUTLINE} strokeWidth={1.5} />
-            <rect x={-19} y={-55} width={8} height={95} rx={3} fill="#92400e" stroke={OUTLINE} strokeWidth={2} />
-            <circle cx={-15} cy={-58} r={14} fill="#b45309" stroke={OUTLINE} strokeWidth={2.5} />
-            <line x1={-17} y1={-50} x2={-17} y2={42} stroke="#fde047" strokeWidth={1.2} />
-            <line x1={-13} y1={-50} x2={-13} y2={42} stroke="#fde047" strokeWidth={1.2} />
+            {/* Lower Gourd */}
+            <circle cx={-16} cy={44} r={24} fill="#b45309" stroke={OUTLINE} strokeWidth={2.6} />
+            <circle cx={-16} cy={44} r={15} fill="#fbbf24" stroke={OUTLINE} strokeWidth={1.8} />
+            <circle cx={-16} cy={44} r={6} fill="#78350f" />
+            {/* Neck Dandi & Frets */}
+            <rect x={-20} y={-62} width={9} height={104} rx={3} fill="#78350f" stroke={OUTLINE} strokeWidth={2.2} />
+            {[-42, -26, -10, 6, 20].map((fy) => (
+              <line key={fy} x1={-21} y1={fy} x2={-10} y2={fy} stroke="#fde047" strokeWidth={2} />
+            ))}
+            {/* Upper Resonator Gourd + Peacock/Lotus Finial */}
+            <circle cx={-15} cy={-64} r={16} fill="#d97706" stroke={OUTLINE} strokeWidth={2.5} />
+            <circle cx={-15} cy={-64} r={8} fill="#fef3c7" stroke={OUTLINE} strokeWidth={1.5} />
+            <path d="M-15,-80 Q-6,-98 -18,-96 Q-24,-90 -15,-80 Z" fill="#fbbf24" stroke={OUTLINE} strokeWidth={1.8} />
+            {/* Strings */}
+            <line x1={-17.5} y1={-56} x2={-17.5} y2={44} stroke="#fef08a" strokeWidth={1.3} />
+            <line x1={-13.5} y1={-56} x2={-13.5} y2={44} stroke="#fef08a" strokeWidth={1.3} />
           </g>
         </g>
 
-        {/* Left Arm (Denying / Explaining + Khartal) */}
-        <g transform={`translate(34, -50) rotate(${gesture === "denying" ? -42 + handWave : -12 + handWave * 0.5})`}>
-          <path d="M0,0 Q26,18 42,-8" fill="none" stroke="#fed7aa" strokeWidth={15} strokeLinecap="round" />
-          <path d="M0,0 Q26,18 42,-8" fill="none" stroke={OUTLINE} strokeWidth={2.5} strokeLinecap="round" />
-          <circle cx={44} cy={-12} r={9} fill="#fed7aa" stroke={OUTLINE} strokeWidth={2.5} />
-          {/* Khartal clapper */}
+        {/* Left Arm (Expressive Hand + Brass Khartal Clappers) */}
+        <g transform={`translate(36, -52) rotate(${gesture === "denying" ? -38 + handWave : -10 + handWave * 0.5})`}>
+          <path d="M0,0 Q28,16 42,-10" fill="none" stroke={OUTLINE} strokeWidth={17} strokeLinecap="round" />
+          <path d="M0,0 Q28,16 42,-10" fill="none" stroke="#fed7aa" strokeWidth={11} strokeLinecap="round" />
+          {/* Golden Wristlet */}
+          <circle cx={38} cy={-4} r={6} fill="none" stroke="#fbbf24" strokeWidth={3} />
+          <circle cx={44} cy={-14} r={8.5} fill="#fed7aa" stroke={OUTLINE} strokeWidth={2.2} />
           {gesture !== "denying" && (
-            <rect x={42} y={-28} width={10} height={24} rx={3} fill="#92400e" stroke="#fde047" strokeWidth={1.5} />
+            <g transform="translate(45, -28) rotate(12)">
+              <rect x={-5} y={-12} width={11} height={26} rx={3} fill="#92400e" stroke="#fde047" strokeWidth={1.8} />
+              <circle cx={0.5} cy={-4} r={4} fill="#fbbf24" />
+              <circle cx={0.5} cy={7} r={4} fill="#fbbf24" />
+            </g>
           )}
         </g>
 
-        {/* Head + Shikha Topknot + Urdhva Pundra Tilak */}
-        <g transform="translate(0, -96)">
-          {/* Flowing grey-white locks */}
-          <path d="M-28,-8 Q-36,16 -22,26" fill="none" stroke="#e2e8f0" strokeWidth={8} strokeLinecap="round" />
-          <path d="M28,-8 Q36,16 22,26" fill="none" stroke="#e2e8f0" strokeWidth={8} strokeLinecap="round" />
-          <circle cx={0} cy={0} r={30} fill="#fed7aa" stroke={OUTLINE} strokeWidth={3} />
-          {/* Shikha Topknot */}
-          <path d="M-12,-28 Q0,-58 20,-42 Q8,-30 10,-26 Z" fill="#1e293b" stroke={OUTLINE} strokeWidth={2.5} />
-          <circle cx={2} cy={-30} r={9} fill="#f8fafc" stroke={OUTLINE} strokeWidth={2} />
-          {/* Vaishnav Tilak */}
-          <path d="M-4,-20 L0,-7 L4,-20" fill="none" stroke="#fef08a" strokeWidth={3} strokeLinecap="round" />
-          <line x1={0} y1={-19} x2={0} y2={-8} stroke="#dc2626" strokeWidth={2} />
-          {/* Eyes & Brows */}
-          <path d="M-16,-7 Q-10,-12 -4,-7" fill="none" stroke={OUTLINE} strokeWidth={2.2} />
-          <path d="M4,-7 Q10,-12 16,-7" fill="none" stroke={OUTLINE} strokeWidth={2.2} />
-          <circle cx={-10} cy={-1} r={3.5} fill={OUTLINE} />
-          <circle cx={10} cy={-1} r={3.5} fill={OUTLINE} />
-          {/* Mustache & Speaking Mouth */}
-          <path d="M-14,10 Q-5,5 0,9 Q5,5 14,10" fill="none" stroke="#e2e8f0" strokeWidth={3.5} strokeLinecap="round" />
-          <ellipse cx={0} cy={14} rx={7} ry={mouthOpen * 0.45} fill="#7f1d1d" stroke={OUTLINE} strokeWidth={1.8} />
+        {/* Sculpted Sage Head, Shikha Topknot, Vaishnav Tilak & Expressive Face */}
+        <g transform="translate(0, -106)">
+          {/* Rudraksha Earrings */}
+          <circle cx={-31} cy={6} r={5.5} fill="#78350f" stroke="#fde047" strokeWidth={1.5} />
+          <circle cx={31} cy={6} r={5.5} fill="#78350f" stroke="#fde047" strokeWidth={1.5} />
+          {/* Face Oval */}
+          <ellipse cx={0} cy={0} rx={29} ry={33} fill="#fed7aa" stroke={OUTLINE} strokeWidth={3} />
+          {/* Silver Hairline & Flowing Shikha Topknot */}
+          <path d="M-29,-12 Q-20,-34 0,-34 Q20,-34 29,-12 Q16,-24 0,-22 Q-16,-24 -29,-12 Z" fill="#f1f5f9" stroke={OUTLINE} strokeWidth={2} />
+          <path d="M-10,-32 Q2,-64 24,-46 Q10,-34 10,-28 Z" fill="#1e293b" stroke={OUTLINE} strokeWidth={2.5} />
+          <circle cx={2} cy={-34} r={8.5} fill="#fffbeb" stroke="#fbbf24" strokeWidth={2} />
+          {/* Glowing Urdhva Pundra Tilak */}
+          <path d="M-5,-23 L0,-8 L5,-23" fill="none" stroke="#fef08a" strokeWidth={3.4} strokeLinecap="round" />
+          <line x1={0} y1={-22} x2={0} y2={-9} stroke="#dc2626" strokeWidth={2.2} />
+          {/* Expressive Brows & Almond Eyes */}
+          <path d="M-17,-9 Q-11,-14 -4,-9" fill="none" stroke={OUTLINE} strokeWidth={2.2} />
+          <path d="M4,-9 Q11,-14 17,-9" fill="none" stroke={OUTLINE} strokeWidth={2.2} />
+          <ellipse cx={-10} cy={-2} rx={5.2} ry={3.8} fill="#ffffff" stroke={OUTLINE} strokeWidth={1.4} />
+          <circle cx={-10} cy={-2} r={2.5} fill={OUTLINE} />
+          <ellipse cx={10} cy={-2} rx={5.2} ry={3.8} fill="#ffffff" stroke={OUTLINE} strokeWidth={1.4} />
+          <circle cx={10} cy={-2} r={2.5} fill={OUTLINE} />
+          {/* Sage White Mustache & Speaking Mouth */}
+          <path d="M-13,10 Q-5,5 0,9 Q5,5 13,10" fill="none" stroke="#f8fafc" strokeWidth={3.8} strokeLinecap="round" />
+          <ellipse cx={0} cy={16} rx={6.5} ry={mouthOpen * 0.45} fill="#7f1d1d" stroke={OUTLINE} strokeWidth={1.8} />
         </g>
       </svg>
     </div>

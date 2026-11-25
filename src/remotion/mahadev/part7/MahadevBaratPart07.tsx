@@ -87,9 +87,9 @@ const P7S01NegDemand: React.FC<{ gf: number }> = ({ gf }) => {
   });
 
   if (cut === 1 || cut === 2) {
-    const zoom = cut === 1 ? interpolate(frame, [0, 155], [1.06, 1.15]) : interpolate(cutPop, [0, 1], [1.12, 1.2]);
+    const zoom = cut === 1 ? interpolate(frame, [0, 155], [1.08, 1.16]) : interpolate(cutPop, [0, 1], [1.14, 1.22]);
     return (
-      <CameraRig zoom={zoom} panX={cut === 1 ? -110 : -150} panY={-25}>
+      <CameraRig zoom={zoom} panX={cut === 1 ? -65 : -115} panY={-20}>
         <HimalayaPalaceBackdrop variant="palace_gate" showAttariSakhis />
         <BackgroundCrowdBand mode="himalaya_citizens" y={685} />
         <SakhiBandRig x={1280} y={670} scale={1.16} askingNeg={cut === 2} />
@@ -112,9 +112,9 @@ const P7S01NegDemand: React.FC<{ gf: number }> = ({ gf }) => {
   }
 
   // Cut 1C & 1D: Mahadev glances to Shringi & Bhringi
-  const zoom = cut === 3 ? interpolate(frame, [290, 445], [1.02, 1.09]) : interpolate(cutPop, [0, 1], [1.1, 1.18]);
+  const zoom = cut === 3 ? interpolate(frame, [290, 445], [1.02, 1.09]) : interpolate(cutPop, [0, 1], [1.12, 1.2]);
   return (
-    <CameraRig zoom={zoom} panX={cut === 4 ? 140 : 0} panY={cut === 4 ? -35 : 0}>
+    <CameraRig zoom={zoom} panX={cut === 4 ? 95 : 0} panY={cut === 4 ? -30 : 0}>
       <HimalayaPalaceBackdrop variant="palace_gate" showAttariSakhis />
       <BackgroundCrowdBand mode="bhoot_army" y={685} />
       <NandiBullRig x={500} y={660} scale={1.22} walking={false} />
@@ -214,7 +214,7 @@ const P7S02NagComedy: React.FC<{ gf: number }> = ({ gf }) => {
 
   if (cut === 2) {
     return (
-      <CameraRig zoom={interpolate(frame, [280, 470], [1.14, 1.24])} panX={220} panY={-40}>
+      <CameraRig zoom={interpolate(frame, [280, 470], [1.16, 1.25])} panX={125} panY={-35}>
         <HimalayaPalaceBackdrop variant="comedy_closeup" />
         <BackgroundCrowdBand mode="bhoot_army" y={690} />
         <NandiBullRig x={620} y={662} scale={1.2} walking={false} />
@@ -465,7 +465,7 @@ const P7S05NarayanArrival: React.FC<{ gf: number }> = ({ gf }) => {
 
   if (cut === 2) {
     return (
-      <CameraRig zoom={1.16} panX={-240} panY={-25}>
+      <CameraRig zoom={1.24} panX={-175} panY={-25}>
         <HimalayaPalaceBackdrop variant="royal_courtyard" showAttariSakhis />
         <BackgroundCrowdBand mode="himalaya_citizens" y={685} />
         <VishnuRig x={540} y={420} scale={0.98} withGaruda highlightItem="all" gestureMode="serene" />
@@ -477,7 +477,7 @@ const P7S05NarayanArrival: React.FC<{ gf: number }> = ({ gf }) => {
 
   // Cut 5C: Narad Muni Denies ("Ye Dulha Nahi Hain!") + Part 08 Cliffhanger
   return (
-    <CameraRig zoom={1.12} panX={-170} panY={-20}>
+    <CameraRig zoom={1.2} panX={-145} panY={-20}>
       <HimalayaPalaceBackdrop variant="royal_courtyard" showAttariSakhis />
       <BackgroundCrowdBand mode="himalaya_citizens" y={685} />
       <VishnuRig x={500} y={420} scale={0.95} withGaruda highlightItem="all" gestureMode="serene" />

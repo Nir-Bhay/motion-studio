@@ -17,9 +17,10 @@ export const MainaDeviRig: React.FC<{
   speakingEnergy?: number;
 }> = ({ x, y, scale = 1, mood = "welcome", speakingEnergy = 0 }) => {
   const frame = useCurrentFrame();
-  const sway = Math.sin(frame * 0.08) * 3;
-  const thaliRot = mood === "welcome" ? Math.sin(frame * 0.12) * 8 : -22;
+  const sway = Math.sin(frame * 0.08) * 2.5;
+  const thaliRot = mood === "welcome" ? Math.sin(frame * 0.12) * 5 : -24;
   const jawOpen = speakingEnergy * 8;
+  const flameScale = 1 + Math.sin(frame * 0.35) * 0.1;
 
   return (
     <div
@@ -31,83 +32,152 @@ export const MainaDeviRig: React.FC<{
         pointerEvents: "none",
       }}
     >
-      <svg width={320} height={420} viewBox="-160 -210 320 420" overflow="visible">
-        <ellipse cx={0} cy={156} rx={70} ry={10} fill="#0b1120" opacity={0.4} />
+      <svg width={340} height={440} viewBox="-170 -220 340 440" overflow="visible">
+        <ellipse cx={0} cy={162} rx={76} ry={11} fill="#0b1120" opacity={0.42} />
 
-        {/* Flowing Royal Chunri Veil Behind Shoulders */}
+        {/* Draped Silk Chunri / Odhni Veil Behind Head & Flowing Down Shoulders */}
         <path
-          d="M -38,-126 Q -78,-62 -76,58 Q -38,68 -24,38 Z"
-          fill="#f43f5e"
+          d="M -38,-148 Q -74,-128 -78,-42 Q -84,48 -68,108 L -34,92 Q -46,24 -36,-92 Z"
+          fill="#e11d48"
           stroke="#0b1120"
-          strokeWidth={2.4}
-          opacity={0.92}
+          strokeWidth={2.6}
         />
         <path
-          d="M 38,-126 Q 78,-62 76,58 Q 38,68 24,38 Z"
-          fill="#f43f5e"
+          d="M 38,-148 Q 74,-128 78,-42 Q 84,48 68,108 L 34,92 Q 46,24 36,-92 Z"
+          fill="#e11d48"
           stroke="#0b1120"
-          strokeWidth={2.4}
-          opacity={0.92}
+          strokeWidth={2.6}
         />
+        {/* Golden Gota-Patti Edge on Chunri */}
+        <path d="M -72,-35 Q -78,45 -64,102" fill="none" stroke="#fde047" strokeWidth={3.5} strokeDasharray="7 4" />
+        <path d="M 72,-35 Q 78,45 64,102" fill="none" stroke="#fde047" strokeWidth={3.5} strokeDasharray="7 4" />
 
-        {/* Royal Crimson-Gold Banarasi Saree Skirt & Pleats */}
+        {/* Royal Banarasi Lehenga Skirt with Deep Pleats & Zari Border */}
         <path
-          d="M -46,-15 L 46,-15 L 68,140 Q 0,162 -68,140 Z"
-          fill="#be123c"
+          d="M -40,-16 L 40,-16 Q 62,62 74,148 Q 0,168 -74,148 Q -62,62 -40,-16 Z"
+          fill="#9f1239"
           stroke="#0b1120"
           strokeWidth={3.2}
         />
-        <path d="M -20,-10 L -32,146 M 0,-12 L 0,150 M 20,-10 L 32,146" stroke="#881337" strokeWidth={2.2} opacity={0.65} />
-        <path d="M -56,122 Q 0,144 56,122" fill="none" stroke="#fde047" strokeWidth={6} />
-        <path d="M -52,110 Q 0,130 52,110" fill="none" stroke="#fbbf24" strokeWidth={2.5} strokeDasharray="5 5" />
+        {/* Vertical Silk Pleats & Gold Buti Dots */}
+        {[-32, -16, 0, 16, 32].map((px, i) => (
+          <path
+            key={i}
+            d={`M ${px * 0.72},-12 Q ${px * 1.15},68 ${px * 1.45},148`}
+            fill="none"
+            stroke="#881337"
+            strokeWidth={2.4}
+          />
+        ))}
+        {[-38, -14, 14, 38].map((bx, i) => (
+          <circle key={i} cx={bx} cy={78 + (i % 2) * 18} r={3.5} fill="#fde047" opacity={0.85} />
+        ))}
+        {/* Ornate Double Zari Hem Border */}
+        <path d="M -69,132 Q 0,154 69,132" fill="none" stroke="#f59e0b" strokeWidth={9} />
+        <path d="M -66,120 Q 0,141 66,120" fill="none" stroke="#fef08a" strokeWidth={3} strokeDasharray="6 4" />
+        {/* Waistband (Kamarbandh) with Hanging Tassels */}
+        <rect x={-42} y={-20} width={84} height={11} rx={4} fill="#fbbf24" stroke="#0b1120" strokeWidth={2.2} />
+        <circle cx={0} cy={-14} r={5} fill="#10b981" stroke="#0b1120" strokeWidth={1.5} />
 
-        {/* Choli Blouse & Golden Zari Pallu Drape */}
-        <path d="M -30,-62 L 30,-62 L 42,-12 L -42,-12 Z" fill="#e11d48" stroke="#0b1120" strokeWidth={3} />
-        <path d="M -32,-62 Q 0,-18 46,65 L 28,72 Q -10,-6 -40,-54 Z" fill="#fbbf24" stroke="#0b1120" strokeWidth={2.2} />
+        {/* Embroidered Velvet Choli Blouse & Diagonal Silk Pallu */}
+        <path d="M -32,-68 Q 0,-74 32,-68 L 42,-16 L -42,-16 Z" fill="#be123c" stroke="#0b1120" strokeWidth={3} />
+        <path d="M -32,-68 L 30,52 L 48,46 L -14,-70 Z" fill="#fbbf24" stroke="#0b1120" strokeWidth={2.2} />
+        <path d="M -24,-66 L 36,48" fill="none" stroke="#fef08a" strokeWidth={2} strokeDasharray="5 4" />
 
-        {/* Rani Haar Necklace & Golden Bangles */}
-        <path d="M -20,-62 Q 0,-36 20,-62" fill="none" stroke="#fde047" strokeWidth={5.5} />
-        <circle cx={0} cy={-44} r={4.5} fill="#10b981" stroke="#0b1120" strokeWidth={1.2} />
+        {/* Neck + Multi-Layered Rani Haar & Choker */}
+        <rect x={-10} y={-80} width={20} height={16} rx={5} fill="#f7be9c" stroke="#0b1120" strokeWidth={2.2} />
+        <path d="M -18,-69 Q 0,-56 18,-69" fill="none" stroke="#fde047" strokeWidth={4.5} />
+        <path d="M -26,-66 Q 0,-34 26,-66" fill="none" stroke="#fbbf24" strokeWidth={4} />
+        <circle cx={0} cy={-48} r={5} fill="#dc2626" stroke="#fde047" strokeWidth={1.8} />
+        <circle cx={-11} cy={-55} r={3} fill="#10b981" />
+        <circle cx={11} cy={-55} r={3} fill="#10b981" />
 
-        {/* Arms + Palms holding Brass Aarti Thali */}
-        <path d="M -30,-48 Q -65,-16 -58,12" fill="none" stroke="#0b1120" strokeWidth={17} strokeLinecap="round" />
-        <path d="M -30,-48 Q -65,-16 -58,12" fill="none" stroke="#f7be9c" strokeWidth={11} strokeLinecap="round" />
-        <circle cx={-58} cy={14} r={7} fill="#f7be9c" stroke="#0b1120" strokeWidth={2} />
-        <path d="M 30,-48 Q 72,-20 62,14" fill="none" stroke="#0b1120" strokeWidth={17} strokeLinecap="round" />
-        <path d="M 30,-48 Q 72,-20 62,14" fill="none" stroke="#f7be9c" strokeWidth={11} strokeLinecap="round" />
-        <circle cx={62} cy={16} r={7} fill="#f7be9c" stroke="#0b1120" strokeWidth={2} />
-
-        {/* Glowing Golden Aarti Thali with Burning Diyas */}
-        <g transform={`translate(-76, 12) rotate(${thaliRot})`}>
-          <ellipse cx={0} cy={0} rx={38} ry={13} fill="#fbbf24" stroke="#0b1120" strokeWidth={2.5} />
-          <ellipse cx={0} cy={0} rx={26} ry={7} fill="#fde047" />
-          <path d="M -6,-4 Q 0,-26 6,-4 Z" fill="#f97316" />
-          <path d="M -3,-4 Q 0,-18 3,-4 Z" fill="#fffbeb" />
-          <circle cx={-15} cy={-2} r={4} fill="#ef4444" />
-          <circle cx={15} cy={-2} r={4} fill="#fff7ed" />
+        {/* Sculpted Arms, Golden Chooda Bangles & Graceful Hands */}
+        {/* Right Arm cradling Aarti Thali */}
+        <g>
+          <path d="M -32,-56 Q -64,-34 -68,-4 Q -62,14 -44,12" fill="none" stroke="#0b1120" strokeWidth={16} strokeLinecap="round" />
+          <path d="M -32,-56 Q -64,-34 -68,-4 Q -62,14 -44,12" fill="none" stroke="#f7be9c" strokeWidth={10.5} strokeLinecap="round" />
+          {/* Chooda Bangles */}
+          <path d="M -68,-6 L -58,2" stroke="#dc2626" strokeWidth={5} strokeLinecap="round" />
+          <path d="M -65,0 L -54,6" stroke="#fde047" strokeWidth={3} strokeLinecap="round" />
+          <ellipse cx={-42} cy={12} rx={9} ry={6} fill="#f7be9c" stroke="#0b1120" strokeWidth={2} />
         </g>
 
-        {/* Head, Bindi, Nose Ring, Earrings & Royal Queen Mukut */}
-        <g transform={`translate(0, -102) rotate(${mood === "shocked" ? -6 : 0})`}>
-          <circle cx={-34} cy={10} r={6} fill="#fbbf24" stroke="#0b1120" strokeWidth={1.6} />
-          <circle cx={34} cy={10} r={6} fill="#fbbf24" stroke="#0b1120" strokeWidth={1.6} />
-          <circle cx={0} cy={0} r={32} fill="#f7be9c" stroke="#0b1120" strokeWidth={3} />
-          <path d="M -32,-6 Q 0,-42 32,-6 Q 16,-24 0,-22 Q -16,-24 -32,-6 Z" fill="#0f172a" />
-          <polygon points="-22,-24 -10,-44 0,-58 10,-44 22,-24" fill="#fbbf24" stroke="#0b1120" strokeWidth={2.2} />
-          <circle cx={0} cy={-36} r={4} fill="#ef4444" />
-          <circle cx={0} cy={-16} r={4} fill="#dc2626" />
-          <circle cx={14} cy={8} r={5.5} fill="none" stroke="#fde047" strokeWidth={2} />
-          <ellipse cx={-12} cy={-3} rx={4.8} ry={3.8} fill="#ffffff" stroke="#0b1120" strokeWidth={1.2} />
-          <circle cx={-12} cy={-3} r={2.3} fill="#0f172a" />
-          <ellipse cx={12} cy={-3} rx={4.8} ry={3.8} fill="#ffffff" stroke="#0b1120" strokeWidth={1.2} />
-          <circle cx={12} cy={-3} r={2.3} fill="#0f172a" />
+        {/* Left Arm welcoming / gesturing */}
+        <g>
+          <path d="M 32,-56 Q 66,-32 68,2 Q 62,18 44,14" fill="none" stroke="#0b1120" strokeWidth={16} strokeLinecap="round" />
+          <path d="M 32,-56 Q 66,-32 68,2 Q 62,18 44,14" fill="none" stroke="#f7be9c" strokeWidth={10.5} strokeLinecap="round" />
+          <path d="M 66,-2 L 56,5" stroke="#dc2626" strokeWidth={5} strokeLinecap="round" />
+          <path d="M 63,4 L 52,10" stroke="#fde047" strokeWidth={3} strokeLinecap="round" />
+          <ellipse cx={42} cy={14} rx={9} ry={6} fill="#f7be9c" stroke="#0b1120" strokeWidth={2} />
+        </g>
+
+        {/* Ornate Brass Panch-Aarti Thali with Kumkum, Akshat, Marigolds & Glowing Diyas */}
+        <g transform={`translate(-74, 14) rotate(${thaliRot})`}>
+          <ellipse cx={0} cy={4} rx={44} ry={15} fill="#b45309" stroke="#0b1120" strokeWidth={2.6} />
+          <ellipse cx={0} cy={0} rx={42} ry={13} fill="#fbbf24" stroke="#0b1120" strokeWidth={2.2} />
+          <ellipse cx={0} cy={0} rx={30} ry={8} fill="#fef08a" />
+          {/* Kumkum & Haldi Katoris */}
+          <circle cx={-19} cy={0} r={5.5} fill="#dc2626" stroke="#78350f" strokeWidth={1.4} />
+          <circle cx={19} cy={0} r={5.5} fill="#f97316" stroke="#78350f" strokeWidth={1.4} />
+          {/* Central Panch-Deep Brass Diya */}
+          <path d="M -9,2 L 9,2 L 6,-5 L -6,-5 Z" fill="#d97706" stroke="#0b1120" strokeWidth={1.4} />
+          <g transform={`translate(0, -5) scale(${flameScale})`}>
+            <path d="M -6,0 Q 0,-26 6,0 Z" fill="#f97316" />
+            <path d="M -3,0 Q 0,-17 3,0 Z" fill="#fffbeb" />
+          </g>
+        </g>
+
+        {/* Sculpted Royal Head, Braided Hair, Maang-Tikka, Nath Chain & Three-Peaked Maharani Mukut */}
+        <g transform={`translate(0, -110) rotate(${mood === "shocked" ? -6 : 0})`}>
+          {/* Jhumka Earrings & Hair Side Waves */}
+          <path d="M -34,4 L -40,22 Q -34,27 -28,22 Z" fill="#fbbf24" stroke="#0b1120" strokeWidth={1.8} />
+          <path d="M 34,4 L 40,22 Q 34,27 28,22 Z" fill="#fbbf24" stroke="#0b1120" strokeWidth={1.8} />
+          {/* Face Oval */}
+          <ellipse cx={0} cy={0} rx={32} ry={34} fill="#f7be9c" stroke="#0b1120" strokeWidth={3} />
+          {/* Soft Cheek Blush */}
+          <ellipse cx={-18} cy={8} rx={7} ry={4} fill="#fb7185" opacity={0.35} />
+          <ellipse cx={18} cy={8} rx={7} ry={4} fill="#fb7185" opacity={0.35} />
+          {/* Dark Hair Parting & Side Locks */}
+          <path d="M -32,-4 Q -30,-38 0,-36 Q 30,-38 32,-4 Q 16,-24 0,-20 Q -16,-24 -32,-4 Z" fill="#0f172a" />
+          {/* White Gajra Garland tucked around Crown Base */}
+          <path d="M -30,-18 Q 0,-30 30,-18" fill="none" stroke="#fffbeb" strokeWidth={6} strokeLinecap="round" strokeDasharray="2 7" />
+
+          {/* Three-Peaked Jewel-Studded Maharani Mukut */}
+          <polygon points="-28,-22 -20,-44 -10,-28 0,-56 10,-28 20,-44 28,-22" fill="#fbbf24" stroke="#0b1120" strokeWidth={2.4} />
+          <circle cx={0} cy={-38} r={4.5} fill="#ef4444" stroke="#0b1120" strokeWidth={1.2} />
+          <circle cx={-18} cy={-34} r={2.8} fill="#10b981" />
+          <circle cx={18} cy={-34} r={2.8} fill="#10b981" />
+
+          {/* Maang-Tikka & Maroon Bindi */}
+          <line x1={0} y1={-25} x2={0} y2={-16} stroke="#fde047" strokeWidth={2.5} />
+          <circle cx={0} cy={-15} r={4.5} fill="#dc2626" stroke="#fde047" strokeWidth={1.5} />
+
+          {/* Expressive Almond Eyes & Brows */}
+          <ellipse cx={-12} cy={-3} rx={6} ry={4.2} fill="#ffffff" stroke="#0b1120" strokeWidth={1.6} />
+          <circle cx={-12} cy={-3} r={2.8} fill="#0f172a" />
+          <circle cx={-13} cy={-4} r={0.9} fill="#ffffff" />
+          <ellipse cx={12} cy={-3} rx={6} ry={4.2} fill="#ffffff" stroke="#0b1120" strokeWidth={1.6} />
+          <circle cx={12} cy={-3} r={2.8} fill="#0f172a" />
+          <circle cx={11} cy={-4} r={0.9} fill="#ffffff" />
+
+          {/* Royal Golden Nath (Nose Ring) + Pearl Chain */}
+          <path d="M 10,8 Q 22,12 31,4" fill="none" stroke="#fef08a" strokeWidth={1.8} strokeDasharray="2 3" />
+          <circle cx={8} cy={10} r={6} fill="none" stroke="#fbbf24" strokeWidth={2.2} />
+          <circle cx={13} cy={12} r={1.8} fill="#ef4444" />
+
           {mood === "shocked" ? (
             <>
-              <path d="M -18,-12 L -6,-15 M 6,-15 L 18,-12" stroke="#0f172a" strokeWidth={2.6} />
-              <ellipse cx={0} cy={14} rx={7} ry={6 + jawOpen * 0.4} fill="#7f1d1d" stroke="#0b1120" strokeWidth={1.6} />
+              <path d="M -20,-13 Q -12,-18 -5,-12" fill="none" stroke="#0f172a" strokeWidth={2.6} />
+              <path d="M 5,-12 Q 12,-18 20,-13" fill="none" stroke="#0f172a" strokeWidth={2.6} />
+              <ellipse cx={0} cy={18} rx={6.5} ry={6 + jawOpen * 0.4} fill="#7f1d1d" stroke="#0b1120" strokeWidth={1.6} />
             </>
           ) : (
-            <path d={`M -9,10 Q 0,${17 + jawOpen} 9,10`} fill="none" stroke="#9f1239" strokeWidth={3} strokeLinecap="round" />
+            <>
+              <path d="M -19,-11 Q -12,-15 -5,-11" fill="none" stroke="#0f172a" strokeWidth={2.2} />
+              <path d="M 5,-11 Q 12,-15 19,-11" fill="none" stroke="#0f172a" strokeWidth={2.2} />
+              <path d={`M -9,15 Q 0,${22 + jawOpen} 9,15`} fill="none" stroke="#9f1239" strokeWidth={3} strokeLinecap="round" />
+            </>
           )}
         </g>
       </svg>
