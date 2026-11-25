@@ -1,6 +1,15 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
-import { breathe, pendulumSwing } from "../motion/physics";
+import { breathe } from "../motion/physics";
+import {
+  CrownForeheadCobra,
+  OrnateTrishulWithDamaru,
+  PanchmukhiNagaGarland,
+  SarpSehraVeil,
+  ScorpionIcon,
+  VasukiNeckSerpent,
+  WaistSerpentBelt,
+} from "../characters/DetailedSerpents";
 
 interface MahadevBaratGroomRigProps {
   x: number;
@@ -12,24 +21,14 @@ interface MahadevBaratGroomRigProps {
   panchmukhiProgress?: number; // 0..1 five-headed serpent garland replacing 1-head Vasuki
   bhasmaGlowProgress?: number; // 0..1 dazzling radiant pyre ash glow across limbs & face
   pose?: "calm" | "heroic" | "marching";
+  seatedOnNandi?: boolean;     // true when riding Nandi Bull so legs tuck cleanly onto saddle!
 }
 
-const ScorpionIcon: React.FC<{ x: number; y: number; sway: number; scale?: number }> = ({
-  x,
-  y,
-  sway,
-  scale = 1,
-}) => (
-  <g transform={`translate(${x}, ${y}) rotate(${sway}) scale(${scale})`}>
-    {/* Body & Segmented Tail curling up with Stinger */}
-    <ellipse cx={0} cy={6} rx={4.5} ry={8} fill="#1e1b4b" stroke="#fbbf24" strokeWidth={1.3} />
-    <path d="M 0,13 Q 10,20 7,28 Q 3,31 0,25" fill="none" stroke="#f59e0b" strokeWidth={2.5} strokeLinecap="round" />
-    <circle cx={0} cy={24} r={2} fill="#ef4444" />
-    {/* Claws */}
-    <path d="M -3,-1 Q -9,-7 -6,-11 M 3,-1 Q 9,-7 6,-11" fill="none" stroke="#fbbf24" strokeWidth={2} strokeLinecap="round" />
-  </g>
-);
-
+/**
+ * Pure solid-color + cel-shaded Mahadev Groom Rig (ZERO url(#...) gradients so Brave/Chrome NEVER turns black!).
+ * Features detailed hands with fingers, Rudraksha malas, sculpted muscles, Baghambar folds, Jata locks,
+ * detailed Cobra/Naga serpents, Ornate Trishul in hand, Sarp Sehra, Bichhu earrings, Panchmukhi Naga, and glowing Tripundra Tilak.
+ */
 export const MahadevBaratGroomRig: React.FC<MahadevBaratGroomRigProps> = ({
   x,
   y,
@@ -40,21 +39,29 @@ export const MahadevBaratGroomRig: React.FC<MahadevBaratGroomRigProps> = ({
   panchmukhiProgress = 0,
   bhasmaGlowProgress = 0,
   pose = "heroic",
+  seatedOnNandi = false,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
 
   const br = breathe(t, 0.3, 3.2);
-  const snakeSway = pendulumSwing(t, 2.5, 8);
   const marchBounce = pose === "marching" ? Math.abs(Math.sin(t * 5.2)) * -10 : 0;
   const blink = Math.sin(t * 2.1 + 1.4) > 0.965 ? 0.12 : 1;
   const mouthOpen = speakingEnergy * 5;
-  const leftArmRot = pose === "marching" ? 18 + Math.sin(t * 5.2) * 14 : 22;
-  const rightArmRot = pose === "marching" ? -18 - Math.sin(t * 5.2) * 14 : -18;
+  const leftArmRot = pose === "marching" ? 18 + Math.sin(t * 5.2) * 14 : 20;
+  // Right arm dynamically holds & moves the Ornate Trishul with gentle breathing/heroic/marching motion!
+  const rightArmRot =
+    pose === "heroic"
+      ? -28 + Math.sin(t * 2.8) * 5
+      : pose === "marching"
+      ? -18 - Math.sin(t * 5.2) * 10
+      : -16 + Math.sin(t * 2.6) * 4;
+  const trishulTilt = pose === "heroic" ? 20 + Math.sin(t * 2.8) * 3 : 16 + Math.sin(t * 2.6) * 3;
 
-  // Aura intensifies dramatically when hot pyre Bhasma is applied!
-  const auraR = 170 + bhasmaGlowProgress * 85;
+  const skinFill = bhasmaGlowProgress > 0.4 ? "#f1f5f9" : "#dce6f2";
+  const skinShadow = bhasmaGlowProgress > 0.4 ? "#cbd5e1" : "#b0c0d4";
+  const haloColor = bhasmaGlowProgress > 0.35 ? "#fde047" : "#7dd3fc";
 
   return (
     <div
@@ -68,30 +75,9 @@ export const MahadevBaratGroomRig: React.FC<MahadevBaratGroomRigProps> = ({
       }}
     >
       <svg width={620} height={700} viewBox="-310 -350 620 700" overflow="visible">
-        <defs>
-          <radialGradient id="p3Aura" cx="50%" cy="40%" r="52%">
-            <stop offset="0%" stopColor={bhasmaGlowProgress > 0.35 ? "#fef9c3" : "#bae6fd"} stopOpacity={0.44 + bhasmaGlowProgress * 0.25} />
-            <stop offset="55%" stopColor={bhasmaGlowProgress > 0.35 ? "#f59e0b" : "#38bdf8"} stopOpacity={0.18 + bhasmaGlowProgress * 0.16} />
-            <stop offset="100%" stopColor="#0f172a" stopOpacity="0" />
-          </radialGradient>
-          <linearGradient id="p3Skin" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#f8fafc" />
-            <stop offset="50%" stopColor={bhasmaGlowProgress > 0.4 ? "#e2e8f0" : "#cbd5e1"} />
-            <stop offset="100%" stopColor="#94a3b8" />
-          </linearGradient>
-          <linearGradient id="p3Bagh" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#fbbf24" />
-            <stop offset="55%" stopColor="#d97706" />
-            <stop offset="100%" stopColor="#78350f" />
-          </linearGradient>
-          <linearGradient id="p3Belt" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="50%" stopColor="#fbbf24" />
-            <stop offset="100%" stopColor="#047857" />
-          </linearGradient>
-        </defs>
-
-        <circle cx={0} cy={-125} r={auraR * 0.78} fill="url(#p3Aura)" />
+        {/* Layered Solid-Alpha Prabhamandala Halo (no url(#...) needed) */}
+        <circle cx={0} cy={-125} r={148 + bhasmaGlowProgress * 45} fill={haloColor} opacity={0.14 + bhasmaGlowProgress * 0.12} />
+        <circle cx={0} cy={-125} r={104 + bhasmaGlowProgress * 28} fill="#fef9c3" opacity={0.18 + bhasmaGlowProgress * 0.14} />
 
         {/* Radiant Bhasma Sparkle Halo */}
         {bhasmaGlowProgress > 0.15 && (
@@ -104,163 +90,162 @@ export const MahadevBaratGroomRig: React.FC<MahadevBaratGroomRigProps> = ({
           </g>
         )}
 
-        {/* Standing Legs + Baghambar + Live Cobra Belt */}
+        {/* Standing Legs OR Tucked Seated-on-Nandi Legs + Baghambar with Live Cobra Belt */}
         <g transform="translate(0, 62)">
-          <path d="M -32,0 Q -42,68 -36,142" stroke="#0b1120" strokeWidth={32} strokeLinecap="round" fill="none" />
-          <path d="M 32,0 Q 42,68 36,142" stroke="#0b1120" strokeWidth={32} strokeLinecap="round" fill="none" />
-          <path d="M -32,0 Q -42,68 -36,142" stroke="url(#p3Skin)" strokeWidth={26} strokeLinecap="round" fill="none" />
-          <path d="M 32,0 Q 42,68 36,142" stroke="url(#p3Skin)" strokeWidth={26} strokeLinecap="round" fill="none" />
-          <ellipse cx={-36} cy={136} rx={14} ry={5} fill="none" stroke="#f8fafc" strokeWidth={4} />
-          <ellipse cx={36} cy={136} rx={14} ry={5} fill="none" stroke="#f8fafc" strokeWidth={4} />
-          <ellipse cx={-36} cy={150} rx={20} ry={10} fill="#cbd5e1" stroke="#0b1120" strokeWidth={2.5} />
-          <ellipse cx={36} cy={150} rx={20} ry={10} fill="#cbd5e1" stroke="#0b1120" strokeWidth={2.5} />
+          {seatedOnNandi ? (
+            <>
+              {/* Physically Seated Astride Nandi's Back — Legs Tucked Cleanly Onto Saddle! */}
+              <path d="M -42,8 Q -64,44 -48,76" stroke="#0b1120" strokeWidth={28} strokeLinecap="round" fill="none" />
+              <path d="M -42,8 Q -64,44 -48,76" stroke={skinFill} strokeWidth={22} strokeLinecap="round" fill="none" />
+              <path d="M 42,8 Q 64,44 48,76" stroke="#0b1120" strokeWidth={28} strokeLinecap="round" fill="none" />
+              <path d="M 42,8 Q 64,44 48,76" stroke={skinFill} strokeWidth={22} strokeLinecap="round" fill="none" />
+              <ellipse cx={-48} cy={72} rx={12} ry={4.5} fill="none" stroke="#ffffff" strokeWidth={3.5} />
+              <ellipse cx={48} cy={72} rx={12} ry={4.5} fill="none" stroke="#ffffff" strokeWidth={3.5} />
+              <ellipse cx={-48} cy={84} rx={18} ry={8.5} fill={skinFill} stroke="#0b1120" strokeWidth={2.5} />
+              <ellipse cx={48} cy={84} rx={18} ry={8.5} fill={skinFill} stroke="#0b1120" strokeWidth={2.5} />
+              {/* Draped Seated Baghambar Wrap */}
+              <path
+                d="M -52,0 L 52,0 L 66,64 Q 0,80 -66,64 Z"
+                fill="#d97706"
+                stroke="#0b1120"
+                strokeWidth={3.2}
+              />
+              <path d="M -46,6 L 0,6 L -6,68 Q -38,68 -62,60 Z" fill="#f59e0b" opacity={0.75} />
+              {[-28, -8, 12, 32].map((sx, idx) => (
+                <path key={idx} d={`M ${sx},12 Q ${sx - 5},36 ${sx + 4},58`} stroke="#451a03" strokeWidth={4} strokeLinecap="round" fill="none" opacity={0.82} />
+              ))}
+            </>
+          ) : (
+            <>
+              <path d="M -32,0 Q -42,68 -36,142" stroke="#0b1120" strokeWidth={32} strokeLinecap="round" fill="none" />
+              <path d="M 32,0 Q 42,68 36,142" stroke="#0b1120" strokeWidth={32} strokeLinecap="round" fill="none" />
+              <path d="M -32,0 Q -42,68 -36,142" stroke={skinFill} strokeWidth={26} strokeLinecap="round" fill="none" />
+              <path d="M 32,0 Q 42,68 36,142" stroke={skinFill} strokeWidth={26} strokeLinecap="round" fill="none" />
+              {/* Inner Calf Cel-Shadow */}
+              <path d="M -27,20 Q -36,75 -31,136" stroke={skinShadow} strokeWidth={8} strokeLinecap="round" fill="none" />
+              <path d="M 27,20 Q 36,75 31,136" stroke={skinShadow} strokeWidth={8} strokeLinecap="round" fill="none" />
+              <ellipse cx={-36} cy={136} rx={14} ry={5} fill="none" stroke="#ffffff" strokeWidth={4} />
+              <ellipse cx={36} cy={136} rx={14} ry={5} fill="none" stroke="#ffffff" strokeWidth={4} />
+              <ellipse cx={-36} cy={150} rx={21} ry={10} fill={skinFill} stroke="#0b1120" strokeWidth={2.8} />
+              <ellipse cx={36} cy={150} rx={21} ry={10} fill={skinFill} stroke="#0b1120" strokeWidth={2.8} />
 
-          <path
-            d="M -48,0 L 48,0 L 66,120 Q 0,138 -66,120 Z"
-            fill="url(#p3Bagh)"
-            stroke="#0b1120"
-            strokeWidth={3}
-          />
-          {[-28, 0, 28].map((sx, idx) => (
-            <path key={idx} d={`M ${sx},12 Q ${sx - 6},58 ${sx + 5},105`} stroke="#291202" strokeWidth={4.5} strokeLinecap="round" fill="none" opacity={0.82} />
-          ))}
+              {/* Baghambar Tiger-Skin Dhoti with Layered Folds & Stripes */}
+              <path
+                d="M -50,0 L 50,0 L 68,120 Q 0,140 -68,120 Z"
+                fill="#d97706"
+                stroke="#0b1120"
+                strokeWidth={3.2}
+              />
+              <path d="M -46,6 L 0,6 L -6,126 Q -38,124 -64,116 Z" fill="#f59e0b" opacity={0.75} />
+              <path d="M 16,6 L 46,6 L 62,116 Q 38,125 14,126 Z" fill="#92400e" opacity={0.55} />
+              {[-30, -8, 12, 32].map((sx, idx) => (
+                <path key={idx} d={`M ${sx},16 Q ${sx - 6},58 ${sx + 5},105`} stroke="#451a03" strokeWidth={4.5} strokeLinecap="round" fill="none" opacity={0.82} />
+              ))}
+            </>
+          )}
 
-          {/* Live Serpent Waist Belt */}
-          <path d={`M -54,4 Q 0,${18 + Math.sin(t * 4) * 3} 54,4`} fill="none" stroke="url(#p3Belt)" strokeWidth={16} strokeLinecap="round" />
-          <path d={`M -48,4 Q 0,${17 + Math.sin(t * 4) * 3} 48,4`} fill="none" stroke="#fde047" strokeWidth={3.5} strokeDasharray="6 6" />
-          <g transform={`translate(${74 + snakeSway * 0.45}, -14) rotate(${28 + snakeSway}) scale(1.35)`}>
-            <path d="M 0,18 Q -15,-4 0,-26 Q 15,-4 0,18 Z" fill="#047857" stroke="#fde047" strokeWidth={2.2} />
-            <circle cx={-4} cy={-9} r={2.3} fill="#fbbf24" />
-            <circle cx={4} cy={-9} r={2.3} fill="#fbbf24" />
-          </g>
+          {/* Live Emerald & Gold Serpent Waist Belt */}
+          <WaistSerpentBelt t={t} opacity={1} />
         </g>
 
-        {/* Muscular Torso */}
+        {/* Muscular Cel-Shaded Torso */}
         <g transform={`translate(0, ${br.chestExpand * 0.35})`}>
-          <path d="M -62,-58 Q 0,-72 62,-58 L 48,64 L -48,64 Z" fill="url(#p3Skin)" stroke="#0b1120" strokeWidth={3.2} />
-          <path d="M -42,-26 Q -18,-12 -4,-24 M 4,-24 Q 18,-12 42,-26" fill="none" stroke="#475569" strokeWidth={2.6} opacity={0.7} />
-          <path d="M -20,4 Q 0,9 20,4 M -18,24 Q 0,29 18,24 M -15,42 Q 0,46 15,42" fill="none" stroke="#475569" strokeWidth={2.2} opacity={0.55} />
-          <path d="M -30,-32 Q 0,-38 30,-32 M -28,-22 Q 0,-28 28,-22 M -26,-12 Q 0,-18 26,-12" fill="none" stroke="#ffffff" strokeWidth={3.6} strokeLinecap="round" />
+          <path d="M -64,-58 Q 0,-74 64,-58 L 49,64 L -49,64 Z" fill={skinFill} stroke="#0b1120" strokeWidth={3.2} />
+          {/* Right-side Cel-Shading & Shoulder Sculpting */}
+          <path d="M 18,-62 Q 46,-60 61,-56 L 47,62 L 16,62 Q 26,0 18,-62 Z" fill={skinShadow} opacity={0.68} />
+          <path d="M -42,-26 Q -18,-12 -4,-24 M 4,-24 Q 18,-12 42,-26" fill="none" stroke="#475569" strokeWidth={2.8} opacity={0.78} />
+          <path d="M -20,4 Q 0,9 20,4 M -18,24 Q 0,29 18,24 M -15,42 Q 0,46 15,42" fill="none" stroke="#475569" strokeWidth={2.3} opacity={0.62} />
+          {/* Sacred Chest Tripundra Ash Lines */}
+          <path d="M -30,-32 Q 0,-38 30,-32 M -28,-22 Q 0,-28 28,-22 M -26,-12 Q 0,-18 26,-12" fill="none" stroke="#ffffff" strokeWidth={3.8} strokeLinecap="round" />
 
-          {/* Symmetrical Arms */}
+          {/* Symmetrical Sculpted Arms + Hands & Fingers */}
           <g transform={`translate(-60, -44) rotate(${leftArmRot})`}>
             <path d="M 0,0 Q -26,42 -22,92" fill="none" stroke="#0b1120" strokeWidth={31} strokeLinecap="round" />
-            <path d="M 0,0 Q -26,42 -22,92" fill="none" stroke="url(#p3Skin)" strokeWidth={25} strokeLinecap="round" />
-            <ellipse cx={-16} cy={36} rx={13} ry={5} transform="rotate(14, -16, 36)" fill="none" stroke="#fbbf24" strokeWidth={4.2} />
+            <path d="M 0,0 Q -26,42 -22,92" fill="none" stroke={skinFill} strokeWidth={25} strokeLinecap="round" />
+            {/* Palm & Fingers */}
+            <ellipse cx={-21} cy={98} rx={12} ry={14} fill={skinFill} stroke="#0b1120" strokeWidth={2.6} />
+            <path d="M -28,104 L -29,115 M -22,106 L -22,118 M -16,104 L -15,115" stroke="#0b1120" strokeWidth={2.2} strokeLinecap="round" />
+            {/* Golden Armlet & Rudraksha Wristband */}
+            <ellipse cx={-16} cy={36} rx={13} ry={5} transform="rotate(14, -16, 36)" fill="none" stroke="#fbbf24" strokeWidth={4.5} />
             <ellipse cx={-21} cy={78} rx={12} ry={4.5} fill="none" stroke="#9a3412" strokeWidth={4.5} />
           </g>
           <g transform={`translate(60, -44) rotate(${rightArmRot})`}>
-            <path d="M 0,0 Q 32,36 30,86" fill="none" stroke="#0b1120" strokeWidth={31} strokeLinecap="round" />
-            <path d="M 0,0 Q 32,36 30,86" fill="none" stroke="url(#p3Skin)" strokeWidth={25} strokeLinecap="round" />
-            <ellipse cx={20} cy={34} rx={13} ry={5} transform="rotate(-14, 20, 34)" fill="none" stroke="#fbbf24" strokeWidth={4.2} />
-            <ellipse cx={29} cy={74} rx={12} ry={4.5} fill="none" stroke="#9a3412" strokeWidth={4.5} />
+            {/* Sculpted Muscular Upper & Forearm Holding Ornate Trishul */}
+            <path d="M 0,0 Q 32,26 42,64" fill="none" stroke="#0b1120" strokeWidth={31} strokeLinecap="round" />
+            <path d="M 0,0 Q 32,26 42,64" fill="none" stroke={skinFill} strokeWidth={25} strokeLinecap="round" />
+            <ellipse cx={22} cy={22} rx={13} ry={5} transform="rotate(-14, 22, 22)" fill="none" stroke="#fbbf24" strokeWidth={4.5} />
+            <ellipse cx={38} cy={52} rx={12} ry={4.5} transform="rotate(-22, 38, 52)" fill="none" stroke="#9a3412" strokeWidth={4.5} />
+
+            {/* Ornate Trishul + Damaru Held Right Inside Mahadev's Hand! */}
+            <OrnateTrishulWithDamaru t={t} x={46} y={64} rotation={trishulTilt} scale={0.96} />
+
+            {/* Gripping Hand Palm & Curled Fingers Wrapping Around Trishul Shaft */}
+            <ellipse cx={44} cy={68} rx={12} ry={13} fill={skinFill} stroke="#0b1120" strokeWidth={2.6} />
+            <path d="M 38,63 Q 48,61 52,66 M 37,69 Q 48,67 52,72 M 38,75 Q 47,73 51,78" fill="none" stroke="#0b1120" strokeWidth={2.4} strokeLinecap="round" />
           </g>
 
-          {/* 1-Headed Vasuki (gracefully exits as Panchmukhi Naga arrives) */}
+          {/* Rudraksha Mala Necklace */}
+          <path d="M -38,-56 Q 0,-22 38,-56" fill="none" stroke="#78350f" strokeWidth={6} strokeDasharray="3 5" strokeLinecap="round" />
+
+          {/* 1-Headed Vasuki */}
           {panchmukhiProgress < 0.85 && (
             <g opacity={1 - panchmukhiProgress} transform={`translate(${panchmukhiProgress * -70}, 0)`}>
-              <path d="M -30,-56 Q 0,-36 30,-56" fill="none" stroke="#334155" strokeWidth={11} strokeLinecap="round" />
-              <g transform={`translate(${28 + snakeSway * 0.4}, -72) rotate(${snakeSway})`}>
-                <path d="M 0,16 Q -11,-3 0,-18 Q 11,-3 0,16 Z" fill="#1e293b" stroke="#cbd5e1" strokeWidth={1.6} />
-                <circle cx={-3} cy={-6} r={1.8} fill="#fbbf24" />
-                <circle cx={3} cy={-6} r={1.8} fill="#fbbf24" />
-              </g>
+              <VasukiNeckSerpent t={t} />
             </g>
           )}
 
-          {/* FIVE-HEADED PANCHMUKHI NAGA GARLAND (P3S03+) */}
-          {panchmukhiProgress > 0.05 && (
-            <g opacity={panchmukhiProgress} transform={`scale(${0.75 + panchmukhiProgress * 0.25})`}>
-              <path d="M -40,-56 Q 0,-18 40,-56" fill="none" stroke="#065f46" strokeWidth={14} strokeLinecap="round" />
-              <path d="M -36,-54 Q 0,-19 36,-54" fill="none" stroke="#fde047" strokeWidth={3} strokeDasharray="5 5" />
-              {[-34, -17, 0, 17, 34].map((hx, idx) => (
-                <g
-                  key={idx}
-                  transform={`translate(${hx}, ${-36 + Math.abs(hx) * 0.2}) rotate(${(hx * 0.45) + Math.sin(t * 4 + idx) * 6})`}
-                >
-                  <path d="M 0,14 Q -11,-4 0,-22 Q 11,-4 0,14 Z" fill="#047857" stroke="#fde047" strokeWidth={1.8} />
-                  <circle cx={-3} cy={-7} r={1.6} fill="#ef4444" />
-                  <circle cx={3} cy={-7} r={1.6} fill="#ef4444" />
-                </g>
-              ))}
-            </g>
-          )}
+          {/* FIVE-HEADED PANCHMUKHI NAGA GARLAND */}
+          <PanchmukhiNagaGarland t={t} progress={panchmukhiProgress} />
 
           {/* Head + Towering Jata-Mukut + Crown Cobra + Sarp Sehra + Bichhu Earrings */}
           <g transform={`translate(0, ${-108 + br.shoulderLift * 0.4})`}>
-            <path d="M -32,-12 Q -38,-94 0,-118 Q 38,-94 32,-12 Z" fill="#3b261c" stroke="#6b4432" strokeWidth={2} />
+            {/* Flowing Jata Hair Locks Behind Neck */}
+            <path d="M -28,0 Q -48,18 -44,44 Q -32,30 -24,14 Z" fill="#3b261c" stroke="#0b1120" strokeWidth={2.2} />
+            <path d="M 28,0 Q 48,18 44,44 Q 32,30 24,14 Z" fill="#3b261c" stroke="#0b1120" strokeWidth={2.2} />
+
+            {/* Towering Jata Crown */}
+            <path d="M -32,-12 Q -38,-94 0,-118 Q 38,-94 32,-12 Z" fill="#3b261c" stroke="#0b1120" strokeWidth={2.8} />
             <path d="M -24,-42 Q 0,-34 24,-42 M -18,-66 Q 0,-58 18,-66" fill="none" stroke="#fde047" strokeWidth={3.5} strokeDasharray="4 4" />
-            <path d="M 12,-96 A 13,13 0 1,0 28,-80 A 9,9 0 1,1 12,-96 Z" fill="#ffffff" />
+            <path d="M 12,-96 A 13,13 0 1,0 28,-80 A 9,9 0 1,1 12,-96 Z" fill="#ffffff" stroke="#0b1120" strokeWidth={1.4} />
 
             {/* Forehead Crown Cobra */}
-            <g transform="translate(0, -28)">
-              <path d="M -34,0 Q 0,9 34,0" fill="none" stroke="#065f46" strokeWidth={12} strokeLinecap="round" />
-              <path d="M -30,0 Q 0,8 30,0" fill="none" stroke="#fde047" strokeWidth={3.5} strokeDasharray="4 4" />
-              <g transform={`translate(0, ${-22 - Math.sin(t * 5) * 2.5}) scale(1.35)`}>
-                <path d="M 0,16 Q -13,-5 0,-24 Q 13,-5 0,16 Z" fill="#047857" stroke="#fde047" strokeWidth={2.2} />
-                <circle cx={-3.8} cy={-8} r={2.3} fill="#ef4444" />
-                <circle cx={3.8} cy={-8} r={2.3} fill="#ef4444" />
-              </g>
-            </g>
+            <CrownForeheadCobra t={t} opacity={1} />
 
-            {/* Face */}
-            <ellipse cx={0} cy={0} rx={32} ry={36} fill="url(#p3Skin)" stroke="#0b1120" strokeWidth={3} />
-            <ellipse cx={0} cy={34} rx={13} ry={8} fill="#2563eb" opacity={0.88} />
+            {/* Face with Ears & Neelkanth Throat */}
+            <ellipse cx={-33} cy={4} rx={6} ry={10} fill={skinFill} stroke="#0b1120" strokeWidth={2.4} />
+            <ellipse cx={33} cy={4} rx={6} ry={10} fill={skinFill} stroke="#0b1120" strokeWidth={2.4} />
+            <ellipse cx={0} cy={0} rx={32} ry={36} fill={skinFill} stroke="#0b1120" strokeWidth={3} />
+            <path d="M 10,-33 Q 31,-22 30,4 Q 28,28 8,34 Q 20,16 20,-4 Q 20,-24 10,-33 Z" fill={skinShadow} opacity={0.55} />
+            <ellipse cx={0} cy={34} rx={13} ry={8} fill="#2563eb" stroke="#0b1120" strokeWidth={2} />
 
-            {/* Live Scorpion Earrings (P3S02+) or Rudraksha Studs */}
+            {/* Live Scorpion Earrings or Rudraksha Studs */}
             {bichhuProgress > 0.1 ? (
               <g opacity={bichhuProgress}>
-                <ScorpionIcon x={-35} y={12} sway={Math.sin(t * 4.5) * 9} scale={0.95} />
-                <ScorpionIcon x={35} y={12} sway={-Math.sin(t * 4.5) * 9} scale={0.95} />
+                <ScorpionIcon x={-36} y={14} sway={Math.sin(t * 4.5) * 9} scale={0.95} />
+                <ScorpionIcon x={36} y={14} sway={-Math.sin(t * 4.5) * 9} scale={0.95} />
               </g>
             ) : (
               <>
-                <circle cx={-33} cy={10} r={5.5} fill="#7c2d12" stroke="#fbbf24" strokeWidth={1.6} />
-                <circle cx={33} cy={10} r={5.5} fill="#7c2d12" stroke="#fbbf24" strokeWidth={1.6} />
+                <circle cx={-34} cy={12} r={5.5} fill="#7c2d12" stroke="#fbbf24" strokeWidth={1.6} />
+                <circle cx={34} cy={12} r={5.5} fill="#7c2d12" stroke="#fbbf24" strokeWidth={1.6} />
               </>
             )}
 
-            <path d="M -17,-16 Q 0,-20 17,-16 M -16,-11 Q 0,-15 16,-11" fill="none" stroke="#ffffff" strokeWidth={2.5} />
-            <ellipse cx={0} cy={-13} rx={2.8} ry={5.5} fill="#ef4444" />
+            {/* Tripundra Tilak + Third Eye + Expressive Brows & Eyes */}
+            <path d="M -17,-16 Q 0,-20 17,-16 M -16,-11 Q 0,-15 16,-11" fill="none" stroke="#ffffff" strokeWidth={2.6} />
+            <ellipse cx={0} cy={-13} rx={3} ry={5.5} fill="#ef4444" stroke="#0b1120" strokeWidth={1} />
+            <path d="M -19,-8 Q -12,-12 -6,-8 M 6,-8 Q 12,-12 19,-8" fill="none" stroke="#0f172a" strokeWidth={2.2} strokeLinecap="round" />
             <g transform={`scale(1, ${blink})`} style={{ transformOrigin: "0px -2px" }}>
-              <ellipse cx={-12} cy={-3} rx={5.8} ry={4} fill="#ffffff" />
+              <ellipse cx={-12} cy={-3} rx={5.8} ry={4.2} fill="#ffffff" stroke="#0b1120" strokeWidth={1.2} />
               <circle cx={-12} cy={-3} r={2.6} fill="#0f172a" />
-              <ellipse cx={12} cy={-3} rx={5.8} ry={4} fill="#ffffff" />
+              <ellipse cx={12} cy={-3} rx={5.8} ry={4.2} fill="#ffffff" stroke="#0b1120" strokeWidth={1.2} />
               <circle cx={12} cy={-3} r={2.6} fill="#0f172a" />
             </g>
+            <path d="M 0,1 L -2,8 L 2,8" fill="none" stroke="#475569" strokeWidth={1.6} strokeLinecap="round" />
             <path d={`M -9,15 Q 0,${21 + mouthOpen} 9,15`} fill={speakingEnergy > 0.15 ? "#7f1d1d" : "none"} stroke="#0f172a" strokeWidth={2.4} strokeLinecap="round" />
 
-            {/* SARP SEHRA: Slender Hanging Serpent Strands + Bichhu Tassels! */}
-            {sehraProgress > 0.05 && (
-              <g opacity={sehraProgress}>
-                {[-40, -29, -20, 20, 29, 40].map((sx, idx) => {
-                  const len = (52 + (idx % 2) * 14) * sehraProgress;
-                  const sway = Math.sin(t * 3.8 + idx * 0.9) * 5;
-                  return (
-                    <g key={idx}>
-                      <path
-                        d={`M ${sx * 0.85},-24 Q ${sx + sway},${-24 + len * 0.55} ${sx + sway * 1.4},${-24 + len}`}
-                        fill="none"
-                        stroke={idx % 2 === 0 ? "#10b981" : "#fbbf24"}
-                        strokeWidth={4.2}
-                        strokeLinecap="round"
-                      />
-                      {/* Forked red tongue at tip */}
-                      <path
-                        d={`M ${sx + sway * 1.4},${-24 + len} l -2.5,6 M ${sx + sway * 1.4},${-24 + len} l 2.5,6`}
-                        stroke="#ef4444"
-                        strokeWidth={1.6}
-                      />
-                      {bichhuProgress > 0.15 && (
-                        <g opacity={bichhuProgress}>
-                          <ScorpionIcon x={sx + sway * 1.4} y={-20 + len} sway={sway * 1.5} scale={0.55} />
-                        </g>
-                      )}
-                    </g>
-                  );
-                })}
-              </g>
-            )}
+            {/* SARP SEHRA */}
+            <SarpSehraVeil t={t} sehraProgress={sehraProgress} bichhuProgress={bichhuProgress} />
           </g>
         </g>
       </svg>

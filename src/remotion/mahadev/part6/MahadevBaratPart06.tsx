@@ -57,27 +57,29 @@ const P6S01DohaJamat: React.FC<{ gf: number }> = ({ gf }) => {
       <BackgroundCrowdBand mode="bhoot_army" y={665} />
       {!isAnimalCut ? (
         <>
-          {/* Cut 1: Thin Bhringi vs Vishal Pramath + Skull-Adorned Dakini/Pishacha */}
-          <DetailedSpiritRig x={360} y={650} kind="bhringi" scale={1.08} phase={0} />
-          <DetailedSpiritRig x={740} y={605} kind="vishal_pramath" scale={1.25} phase={0.8} />
-          <DetailedSpiritRig x={1180} y={640} kind="dakini" scale={1.12} phase={1.4} />
-          <DetailedSpiritRig x={1560} y={635} kind="pishacha" scale={1.12 + bed * 0.03} phase={2.1} flipX />
+          {/* Cut 1: Thin Bhringi/Kankal vs Vishal Pramath/Daitya + Asur + Dakini/Pishacha */}
+          <DetailedSpiritRig x={240} y={650} kind="bhringi" scale={1.04} phase={0} />
+          <DetailedSpiritRig x={560} y={605} kind="vishal_pramath" scale={1.18} phase={0.8} />
+          <DetailedSpiritRig x={920} y={645} kind="asura_senapati" scale={1.08} phase={1.2} />
+          <DetailedSpiritRig x={1260} y={640} kind="dakini" scale={1.08} phase={1.6} />
+          <DetailedSpiritRig x={1620} y={645} kind="pret_kankal" scale={1.08 + bed * 0.03} phase={2.1} flipX />
         </>
       ) : (
         <>
-          {/* Cut 2: Khag, Shwan, Sukar, Gardabh & Bahu-Mukh Spirits Roaring Toward Himalaya */}
-          <DetailedSpiritRig x={300} y={660} kind="kukar_mukha" scale={1.14} phase={0} />
-          <DetailedSpiritRig x={680} y={655} kind="sukar_mukha" scale={1.14} phase={0.7} />
-          <DetailedSpiritRig x={1060} y={650} kind="gardabh_mukha" scale={1.14} phase={1.4} />
-          <DetailedSpiritRig x={1440} y={650} kind="narsingha" scale={1.08} phase={2.0} />
-          <DetailedSpiritRig x={1720} y={665} kind="dhol_gana" scale={1.05} phase={2.6} flipX />
+          {/* Cut 2: Khag (Bird), Shwan (Hound), Shrigal (Jackal), Sukar (Boar), Gardabh (Donkey) & Bhoot Spirits */}
+          <DetailedSpiritRig x={230} y={645} kind="khag_mukha" scale={1.08} phase={0} />
+          <DetailedSpiritRig x={540} y={660} kind="kukar_mukha" scale={1.08} phase={0.6} />
+          <DetailedSpiritRig x={860} y={655} kind="shrigal_mukha" scale={1.08} phase={1.2} />
+          <DetailedSpiritRig x={1180} y={655} kind="sukar_mukha" scale={1.08} phase={1.8} />
+          <DetailedSpiritRig x={1480} y={650} kind="gardabh_mukha" scale={1.08} phase={2.3} />
+          <DetailedSpiritRig x={1740} y={665} kind="nagada_gana" scale={1.04} phase={2.8} flipX />
         </>
       )}
     </ParallaxStage>
   );
 };
 
-// P6-S02: Bhajan — "Aayi Shankar Ki Baratiya Himachal Nagari!" Grand Gate Entry
+// P6-S02: Bhajan — "Aayi Shankar Ki Baratiya Himachal Nagari!" Grand Gate Barat Bheed Entry
 const P6S02BhajanEntry: React.FC<{ gf: number }> = ({ gf }) => {
   const frame = useCurrentFrame();
   const bed = getBedP6(gf);
@@ -86,11 +88,13 @@ const P6S02BhajanEntry: React.FC<{ gf: number }> = ({ gf }) => {
   return (
     <ParallaxStage mode="himalaya" cameraX={enterX * 0.35} zoom={1.04}>
       <BackgroundCrowdBand mode="himalaya_citizens" y={665} />
-      <MahadevBaratGroomRig x={480 + enterX * 0.2} y={515} scale={0.94} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose="calm" />
+      <MahadevBaratGroomRig x={480 + enterX * 0.2} y={538} scale={0.94} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose="calm" seatedOnNandi />
       <NandiBullRig x={505 + enterX * 0.2} y={658} scale={1.24} walking />
-      <DetailedSpiritRig x={190 + enterX * 0.2} y={675} kind="narsingha" scale={0.95} phase={0} />
-      <DetailedSpiritRig x={870 + enterX * 0.25} y={675} kind="dhol_gana" scale={1.02 + bed * 0.04} phase={0.5} />
-      <SakhiBandRig x={1450} y={690} scale={1.04} />
+      <DetailedSpiritRig x={175 + enterX * 0.2} y={675} kind="chhatra_gana" scale={0.95} phase={0} />
+      <DetailedSpiritRig x={820 + enterX * 0.25} y={675} kind="nagada_gana" scale={1.02 + bed * 0.04} phase={0.5} />
+      <DetailedSpiritRig x={1060 + enterX * 0.25} y={680} kind="asura_senapati" scale={0.95} phase={1.2} />
+      <DetailedSpiritRig x={1250 + enterX * 0.25} y={675} kind="bhoot_maya" scale={0.92} phase={1.9} />
+      <SakhiBandRig x={1560} y={690} scale={1.02} />
     </ParallaxStage>
   );
 };
@@ -106,20 +110,21 @@ const P6S03MouseAndElephant: React.FC<{ gf: number }> = ({ gf }) => {
       <BackgroundCrowdBand mode="himalaya_citizens" y={665} />
       {!isMouseHaathiCut ? (
         <>
-          <MahadevBaratGroomRig x={520} y={515} scale={0.96} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose="heroic" />
-          <NandiBullRig x={545} y={660} scale={1.26} walking />
-          <DetailedSpiritRig x={210} y={670} kind="shringi" scale={0.96} phase={0} />
-          <DetailedSpiritRig x={960} y={675} kind="bahu_mukh" scale={1.02} phase={0.6} />
-          <DetailedSpiritRig x={1260} y={675} kind="dhol_gana" scale={1.02} phase={1.3} />
-          <DetailedSpiritRig x={1580} y={675} kind="narsingha" scale={1.02} phase={2.1} flipX />
+          <MahadevBaratGroomRig x={510} y={538} scale={0.96} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose="heroic" seatedOnNandi />
+          <NandiBullRig x={535} y={660} scale={1.26} walking />
+          <DetailedSpiritRig x={190} y={670} kind="chhatra_gana" scale={0.96} phase={0} />
+          <DetailedSpiritRig x={920} y={675} kind="nagada_gana" scale={1.02} phase={0.6} />
+          <DetailedSpiritRig x={1200} y={675} kind="daitya_mahabali" scale={0.98} phase={1.3} />
+          <DetailedSpiritRig x={1480} y={675} kind="bhoot_maya" scale={0.98} phase={1.8} />
+          <DetailedSpiritRig x={1720} y={675} kind="narsingha" scale={0.98} phase={2.1} flipX />
         </>
       ) : (
         <>
-          {/* Exact Song Lyrics Visualized: Mouse Rider & Royal Elephant Rider! */}
-          <MouseMountGanaRig x={430} y={685} scale={1.28} phase={0} />
-          <MouseMountGanaRig x={770} y={715} scale={1.08} phase={1.3} />
-          <ElephantMountDevaRig x={1240} y={635} scale={1.18 + bed * 0.03} phase={0.4} />
-          <DetailedSpiritRig x={1660} y={685} kind="dhol_gana" scale={0.98} phase={0.9} flipX />
+          {/* Exact Song Lyrics Visualized: Mouse Rider & Royal Elephant Rider + Barat Band! */}
+          <MouseMountGanaRig x={390} y={685} scale={1.28} phase={0} />
+          <MouseMountGanaRig x={730} y={715} scale={1.08} phase={1.3} />
+          <ElephantMountDevaRig x={1210} y={635} scale={1.18 + bed * 0.03} phase={0.4} />
+          <DetailedSpiritRig x={1650} y={685} kind="nagada_gana" scale={0.98} phase={0.9} flipX />
         </>
       )}
     </ParallaxStage>
@@ -135,7 +140,7 @@ const P6S04Mainavati: React.FC<{ gf: number }> = ({ gf }) => {
   return (
     <ParallaxStage mode="himalaya" cameraX={0} zoom={isShocked ? 1.12 : 1.04}>
       <BackgroundCrowdBand mode="himalaya_citizens" y={675} />
-      <MahadevBaratGroomRig x={470} y={530} scale={1.02} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose={isShocked ? "heroic" : "calm"} />
+      <MahadevBaratGroomRig x={470} y={550} scale={1.02} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose={isShocked ? "heroic" : "calm"} seatedOnNandi />
       <NandiBullRig x={495} y={668} scale={1.2} walking={false} />
       <DetailedSpiritRig x={190} y={680} kind="sukar_mukha" scale={0.92} phase={0.2} />
       <DetailedSpiritRig x={820} y={685} kind="bahu_nayan" scale={0.9} phase={1.0} />

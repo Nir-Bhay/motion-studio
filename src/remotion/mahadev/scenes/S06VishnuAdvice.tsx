@@ -25,20 +25,12 @@ export const S06VishnuAdvice: React.FC<{ globalStartFrame: number }> = ({ global
 
   return (
     <ParallaxStage mode="shamshan" cameraX={interpolate(frame, [0, 1050], [-16, 16])} zoom={camZoom}>
-      {/* Soft Radial Contrast Glows (Zero hard edges!) */}
+      {/* Soft Radial Contrast Glows (Zero url(#...) gradient dependencies!) */}
       <svg viewBox="0 0 1920 1080" width="100%" height="100%" style={{ position: "absolute", inset: 0 }}>
-        <defs>
-          <radialGradient id="s06Gold" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.34" />
-            <stop offset="100%" stopColor="#fbbf24" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient id="s06Blue" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.28" />
-            <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <circle cx={1340} cy={510} r={420} fill="url(#s06Gold)" opacity={0.7 + vo * 0.3} />
-        <circle cx={680} cy={610} r={390} fill="url(#s06Blue)" />
+        <circle cx={1340} cy={510} r={420} fill="#fbbf24" opacity={0.14 + vo * 0.08} />
+        <circle cx={1340} cy={510} r={250} fill="#fde047" opacity={0.14 + vo * 0.08} />
+        <circle cx={680} cy={610} r={390} fill="#60a5fa" opacity={0.12} />
+        <circle cx={680} cy={610} r={230} fill="#93c5fd" opacity={0.14} />
       </svg>
 
       {/* Mahadev Listening Calmly on Tiger Skin */}

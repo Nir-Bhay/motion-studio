@@ -2,6 +2,8 @@ import React from "react";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { VishnuRig } from "../characters/VishnuRig";
+import { DevaHelperRig } from "../characters/ApsaraAndMusicians";
+import { BackgroundCrowdBand } from "../characters/DetailedGanasAndSpirits";
 import { getSmoothVoEnergy } from "../timeline";
 
 // S03 (00:34 - 00:56, 1320 frames): "भगवान विष्णु पधारे... शंख, चक्र, गदा, पद्म लेकर के... देख कर सब बलैया लेने लगे!"
@@ -73,36 +75,27 @@ export const S03Vishnu: React.FC<{ globalStartFrame: number }> = ({ globalStartF
         </div>
       )}
 
-      {/* Crowd of Devas & Rishis below waving hands in "बलैया लेना" adoration */}
-      {[240, 440, 650, 1270, 1480, 1680].map((dx, idx) => {
-        const sway = Math.sin(frame * 0.14 + idx * 0.9) * 18;
-        return (
-          <div
-            key={idx}
-            style={{
-              position: "absolute",
-              left: dx,
-              top: 790 + Math.sin(frame * 0.08 + idx) * 6,
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <svg width={170} height={220} viewBox="-85 -110 170 220" overflow="visible">
-              <path d="M -24,14 L 24,14 L 30,86 L -30,86 Z" fill={idx % 2 === 0 ? "#fb7185" : "#38bdf8"} stroke="#fde047" strokeWidth={2} />
-              <path d="M -20,-34 L 20,-34 L 16,16 L -16,16 Z" fill="#fde68a" />
-              <path d="M -14,-30 Q 0,-4 14,-30" fill="none" stroke="#f43f5e" strokeWidth={5} strokeDasharray="3 4" />
-              {/* Both Hands Raised Toward Narayana */}
-              <path d={`M -18,-24 Q ${-36},${-52} ${-26 + sway * 0.4},-84`} stroke="#f7be9c" strokeWidth={11} strokeLinecap="round" fill="none" />
-              <path d={`M 18,-24 Q ${36},${-52} ${26 + sway * 0.4},-84`} stroke="#f7be9c" strokeWidth={11} strokeLinecap="round" fill="none" />
-              <circle cx={0} cy={-54} r={18} fill="#f7be9c" stroke="#b46e4c" strokeWidth={1.2} />
-              <line x1={0} y1={-66} x2={0} y2={-58} stroke="#dc2626" strokeWidth={2.5} strokeLinecap="round" />
-              <circle cx={-6} cy={-55} r={2} fill="#0f172a" />
-              <circle cx={6} cy={-55} r={2} fill="#0f172a" />
-              <path d="M -5,-45 Q 0,-41 5,-45" fill="none" stroke="#7f1d1d" strokeWidth={1.8} />
-              <polygon points="-14,-68 0,-92 14,-68" fill="#fbbf24" stroke="#92400e" strokeWidth={1.2} />
-            </svg>
-          </div>
-        );
-      })}
+      {/* Rich Devaloka Crowd Below + Full-Bodied Devtas Cheering in Adoration ("बलैया लेना") */}
+      <BackgroundCrowdBand mode="devaloka" y={695} />
+      {[
+        { x: 220, col: "#f59e0b", flip: false },
+        { x: 420, col: "#ec4899", flip: false },
+        { x: 630, col: "#0284c7", flip: false },
+        { x: 1290, col: "#ea580c", flip: true },
+        { x: 1500, col: "#ec4899", flip: true },
+        { x: 1700, col: "#0284c7", flip: true },
+      ].map((d, idx) => (
+        <DevaHelperRig
+          key={idx}
+          x={d.x}
+          y={745}
+          scale={0.86}
+          pose="cheer"
+          dhotiColor={d.col}
+          phase={idx * 0.7}
+          flipX={d.flip}
+        />
+      ))}
     </ParallaxStage>
   );
 };

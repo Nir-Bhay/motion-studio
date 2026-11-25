@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
 import { breathe, clothWave, pendulumSwing } from "../motion/physics";
+import { CobraHood, OrnateTrishulWithDamaru } from "./DetailedSerpents";
 
 interface MahadevRigProps {
   x: number;
@@ -29,7 +30,6 @@ export const MahadevRig: React.FC<MahadevRigProps> = ({
   const jataSway = clothWave(t, 0.4, 5.5);
   const tongueFlick = Math.sin(t * 8.0) > 0.55;
   const gangaOffset = (frame * 2.4) % 42;
-  const damaruTilt = pendulumSwing(t, 2.9, 10);
   const mouthOpen = speakingEnergy * 5.5;
 
   return (
@@ -44,211 +44,148 @@ export const MahadevRig: React.FC<MahadevRigProps> = ({
       }}
     >
       <svg width={820} height={620} viewBox="-410 -320 820 620" overflow="visible">
-        <defs>
-          <radialGradient id="shivaAuraStrong" cx="50%" cy="45%" r="52%">
-            <stop offset="0%" stopColor="#bae6fd" stopOpacity="0.42" />
-            <stop offset="55%" stopColor="#38bdf8" stopOpacity="0.14" />
-            <stop offset="100%" stopColor="#0f172a" stopOpacity="0" />
-          </radialGradient>
-          {/* Luminous bhasma-clad skin with sculpted slate shading */}
-          <linearGradient id="shivaSkin" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#f8fafc" />
-            <stop offset="50%" stopColor="#cbd5e1" />
-            <stop offset="100%" stopColor="#94a3b8" />
-          </linearGradient>
-          <linearGradient id="shivaMuscleShadow" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#93b4d8" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#6488b4" stopOpacity="0.2" />
-          </linearGradient>
-          <linearGradient id="baghambarRich" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#fbbf24" />
-            <stop offset="50%" stopColor="#d97706" />
-            <stop offset="100%" stopColor="#78350f" />
-          </linearGradient>
-          <linearGradient id="basaltRock" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#475569" />
-            <stop offset="60%" stopColor="#293548" />
-            <stop offset="100%" stopColor="#0f172a" />
-          </linearGradient>
-          <linearGradient id="trishulSteel" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#f8fafc" />
-            <stop offset="50%" stopColor="#cbd5e1" />
-            <stop offset="100%" stopColor="#94a3b8" />
-          </linearGradient>
-        </defs>
-
-        {/* Ornate Etched Trishul + Pendulum-Swaying Damaru */}
-        <g transform="translate(238, -22)">
-          <rect x={-4.5} y={-215} width={9} height={427} rx={4.5} fill="url(#trishulSteel)" stroke="#e2e8f0" strokeWidth={1} />
-          {/* Decorative Brass Rings along Shaft */}
-          {[-175, -110, 40].map((ry, i) => (
-            <rect key={i} x={-6} y={ry} width={12} height={7} rx={3} fill="#fbbf24" stroke="#92400e" strokeWidth={1} />
-          ))}
-          {/* Center Spear & Curved Prongs */}
-          <polygon points="0,-266 -11,-208 11,-208" fill="#f8fafc" stroke="#94a3b8" strokeWidth={1.5} />
-          <path d="M 0,-186 Q -36,-192 -34,-238 Q -22,-216 0,-208" fill="url(#trishulSteel)" stroke="#e2e8f0" strokeWidth={1.5} />
-          <path d="M 0,-186 Q 36,-192 34,-238 Q 22,-216 0,-208" fill="url(#trishulSteel)" stroke="#e2e8f0" strokeWidth={1.5} />
-          {/* Crimson Silk Ribbon & Swaying Damaru */}
-          <path d={`M -4,-150 Q ${-18 + damaruTilt * 0.6},-135 ${-14 + damaruTilt},-112`} fill="none" stroke="#ef4444" strokeWidth={4} strokeLinecap="round" />
-          <g transform={`translate(-10, -148) rotate(${damaruTilt})`}>
-            <polygon points="-18,-15 18,-15 0,0" fill="#b45309" stroke="#fde047" strokeWidth={2} />
-            <polygon points="-18,15 18,15 0,0" fill="#b45309" stroke="#fde047" strokeWidth={2} />
-            <line x1={-18} y1={-15} x2={-18} y2={15} stroke="#fffbeb" strokeWidth={3} />
-            <line x1={18} y1={-15} x2={18} y2={15} stroke="#fffbeb" strokeWidth={3} />
-            <line x1={-15} y1={-11} x2={15} y2={11} stroke="#fde047" strokeWidth={1.5} />
-            <line x1={15} y1={-11} x2={-15} y2={11} stroke="#fde047" strokeWidth={1.5} />
-            <circle cx={0} cy={17} r={4} fill="#ef4444" />
-          </g>
+        {/* Ornate Etched Trishul + Pendulum-Swaying Damaru Planted in Carved Rock Socket */}
+        <g transform="translate(245, 132)">
+          <path d="M -28,30 L -18,0 L 18,0 L 28,30 Z" fill="#334155" stroke="#0b1120" strokeWidth={2.5} />
+          <path d="M -18,4 L 18,4" stroke="#94a3b8" strokeWidth={2} />
         </g>
+        <OrnateTrishulWithDamaru t={t} x={245} y={-2} scale={1.16} />
 
-        {/* Sculpted Basalt Mountain Seat with Moonlit Rim Highlight */}
+        {/* Sculpted Basalt Mountain Seat with Raised Bolster Ridge & Moonlit Rim Highlight */}
         <path
-          d="M -275,188 Q -230,104 -125,108 Q 0,90 148,114 Q 248,118 275,188 Z"
-          fill="url(#basaltRock)"
-          stroke="#94a3b8"
-          strokeWidth={2.5}
+          d="M -295,192 Q -255,96 -155,88 Q -40,80 120,104 Q 245,112 285,192 Z"
+          fill="#293548"
+          stroke="#0b1120"
+          strokeWidth={3.2}
         />
-        <path d="M -215,120 Q -120,108 15,106 Q 130,108 215,126" fill="none" stroke="#bae6fd" strokeWidth={2} opacity={0.4} />
+        <path
+          d="M -280,185 Q -235,108 -148,100 Q -20,94 125,116 Q 230,124 268,185"
+          fill="none"
+          stroke="#bae6fd"
+          strokeWidth={2.2}
+          opacity={0.45}
+        />
 
         {pose === "lounging" ? (
-          /* POSE 1: Sculpted Reclining Mahadev ("बाघंबर लपेटे, हाथ की तकिया लगाए") */
+          /* POSE 1: Anatomically Grounded, Majestic Reclining Mahadev ("बाघंबर लपेटे, हाथ की तकिया लगाए") */
           <g transform={`translate(0, ${br.chestExpand * 0.4})`}>
-            {/* Strong Lunar Prabhamandala Halo */}
-            <circle cx={-105} cy={-44} r={168} fill="url(#shivaAuraStrong)" />
+            <circle cx={-105} cy={-44} r={155} fill="#38bdf8" opacity={0.14} />
+            <circle cx={-105} cy={-44} r={108} fill="#bae6fd" opacity={0.18} />
 
-            {/* Lush Spotted & Striped Baghambar (Tiger Skin Pelt) */}
+            {/* Lush Layered Baghambar Spread & Bolster Cushion Under Elbow */}
             <path
-              d="M -195,118 Q -110,42 46,44 Q 170,46 196,122 Q 95,148 -195,118 Z"
-              fill="url(#baghambarRich)"
-              stroke="#fbbf24"
-              strokeWidth={2.5}
-            />
-            {/* Fur Edge Trim */}
-            <path
-              d="M -190,118 Q -95,134 0,136 Q 95,136 192,122"
-              fill="none"
-              stroke="#fef3c7"
+              d="M -225,124 Q -175,44 -85,48 Q 35,48 165,58 Q 210,82 215,128 Q 95,152 -225,124 Z"
+              fill="#d97706"
+              stroke="#0b1120"
               strokeWidth={3}
-              strokeDasharray="6 6"
-              opacity={0.55}
             />
-            {/* Organic Tiger Stripes */}
-            {[-130, -82, -32, 20, 74, 126].map((sx, idx) => (
+            <path
+              d="M -216,120 Q -145,76 -75,78 Q 40,84 185,124 Q 80,144 -216,120 Z"
+              fill="#f59e0b"
+              opacity={0.65}
+            />
+            {/* Raised Tiger-Skin Bolster Mound supporting Elbow */}
+            <ellipse cx={-168} cy={78} rx={48} ry={24} fill="#b45309" stroke="#0b1120" strokeWidth={2.6} />
+            <path d="M -218,124 Q -105,140 0,142 Q 105,142 210,128" fill="none" stroke="#fef3c7" strokeWidth={3} strokeDasharray="6 6" opacity={0.6} />
+            {[-148, -96, -42, 12, 66, 122, 168].map((sx, idx) => (
               <path
                 key={idx}
-                d={`M ${sx},${64 + (idx % 2) * 10} Q ${sx + 12},88 ${sx - 8},112`}
+                d={`M ${sx},${64 + (idx % 2) * 10} Q ${sx + 10},88 ${sx - 8},114`}
                 fill="none"
-                stroke="#291202"
-                strokeWidth={5.5}
+                stroke="#451a03"
+                strokeWidth={5.2}
                 strokeLinecap="round"
-                opacity={0.82}
+                opacity={0.84}
               />
             ))}
 
-            {/* Sculpted Muscular Legs with Silver Anklet Kada */}
-            <path
-              d="M 30,86 Q 128,62 164,108 Q 114,134 26,112 Z"
-              fill="url(#shivaSkin)"
-              stroke="#cbd5e1"
-              strokeWidth={2}
-            />
-            <path d="M 55,88 Q 105,82 135,98" fill="none" stroke="url(#shivaMuscleShadow)" strokeWidth={7} strokeLinecap="round" />
-            <ellipse cx={148} cy={104} rx={5} ry={11} fill="none" stroke="#f8fafc" strokeWidth={3.5} />
-            <ellipse cx={166} cy={112} rx={17} ry={10} fill="#e2e8f0" stroke="#94a3b8" strokeWidth={1.5} />
+            {/* Back/Lower Extended Leg (clearly visible along Baghambar!) */}
+            <g>
+              <path d="M 18,92 Q 96,104 176,106" fill="none" stroke="#0b1120" strokeWidth={32} strokeLinecap="round" />
+              <path d="M 18,92 Q 96,104 176,106" fill="none" stroke="#cbd5e1" strokeWidth={26} strokeLinecap="round" />
+              <ellipse cx={162} cy={106} rx={5.5} ry={13} fill="none" stroke="#f8fafc" strokeWidth={4} />
+              <path d="M 174,98 Q 194,94 198,112 Q 184,118 172,112 Z" fill="#cbd5e1" stroke="#0b1120" strokeWidth={2.4} />
+            </g>
 
-            {/* Sculpted Muscular Torso (Broad Deltoids, Pectorals, Obliques) */}
-            <path
-              d="M -114,58 Q -72,10 34,34 L 44,88 L -104,96 Z"
-              fill="url(#shivaSkin)"
-              stroke="#e0f2fe"
-              strokeWidth={2.2}
-            />
-            {/* Pectoral & Rib Contours */}
-            <path d="M -82,48 Q -48,58 -24,44 M -64,68 Q -32,74 -6,66" fill="none" stroke="#6488b4" strokeWidth={2.5} strokeLinecap="round" opacity={0.55} />
-            {/* Crisp White Tripundra Bhasma across Sculpted Chest */}
-            <path d="M -56,42 Q -30,36 -8,44 M -54,51 Q -30,45 -10,53 M -52,60 Q -30,54 -12,62" fill="none" stroke="#ffffff" strokeWidth={3.2} strokeLinecap="round" />
+            {/* Front/Upper Bent Leg (Natural Relaxed Reclining Knee-Up Pose!) */}
+            <g>
+              {/* Thigh angling up to bent knee */}
+              <path d="M 12,76 Q 68,38 98,38" fill="none" stroke="#0b1120" strokeWidth={35} strokeLinecap="round" />
+              <path d="M 12,76 Q 68,38 98,38" fill="none" stroke="#dce6f2" strokeWidth={29} strokeLinecap="round" />
+              {/* Lower Shin angling down cleanly to rested ankle & foot */}
+              <path d="M 98,38 Q 124,70 132,112" fill="none" stroke="#0b1120" strokeWidth={31} strokeLinecap="round" />
+              <path d="M 98,38 Q 124,70 132,112" fill="none" stroke="#dce6f2" strokeWidth={25} strokeLinecap="round" />
+              {/* Thigh/Calf Cel-Shading */}
+              <path d="M 32,68 Q 66,46 88,46" fill="none" stroke="#93b4d8" strokeWidth={7} strokeLinecap="round" opacity={0.5} />
+              {/* Silver Kada Anklet & Detailed Rested Foot */}
+              <ellipse cx={130} cy={104} rx={13} ry={5.5} fill="none" stroke="#ffffff" strokeWidth={4.2} />
+              <path d="M 125,112 Q 152,108 158,122 Q 140,128 122,120 Z" fill="#e2e8f0" stroke="#0b1120" strokeWidth={2.5} />
+            </g>
 
-            {/* Resting Arm ("हाथ की तकिया" — sculpted bicep + forearm + Nag-Keyura armlet + Rudraksha wrist) */}
-            <path
-              d="M -104,64 L -166,92 L -144,10"
-              fill="none"
-              stroke="url(#shivaSkin)"
-              strokeWidth={27}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M -104,64 L -166,92 L -144,10"
-              fill="none"
-              stroke="#f8fafc"
-              strokeWidth={2}
-              strokeLinecap="round"
-              opacity={0.65}
-            />
-            {/* Bicep Keyura Armlet & Wrist Rudraksha */}
-            <ellipse cx={-136} cy={78} rx={6} ry={14} transform="rotate(24, -136, 78)" fill="none" stroke="#fbbf24" strokeWidth={4} />
-            <ellipse cx={-152} cy={42} rx={12} ry={5} fill="none" stroke="#9a3412" strokeWidth={4.5} strokeDasharray="3 3" />
-            {/* Articulated Pillow Hand */}
-            <ellipse cx={-141} cy={6} rx={14} ry={11} fill="#e2e8f0" stroke="#94a3b8" strokeWidth={1.5} />
+            {/* Baghambar Dhoti Wrap across Hips & Waist with Live Cobra Belt */}
+            <path d="M -22,42 Q 18,32 52,58 L 42,108 Q 2,116 -28,100 Z" fill="#d97706" stroke="#0b1120" strokeWidth={2.8} />
+            <path d="M -8,48 Q 18,68 12,98 M 14,48 Q 34,68 26,100" fill="none" stroke="#451a03" strokeWidth={4.5} strokeLinecap="round" opacity={0.85} />
+            <path d="M -20,44 Q 8,70 28,96" fill="none" stroke="#15803d" strokeWidth={7} strokeLinecap="round" />
+            <path d="M -20,44 Q 8,70 28,96" fill="none" stroke="#fde047" strokeWidth={2.2} strokeDasharray="4 4" strokeLinecap="round" />
 
-            {/* Relaxed Draped Arm with Muscle Contour & Wristlet */}
-            <path d="M 10,44 Q 68,58 98,94" fill="none" stroke="#0b1120" strokeWidth={30} strokeLinecap="round" />
-            <path
-              d="M 10,44 Q 68,58 98,94"
-              fill="none"
-              stroke="url(#shivaSkin)"
-              strokeWidth={24}
-              strokeLinecap="round"
-            />
-            <ellipse cx={42} cy={55} rx={6} ry={13} transform="rotate(-24, 42, 55)" fill="none" stroke="#fbbf24" strokeWidth={4} />
-            <ellipse cx={84} cy={81} rx={10} ry={5} transform="rotate(-38, 84, 81)" fill="none" stroke="#9a3412" strokeWidth={4} />
+            {/* Muscular Ash-Smeared Reclining Torso */}
+            <path d="M -126,58 Q -84,8 28,36 L 38,94 L -112,96 Z" fill="#dce6f2" stroke="#0b1120" strokeWidth={3} />
+            {/* Pectoral & Rib Shading + Rudraksha Mala + Tripundra on Chest */}
+            <path d="M -92,46 Q -56,58 -30,42 M -70,68 Q -36,76 -6,66" fill="none" stroke="#6488b4" strokeWidth={2.6} strokeLinecap="round" opacity={0.68} />
+            <path d="M -102,38 Q -58,76 -16,52" fill="none" stroke="#9a3412" strokeWidth={6} strokeDasharray="3 4" strokeLinecap="round" />
+            <path d="M -60,40 Q -34,34 -12,42 M -58,49 Q -34,43 -14,51 M -56,58 Q -34,52 -16,60" fill="none" stroke="#ffffff" strokeWidth={3.2} strokeLinecap="round" />
+
+            {/* Right Arm Planted on Bolster ("हाथ की तकिया लगाए") */}
+            <path d="M -112,60 L -168,80 L -144,6" fill="none" stroke="#0b1120" strokeWidth={32} strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M -112,60 L -168,80 L -144,6" fill="none" stroke="#dce6f2" strokeWidth={26} strokeLinecap="round" strokeLinejoin="round" />
+            <ellipse cx={-139} cy={70} rx={6} ry={13.5} transform="rotate(20, -139, 70)" fill="none" stroke="#fbbf24" strokeWidth={4} />
+            <ellipse cx={-154} cy={38} rx={12} ry={5} fill="none" stroke="#9a3412" strokeWidth={4.5} strokeDasharray="3 3" />
+            {/* Open Palm Cradling Head */}
+            <ellipse cx={-141} cy={2} rx={15} ry={11} fill="#e2e8f0" stroke="#0b1120" strokeWidth={2.4} />
+
+            {/* Left Arm Relaxed Along Raised Knee */}
+            <path d="M -12,40 Q 44,24 92,38" fill="none" stroke="#0b1120" strokeWidth={29} strokeLinecap="round" />
+            <path d="M -12,40 Q 44,24 92,38" fill="none" stroke="#dce6f2" strokeWidth={23} strokeLinecap="round" />
+            <ellipse cx={28} cy={33} rx={6} ry={12.5} transform="rotate(-8, 28, 33)" fill="none" stroke="#fbbf24" strokeWidth={4} />
+            <ellipse cx={72} cy={33} rx={5.5} ry={11.5} transform="rotate(8, 72, 33)" fill="none" stroke="#9a3412" strokeWidth={4} />
+            <ellipse cx={96} cy={40} rx={12} ry={9} fill="#e2e8f0" stroke="#0b1120" strokeWidth={2.2} />
 
             {/* Coiled Vasuki Serpent around Neck */}
-            <g transform="translate(-86, 30)">
-              <path d="M -24,12 Q 0,28 24,10" fill="none" stroke="#334155" strokeWidth={12} strokeLinecap="round" />
-              <path d="M -20,12 Q 0,24 20,10" fill="none" stroke="#94a3b8" strokeWidth={2.5} strokeDasharray="4 5" opacity={0.75} />
-              {/* Swaying Cobra Hood */}
-              <g transform={`translate(${24 + snakeSway * 0.4}, -12) rotate(${snakeSway})`}>
-                <path d="M 0,18 Q -14,-4 0,-20 Q 14,-4 0,18 Z" fill="#1e293b" stroke="#cbd5e1" strokeWidth={1.8} />
-                <circle cx={-3.5} cy={-6} r={2} fill="#fbbf24" />
-                <circle cx={3.5} cy={-6} r={2} fill="#fbbf24" />
-                {tongueFlick && <path d="M 0,-20 L 0,-29 M 0,-29 L -3.5,-34 M 0,-29 L 3.5,-34" stroke="#ef4444" strokeWidth={1.8} />}
+            <g transform="translate(-94, 28)">
+              <path d="M -28,12 C -34,26 0,34 26,10" fill="none" stroke="#0b1120" strokeWidth={16} strokeLinecap="round" />
+              <path d="M -28,12 C -34,26 0,34 26,10" fill="none" stroke="#1e293b" strokeWidth={11} strokeLinecap="round" />
+              <path d="M -22,12 Q 0,27 22,10" fill="none" stroke="#64748b" strokeWidth={3.5} strokeDasharray="4 5" />
+              <g transform={`translate(${26 + snakeSway * 0.4}, -14)`}>
+                <CobraHood
+                  scale={1.08}
+                  bodyColor="#334155"
+                  hoodColor="#1e293b"
+                  bellyColor="#cbd5e1"
+                  markColor="#fbbf24"
+                  eyeColor="#ef4444"
+                  tongueOut={tongueFlick}
+                  rotation={snakeSway}
+                />
               </g>
             </g>
 
-            {/* Mahadev's Sculpted Head Resting Calmly on Hand */}
-            <g transform={`translate(-118, -18) rotate(${-14 + br.headNod})`}>
-              {/* Flowing Braided Jata Locks with Physics Sway */}
+            {/* Mahadev's Sculpted Head Cradled in Palm */}
+            <g transform={`translate(-122, -16) rotate(${-12 + br.headNod})`}>
               <path d={`M -30,-6 Q ${-46 + jataSway},18 ${-40 + jataSway * 1.3},42`} fill="none" stroke="#291d18" strokeWidth={9} strokeLinecap="round" />
               <path d={`M 30,-6 Q ${46 - jataSway * 0.6},18 ${38 - jataSway},42`} fill="none" stroke="#291d18" strokeWidth={9} strokeLinecap="round" />
               <path d="M -30,-12 Q -38,-58 0,-68 Q 38,-58 30,-12 Z" fill="#291d18" stroke="#573d30" strokeWidth={1.5} />
               <ellipse cx={0} cy={-60} rx={21} ry={17} fill="#3f2c22" stroke="#573d30" strokeWidth={1.5} />
-              {/* Rudraksha Crown Band */}
               <path d="M -19,-46 Q 0,-40 19,-46" fill="none" stroke="#b45309" strokeWidth={5.5} strokeDasharray="3 4" strokeLinecap="round" />
-              {/* Luminous Crescent Moon */}
-              <circle cx={16} cy={-55} r={16} fill="#e0f2fe" opacity={0.25} />
+              <circle cx={16} cy={-55} r={16} fill="#e0f2fe" opacity={0.28} />
               <path d="M 10,-65 A 12,12 0 1,0 26,-50 A 9,9 0 1,1 10,-65 Z" fill="#ffffff" />
-              {/* Rippling Ganga Stream */}
-              <path
-                d={`M -6,-72 Q -22,${-44 + gangaOffset * 0.22} -32,-8`}
-                fill="none"
-                stroke="#e0f2fe"
-                strokeWidth={3.8}
-                strokeDasharray="9 5"
-                opacity={0.85}
-              />
-              {/* Face */}
-              <ellipse cx={0} cy={0} rx={31} ry={35} fill="url(#shivaSkin)" stroke="#0b1120" strokeWidth={3} />
-              {/* Neelkanth Sapphire Blue Throat */}
+              <path d={`M -6,-72 Q -22,${-44 + gangaOffset * 0.22} -32,-8`} fill="none" stroke="#e0f2fe" strokeWidth={3.8} strokeDasharray="9 5" opacity={0.88} />
+              <ellipse cx={0} cy={0} rx={31} ry={35} fill="#dce6f2" stroke="#0b1120" strokeWidth={3} />
               <ellipse cx={0} cy={32} rx={13} ry={8} fill="#2563eb" opacity={0.85} />
-              {/* Rudraksha Ear Kundals & Neck Mala */}
               <circle cx={-32} cy={10} r={5.5} fill="#7c2d12" stroke="#fbbf24" strokeWidth={1.6} />
               <circle cx={32} cy={10} r={5.5} fill="#7c2d12" stroke="#fbbf24" strokeWidth={1.6} />
               <path d="M -17,29 Q 0,44 17,29" fill="none" stroke="#9a3412" strokeWidth={6} strokeDasharray="3 4" strokeLinecap="round" />
-              {/* Tripundra & Radiant Third Eye */}
               <path d="M -17,-16 Q 0,-20 17,-16 M -16,-11 Q 0,-15 16,-11" fill="none" stroke="#ffffff" strokeWidth={2.5} strokeLinecap="round" />
               <ellipse cx={0} cy={-13} rx={2.8} ry={5.5} fill="#ef4444" stroke="#fde047" strokeWidth={0.8} />
-              {/* Calm Meditative Eyes + Nose Bridge */}
               <path d="M 0,-6 L -2,6 L 2,7" fill="none" stroke="#6488b4" strokeWidth={1.6} strokeLinecap="round" />
               <g transform={`scale(1, ${blink})`} style={{ transformOrigin: "0px -2px" }}>
                 <path d="M -19,-2 Q -12,-6 -5,-2" fill="none" stroke="#0f172a" strokeWidth={2.8} strokeLinecap="round" />
@@ -256,52 +193,55 @@ export const MahadevRig: React.FC<MahadevRigProps> = ({
                 <path d="M 5,-2 Q 12,-6 19,-2" fill="none" stroke="#0f172a" strokeWidth={2.8} strokeLinecap="round" />
                 <circle cx={12} cy={-2} r={2.5} fill="#0f172a" />
               </g>
-              {/* Peaceful Smile */}
               <path d={`M -9,15 Q 0,${20 + mouthOpen} 9,15`} fill="none" stroke="#1e293b" strokeWidth={2.4} strokeLinecap="round" />
             </g>
           </g>
         ) : (
-          /* POSE 2: Sitting Upright Muscular Padmasana + Abhaya Blessing Hand (S07 Finale) */
+          /* POSE 2: Sitting Upright Muscular Padmasana + Abhaya Blessing Hand */
           <g transform={`translate(0, ${br.chestExpand * 0.4})`}>
-            <circle cx={0} cy={-78} r={178} fill="url(#shivaAuraStrong)" />
-            {/* Tiger-skin Dhoti & Crossed Padmasana Legs */}
-            <path d="M -98,96 Q 0,134 98,96 Q 114,54 46,48 L -46,48 Q -114,54 -98,96 Z" fill="url(#baghambarRich)" stroke="#0b1120" strokeWidth={3} />
+            <circle cx={0} cy={-78} r={150} fill="#38bdf8" opacity={0.14} />
+            <circle cx={0} cy={-78} r={106} fill="#bae6fd" opacity={0.18} />
+            <path d="M -98,96 Q 0,134 98,96 Q 114,54 46,48 L -46,48 Q -114,54 -98,96 Z" fill="#d97706" stroke="#0b1120" strokeWidth={3} />
             {[-58, -22, 22, 58].map((sx, i) => (
-              <path key={i} d={`M ${sx},60 Q ${sx + 6},85 ${sx - 6},106`} fill="none" stroke="#291202" strokeWidth={5} strokeLinecap="round" opacity={0.8} />
+              <path key={i} d={`M ${sx},60 Q ${sx + 6},85 ${sx - 6},106`} fill="none" stroke="#451a03" strokeWidth={5} strokeLinecap="round" opacity={0.8} />
             ))}
-            {/* Sculpted Muscular Torso */}
-            <path d="M -54,-38 Q 0,-50 54,-38 L 42,56 L -42,56 Z" fill="url(#shivaSkin)" stroke="#0b1120" strokeWidth={3} />
+            <path d="M -54,-38 Q 0,-50 54,-38 L 42,56 L -42,56 Z" fill="#dce6f2" stroke="#0b1120" strokeWidth={3} />
             <path d="M -36,-14 Q -18,-6 -4,-16 M 4,-16 Q 18,-6 36,-14" fill="none" stroke="#475569" strokeWidth={2.4} opacity={0.7} />
             <path d="M -28,-22 Q 0,-28 28,-22 M -26,-12 Q 0,-18 26,-12" fill="none" stroke="#ffffff" strokeWidth={3.2} />
-            {/* Left Arm + Keyura Armlet */}
             <path d="M -50,-28 Q -78,28 -60,78" fill="none" stroke="#0b1120" strokeWidth={30} strokeLinecap="round" />
-            <path d="M -50,-28 Q -78,28 -60,78" fill="none" stroke="url(#shivaSkin)" strokeWidth={24} strokeLinecap="round" />
+            <path d="M -50,-28 Q -78,28 -60,78" fill="none" stroke="#dce6f2" strokeWidth={24} strokeLinecap="round" />
             <ellipse cx={-66} cy={4} rx={12} ry={5} transform="rotate(14, -66, 4)" fill="none" stroke="#fbbf24" strokeWidth={4} />
-            {/* Right Arm Raised in Abhaya Blessing */}
             <g transform={`translate(50, -28) rotate(${-15 - Math.sin(t * 3.8) * 7})`}>
               <path d="M 0,0 Q 36,-14 48,-56" fill="none" stroke="#0b1120" strokeWidth={30} strokeLinecap="round" />
-              <path d="M 0,0 Q 36,-14 48,-56" fill="none" stroke="url(#shivaSkin)" strokeWidth={24} strokeLinecap="round" />
+              <path d="M 0,0 Q 36,-14 48,-56" fill="none" stroke="#dce6f2" strokeWidth={24} strokeLinecap="round" />
               <ellipse cx={28} cy={-16} rx={6} ry={13} transform="rotate(-48, 28, -16)" fill="none" stroke="#fbbf24" strokeWidth={4} />
-              <ellipse cx={50} cy={-66} rx={12} ry={15} fill="#f8fafc" />
+              <ellipse cx={50} cy={-66} rx={12} ry={15} fill="#f8fafc" stroke="#0b1120" strokeWidth={2} />
               <circle cx={50} cy={-66} r={30} fill="#bae6fd" opacity={0.32 + 0.16 * Math.sin(t * 4.5)} />
             </g>
-            {/* Vasuki Serpent */}
             <g transform="translate(0, -38)">
-              <path d="M -28,8 Q 0,25 28,8" fill="none" stroke="#334155" strokeWidth={12} strokeLinecap="round" />
-              <g transform={`translate(${28 + snakeSway * 0.4}, -12) rotate(${snakeSway})`}>
-                <path d="M 0,18 Q -13,-4 0,-19 Q 13,-4 0,18 Z" fill="#1e293b" stroke="#cbd5e1" strokeWidth={1.8} />
-                <circle cx={-3} cy={-6} r={2} fill="#fbbf24" />
-                <circle cx={3} cy={-6} r={2} fill="#fbbf24" />
+              <path d="M -30,8 C -36,24 0,32 30,8" fill="none" stroke="#0b1120" strokeWidth={16} strokeLinecap="round" />
+              <path d="M -30,8 C -36,24 0,32 30,8" fill="none" stroke="#1e293b" strokeWidth={11} strokeLinecap="round" />
+              <path d="M -24,9 Q 0,24 24,9" fill="none" stroke="#64748b" strokeWidth={3.5} strokeDasharray="4 5" />
+              <g transform={`translate(${30 + snakeSway * 0.4}, -16)`}>
+                <CobraHood
+                  scale={1.05}
+                  bodyColor="#334155"
+                  hoodColor="#1e293b"
+                  bellyColor="#cbd5e1"
+                  markColor="#fbbf24"
+                  eyeColor="#ef4444"
+                  tongueOut={tongueFlick}
+                  rotation={snakeSway}
+                />
               </g>
             </g>
-            {/* Head */}
             <g transform={`translate(0, ${-86 + br.headNod * 0.6})`}>
               <path d={`M -30,-6 Q ${-42 + jataSway},18 ${-36 + jataSway},38`} fill="none" stroke="#291d18" strokeWidth={8} strokeLinecap="round" />
               <path d={`M 30,-6 Q ${42 - jataSway},18 ${36 - jataSway},38`} fill="none" stroke="#291d18" strokeWidth={8} strokeLinecap="round" />
               <path d="M -31,-10 Q -37,-58 0,-68 Q 37,-58 31,-10 Z" fill="#291d18" />
               <ellipse cx={0} cy={-58} rx={21} ry={17} fill="#3f2c22" />
               <path d="M 10,-64 A 12,12 0 1,0 26,-49 A 9,9 0 1,1 10,-64 Z" fill="#ffffff" />
-              <ellipse cx={0} cy={0} rx={31} ry={35} fill="url(#shivaSkin)" stroke="#0b1120" strokeWidth={3} />
+              <ellipse cx={0} cy={0} rx={31} ry={35} fill="#dce6f2" stroke="#0b1120" strokeWidth={3} />
               <ellipse cx={0} cy={32} rx={13} ry={8} fill="#2563eb" opacity={0.85} />
               <path d="M -17,-16 Q 0,-20 17,-16 M -16,-11 Q 0,-15 16,-11" fill="none" stroke="#ffffff" strokeWidth={2.5} />
               <ellipse cx={0} cy={-13} rx={2.8} ry={5.5} fill="#ef4444" />

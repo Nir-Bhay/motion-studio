@@ -51,13 +51,14 @@ const P5S01PretCry: React.FC<{ gf: number }> = ({ gf }) => {
   return (
     <ParallaxStage mode="shamshan" cameraX={0} zoom={1.04}>
       <BackgroundCrowdBand mode="bhoot_army" y={665} />
-      <MahadevBaratGroomRig x={460} y={515} scale={0.92} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} speakingEnergy={vo * 0.25} pose="calm" />
+      <MahadevBaratGroomRig x={460} y={538} scale={0.92} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} speakingEnergy={vo * 0.25} pose="calm" seatedOnNandi />
       <NandiBullRig x={485} y={660} scale={1.2} walking={false} />
-      <DetailedSpiritRig x={190} y={680} kind="shringi" scale={0.95} phase={0} />
-      <PretCreatureRig x={1020} y={630} variant="weeping" scale={1.12} phase={0} />
-      <PretCreatureRig x={1260} y={665} variant="weeping" scale={1.06} phase={1.2} />
-      <PretCreatureRig x={1520} y={625} variant="weeping" scale={1.1} phase={2.1} />
-      <DetailedSpiritRig x={1740} y={675} kind="vetala" scale={0.9} phase={0.5} flipX />
+      <DetailedSpiritRig x={180} y={680} kind="chhatra_gana" scale={0.95} phase={0} />
+      <DetailedSpiritRig x={870} y={685} kind="bhoot_maya" scale={0.92} phase={0.3} flipX />
+      <PretCreatureRig x={1090} y={630} variant="weeping" scale={1.1} phase={0} />
+      <DetailedSpiritRig x={1320} y={675} kind="pret_kankal" scale={0.95} phase={1.2} flipX />
+      <PretCreatureRig x={1540} y={625} variant="weeping" scale={1.08} phase={2.1} />
+      <DetailedSpiritRig x={1740} y={675} kind="asura_senapati" scale={0.9} phase={0.5} flipX />
     </ParallaxStage>
   );
 };
@@ -72,22 +73,21 @@ const P5S02Vachan: React.FC<{ gf: number }> = ({ gf }) => {
   return (
     <ParallaxStage mode="shamshan" cameraX={0} zoom={interpolate(frame, [0, 480], [1.03, 1.12])}>
       <BackgroundCrowdBand mode="bhoot_army" y={660} />
-      <MahadevBaratGroomRig x={480} y={540} scale={1.15} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} speakingEnergy={vo} pose="heroic" />
-      <DetailedSpiritRig x={210} y={685} kind="narsingha" scale={0.95} phase={0} />
-      {/* Joyfully leaping Bhoot-Pret crowd celebrating Mahadev's vow! */}
-      <DetailedSpiritRig x={980} y={665 - cheer * 24} kind="shringi" scale={0.98} phase={0.2} flipX />
-      <DetailedSpiritRig x={1210} y={675 - cheer * 28} kind="dakini" scale={0.96} phase={1.1} flipX />
-      <DetailedSpiritRig x={1460} y={670 - cheer * 22} kind="pishacha" scale={0.98} phase={2.0} flipX />
-      <DetailedSpiritRig x={1700} y={685 - cheer * 20} kind="dhol_gana" scale={0.95} phase={0.7} flipX />
+      <MahadevBaratGroomRig x={470} y={540} scale={1.15} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} speakingEnergy={vo} pose="heroic" />
+      <DetailedSpiritRig x={190} y={685} kind="nagada_gana" scale={0.95} phase={0} />
+      {/* Joyfully leaping Asurs, Daityas, Ghosts & Bhoot-Pret Barat crowd celebrating Mahadev's vow! */}
+      <DetailedSpiritRig x={890} y={665 - cheer * 24} kind="asura_senapati" scale={0.98} phase={0.2} flipX />
+      <DetailedSpiritRig x={1140} y={675 - cheer * 28} kind="bhoot_maya" scale={0.96} phase={1.1} flipX />
+      <DetailedSpiritRig x={1390} y={660 - cheer * 22} kind="daitya_mahabali" scale={0.98} phase={2.0} flipX />
+      <DetailedSpiritRig x={1650} y={685 - cheer * 20} kind="chhatra_gana" scale={0.95} phase={0.7} flipX />
     </ParallaxStage>
   );
 };
 
-// P5-S03: Word-by-Word Showcase Cuts — Mukh-Heen, Bahu-Mukh, & Bahu-Paad!
+// P5-S03: Word-by-Word Showcase Cuts — Mukh-Heen, Bahu-Mukh, Crawl-Pret & Bahu-Paad!
 const P5S03MukhHeen: React.FC<{ gf: number }> = ({ gf }) => {
   const frame = useCurrentFrame();
   const bed = getBedP5(gf);
-  // Dynamic 3-clip spotlight cuts matching exact Hindi verse phrasing!
   const isMukhCut = frame >= 120 && frame < 340;
   const isPaadCut = frame >= 340;
 
@@ -96,10 +96,10 @@ const P5S03MukhHeen: React.FC<{ gf: number }> = ({ gf }) => {
       <BackgroundCrowdBand mode="bhoot_army" y={665} />
       {!isMukhCut && !isPaadCut && (
         <>
-          <MahadevBaratGroomRig x={480} y={545} scale={1.12} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose="heroic" />
-          <DetailedSpiritRig x={1020} y={645} kind="mukh_heen" scale={1.08} phase={0} />
-          <DetailedSpiritRig x={1320} y={640} kind="bahu_mukh" scale={1.08} phase={1.1} />
-          <DetailedSpiritRig x={1630} y={655} kind="bahu_paad" scale={1.08 + bed * 0.04} phase={2.2} />
+          <MahadevBaratGroomRig x={460} y={545} scale={1.12} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose="heroic" />
+          <DetailedSpiritRig x={960} y={645} kind="mukh_heen" scale={1.06} phase={0} />
+          <DetailedSpiritRig x={1280} y={640} kind="bahu_mukh" scale={1.06} phase={1.1} />
+          <DetailedSpiritRig x={1620} y={655} kind="bahu_paad" scale={1.06 + bed * 0.04} phase={2.2} />
         </>
       )}
       {isMukhCut && (
@@ -111,16 +111,16 @@ const P5S03MukhHeen: React.FC<{ gf: number }> = ({ gf }) => {
       )}
       {isPaadCut && (
         <>
-          {/* Spotlight Clip 2: Crawling Spirit + Bahu-Paad (Multi-legged & 4-armed)! */}
-          <DetailedSpiritRig x={580} y={685} kind="vetala" scale={1.18} phase={0.3} />
-          <DetailedSpiritRig x={1280} y={610} kind="bahu_paad" scale={1.38} phase={1.7} />
+          {/* Spotlight Clip 2: Handless/Legless Crawling Spirit ("बिन पद कर") + Bahu-Paad (Multi-legged & 4-armed)! */}
+          <DetailedSpiritRig x={600} y={665} kind="crawl_pret" scale={1.32} phase={0.3} />
+          <DetailedSpiritRig x={1300} y={610} kind="bahu_paad" scale={1.38} phase={1.7} />
         </>
       )}
     </ParallaxStage>
   );
 };
 
-// P5-S04: Word-by-Word Showcase — Bahu-Nayan (7-eyed), Vishal Prachand, & Lean Bhringi!
+// P5-S04: Word-by-Word Showcase — Bahu-Nayan (7-eyed), Vishal Prachand, & Lean Bhringi / Kankal!
 const P5S04NayanTan: React.FC<{ gf: number }> = ({ gf }) => {
   const frame = useCurrentFrame();
   const bed = getBedP5(gf);
@@ -131,21 +131,22 @@ const P5S04NayanTan: React.FC<{ gf: number }> = ({ gf }) => {
       <BackgroundCrowdBand mode="bhoot_army" y={665} />
       {!isSizeCut ? (
         <>
-          <DetailedSpiritRig x={560} y={615} kind="mukh_heen" scale={1.24} phase={0} />
+          <DetailedSpiritRig x={560} y={615} kind="pret_kankal" scale={1.24} phase={0} />
           <DetailedSpiritRig x={1320} y={610} kind="bahu_nayan" scale={1.35 + bed * 0.04} phase={1.2} />
         </>
       ) : (
         <>
-          {/* Giant Muscular Vishal Pramath vs Ultra-Lean Dancing Bhringi! */}
-          <DetailedSpiritRig x={600} y={595} kind="vishal_pramath" scale={1.45} phase={0} />
-          <DetailedSpiritRig x={1340} y={645} kind="bhringi" scale={1.12} phase={1.5} flipX />
+          {/* Giant Muscular Daitya / Vishal Pramath vs Ultra-Lean Dancing Bhringi! */}
+          <DetailedSpiritRig x={580} y={595} kind="vishal_pramath" scale={1.42} phase={0} />
+          <DetailedSpiritRig x={1020} y={625} kind="daitya_mahabali" scale={1.24} phase={0.8} />
+          <DetailedSpiritRig x={1440} y={645} kind="bhringi" scale={1.12} phase={1.5} flipX />
         </>
       )}
     </ParallaxStage>
   );
 };
 
-// P5-S05: Grand Himalaya March — Sukar, Kukar & Donkey-Headed Prets Marching with Nandi & Mahadev!
+// P5-S05: Grand Himalaya Barat March — Asurs, Ghosts, Nagada/Chhatra & Sukar/Kukar/Gardabh Prets!
 const P5S05HimalayaMarch: React.FC<{ gf: number }> = ({ gf }) => {
   const frame = useCurrentFrame();
   const bed = getBedP5(gf);
@@ -155,16 +156,17 @@ const P5S05HimalayaMarch: React.FC<{ gf: number }> = ({ gf }) => {
     <ParallaxStage mode="shamshan" cameraX={marchX * 0.45} zoom={1.03}>
       <BackgroundCrowdBand mode="bhoot_army" y={660} />
 
-      {/* Mahadev Riding Nandi Bull Leading the Grand Spirit Army */}
-      <MahadevBaratGroomRig x={430 + marchX * 0.25} y={505} scale={0.95} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose="calm" />
-      <NandiBullRig x={455 + marchX * 0.25} y={650} scale={1.24} walking />
-      <DetailedSpiritRig x={150 + marchX * 0.25} y={670} kind="narsingha" scale={0.94} phase={0} />
+      {/* Mahadev Riding Nandi Bull Leading the Grand Barat Procession */}
+      <MahadevBaratGroomRig x={420 + marchX * 0.25} y={528} scale={0.95} sehraProgress={1} bichhuProgress={1} panchmukhiProgress={1} bhasmaGlowProgress={1} pose="calm" seatedOnNandi />
+      <NandiBullRig x={445 + marchX * 0.25} y={650} scale={1.24} walking />
+      <DetailedSpiritRig x={145 + marchX * 0.25} y={670} kind="chhatra_gana" scale={0.94} phase={0} />
 
-      {/* Boar-Headed, Hound-Headed & Donkey-Headed Barat Dancers! */}
-      <DetailedSpiritRig x={880 + marchX * 0.3} y={670} kind="sukar_mukha" scale={1.04 + bed * 0.04} phase={0.4} />
-      <DetailedSpiritRig x={1150 + marchX * 0.3} y={680} kind="kukar_mukha" scale={1.04} phase={1.3} />
-      <DetailedSpiritRig x={1420 + marchX * 0.3} y={670} kind="gardabh_mukha" scale={1.04} phase={2.1} />
-      <DetailedSpiritRig x={1690 + marchX * 0.3} y={685} kind="bahu_mukh" scale={1.02} phase={0.8} flipX />
+      {/* Barat Procession Musicians, Asurs, Ghosts & Animal-Headed Spirits */}
+      <DetailedSpiritRig x={780 + marchX * 0.3} y={675} kind="nagada_gana" scale={1.02} phase={0.2} />
+      <DetailedSpiritRig x={1020 + marchX * 0.3} y={670} kind="sukar_mukha" scale={1.04 + bed * 0.04} phase={0.6} />
+      <DetailedSpiritRig x={1260 + marchX * 0.3} y={675} kind="kukar_mukha" scale={1.04} phase={1.3} />
+      <DetailedSpiritRig x={1500 + marchX * 0.3} y={670} kind="gardabh_mukha" scale={1.04} phase={2.1} />
+      <DetailedSpiritRig x={1740 + marchX * 0.3} y={675} kind="bhoot_maya" scale={1.0} phase={0.8} flipX />
 
       {frame > 410 && (
         <div

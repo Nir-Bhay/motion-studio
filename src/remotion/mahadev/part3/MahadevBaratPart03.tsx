@@ -157,6 +157,7 @@ const P3S06Pankti: React.FC<{ gf: number }> = ({ gf }) => {
 
   return (
     <ParallaxStage mode="devaloka" cameraX={marchOffset * 0.45} zoom={1}>
+      <BackgroundCrowdBand mode="devaloka" y={685} />
       {/* Separate Row Banners in Sky (matched left-to-right: Rear -> Front) */}
       <div style={{ position: "absolute", top: 150, left: 0, right: 0, display: "flex", justifyContent: "space-around", padding: "0 90px", pointerEvents: "none" }}>
         {[

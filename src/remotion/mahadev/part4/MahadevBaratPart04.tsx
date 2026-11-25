@@ -100,14 +100,15 @@ const P4S02VishwaPret: React.FC<{ gf: number }> = ({ gf }) => {
       />
       <ShivGanaRig x={220} y={670} variant="shringi" scale={1.0} phase={0} />
 
-      {/* Flying Global Ghosts, Dakini, Vetala, Pishacha & Top-Hat London/America Prets! */}
-      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2050, 960])} y={640} kind="vetala" scale={0.96} phase={0.2} flipX />
-      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2160, 1210])} y={695} kind="pishacha" scale={0.94} phase={1.3} flipX />
-      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2250, 1490])} y={670} kind="dakini" scale={0.96} phase={2.0} flipX />
-      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2080, 1080])} y={340} variant="classic" scale={1.05} phase={0} />
-      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2180, 1340])} y={460} variant="dakini" scale={1.02} phase={1.1} />
-      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2280, 1600])} y={360} variant="london" scale={1.12} phase={2.2} />
-      <PretCreatureRig x={interpolate(flyIn, [0, 1], [2340, 1740])} y={540} variant="classic" scale={0.95} phase={0.7} />
+      {/* Flying Global Ghosts, Asuras, Daityas, Kankal Prets, Dakini, Vetala, Pishacha & Foreign London/America Prets! */}
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2020, 860])} y={660} kind="asura_senapati" scale={0.96} phase={0.1} flipX />
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2100, 1080])} y={690} kind="bhoot_maya" scale={0.96} phase={0.8} flipX />
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2180, 1300])} y={640} kind="daitya_mahabali" scale={0.94} phase={1.4} flipX />
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2250, 1520])} y={680} kind="pret_kankal" scale={0.96} phase={2.1} flipX />
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2320, 1730])} y={670} kind="dakini" scale={0.94} phase={2.5} flipX />
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2080, 1040])} y={340} kind="foreign_pret_tophat" scale={0.92} phase={0} flipX />
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2180, 1340])} y={410} kind="foreign_pret_cowboy" scale={0.92} phase={1.1} flipX />
+      <DetailedSpiritRig x={interpolate(flyIn, [0, 1], [2280, 1610])} y={355} kind="bhoot_maya" scale={0.88} phase={2.2} flipX />
     </ParallaxStage>
   );
 };
@@ -120,6 +121,7 @@ const P4S03RamBarat: React.FC<{ gf: number }> = ({ gf }) => {
 
   return (
     <ParallaxStage mode="devaloka" cameraX={walk * 0.4} zoom={1.02}>
+      <BackgroundCrowdBand mode="devaloka" y={685} />
       <div
         style={{
           position: "absolute",
@@ -140,13 +142,14 @@ const P4S03RamBarat: React.FC<{ gf: number }> = ({ gf }) => {
       </div>
 
       {/* Royal Ram Barat Procession Side (Right) */}
-      <VishnuRig x={1520 + walk * 0.25} y={495} scale={1.02} />
-      <BrahmaRig x={1180 + walk * 0.25} y={510} scale={0.88} />
+      <VishnuRig x={1560 + walk * 0.25} y={495} scale={1.0} />
+      <BrahmaRig x={1230 + walk * 0.25} y={505} scale={0.88} />
 
-      {/* Eager Prets tagging along happily behind (Left) */}
-      <PretCreatureRig x={420 + walk * 0.35} y={540} variant="classic" scale={1.05 + bed * 0.04} phase={0} />
-      <PretCreatureRig x={660 + walk * 0.35} y={620} variant="dakini" scale={1.0} phase={1.4} />
-      <PretCreatureRig x={880 + walk * 0.35} y={560} variant="london" scale={0.96} phase={2.1} />
+      {/* Eager Prets, Bhoot & Asurs tagging along happily behind (Left) */}
+      <DetailedSpiritRig x={240 + walk * 0.35} y={665} kind="asura_senapati" scale={0.94 + bed * 0.03} phase={0} />
+      <DetailedSpiritRig x={480 + walk * 0.35} y={660} kind="bhoot_maya" scale={0.95} phase={1.1} />
+      <DetailedSpiritRig x={710 + walk * 0.35} y={675} kind="pret_kankal" scale={0.94} phase={1.8} />
+      <DetailedSpiritRig x={920 + walk * 0.35} y={670} kind="foreign_pret_tophat" scale={0.92} phase={2.4} />
     </ParallaxStage>
   );
 };
@@ -179,10 +182,11 @@ const P4S04IndraVajra: React.FC<{ gf: number }> = ({ gf }) => {
         ⚡ “अवगुणों का प्रवेश निषेध है!”
       </div>
 
-      {/* Blocked Prets shrinking back */}
-      <PretCreatureRig x={360} y={610} variant="weeping" scale={1.05} phase={0} />
-      <PretCreatureRig x={620} y={560} variant="classic" scale={0.98} phase={1.2} />
-      <PretCreatureRig x={820} y={650} variant="weeping" scale={0.95} phase={2.1} />
+      {/* Blocked Asurs, Daityas, Ghosts & Prets shrinking back from Indra's Vajra */}
+      <DetailedSpiritRig x={240} y={665} kind="asura_senapati" scale={0.94} phase={0.4} />
+      <DetailedSpiritRig x={480} y={645} kind="bhoot_maya" scale={0.92} phase={1.0} />
+      <PretCreatureRig x={680} y={625} variant="weeping" scale={1.02} phase={0} />
+      <DetailedSpiritRig x={870} y={675} kind="pret_kankal" scale={0.92} phase={1.8} />
     </ParallaxStage>
   );
 };
@@ -201,7 +205,7 @@ const P4S05NandiArrival: React.FC<{ gf: number }> = ({ gf }) => {
       {/* Mahadev Riding Sacred Nandi Bull! */}
       <MahadevBaratGroomRig
         x={nandiX - 10}
-        y={518}
+        y={540}
         scale={0.9}
         sehraProgress={1}
         bichhuProgress={1}
@@ -209,15 +213,16 @@ const P4S05NandiArrival: React.FC<{ gf: number }> = ({ gf }) => {
         bhasmaGlowProgress={1}
         speakingEnergy={vo}
         pose="calm"
+        seatedOnNandi
       />
       <NandiBullRig x={nandiX + 12} y={660} scale={1.22} walking={frame < 340} />
-      <ShivGanaRig x={nandiX - 240} y={695} variant="shringi" scale={0.92} phase={0} />
+      <DetailedSpiritRig x={nandiX - 240} y={695} kind="chhatra_gana" scale={0.92} phase={0} />
 
-      {/* Weeping Bhoot-Prets waiting in the field */}
-      <DetailedSpiritRig x={960} y={690} kind="vetala" scale={0.86} phase={0.4} flipX />
-      <PretCreatureRig x={1170} y={625} variant="weeping" scale={1.12} phase={0} />
-      <PretCreatureRig x={1410} y={655} variant="weeping" scale={1.05} phase={1.1} />
-      <PretCreatureRig x={1650} y={615} variant="weeping" scale={1.08} phase={2.0} />
+      {/* Weeping Bhoot-Prets, Asurs & Ghosts waiting in the field */}
+      <DetailedSpiritRig x={920} y={685} kind="bhoot_maya" scale={0.88} phase={0.4} flipX />
+      <PretCreatureRig x={1150} y={625} variant="weeping" scale={1.1} phase={0} />
+      <DetailedSpiritRig x={1390} y={680} kind="pret_kankal" scale={0.94} phase={1.1} flipX />
+      <PretCreatureRig x={1650} y={615} variant="weeping" scale={1.06} phase={2.0} />
 
       {frame > 430 && (
         <div

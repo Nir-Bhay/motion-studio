@@ -3,6 +3,9 @@ import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remo
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { BrahmaRig, IndraOnAiravataRig } from "../characters/BrahmaIndraRigs";
 import { MahadevRig } from "../characters/MahadevRig";
+import { ShivGanaRig } from "../characters/ShivGanaRig";
+import { BackgroundCrowdBand, DetailedSpiritRig } from "../characters/DetailedGanasAndSpirits";
+import { NandiBullRig } from "../part4/BhootPretAndNandiRigs";
 import { fireTurbulence } from "../motion/physics";
 import { getSmoothVoEnergy } from "../timeline";
 
@@ -18,7 +21,7 @@ export const S05ShamshanReveal: React.FC<{ globalStartFrame: number }> = ({ glob
   // Part B (250 - 870f): Crisp cross-dissolve & downward camera reveal into moonlit Shamshan!
   const toShamshan = interpolate(frame, [240, 275], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const qBounce = Math.sin(t * 7.5) * 12;
-  const camZoom = interpolate(frame, [265, 870], [0.97, 1.12], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const camZoom = interpolate(frame, [265, 870], [0.98, 1.1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
     <AbsoluteFill>
@@ -26,6 +29,7 @@ export const S05ShamshanReveal: React.FC<{ globalStartFrame: number }> = ({ glob
       {toShamshan < 1 && (
         <AbsoluteFill style={{ opacity: 1 - toShamshan }}>
           <ParallaxStage mode="devaloka" cameraX={Math.sin(frame * 0.04) * 35} zoom={1.03}>
+            <BackgroundCrowdBand mode="devaloka" y={695} />
             <BrahmaRig x={560} y={530} scale={0.95} speakingEnergy={vo} />
             <IndraOnAiravataRig x={1360} y={555} scale={0.92} />
 
@@ -72,7 +76,7 @@ export const S05ShamshanReveal: React.FC<{ globalStartFrame: number }> = ({ glob
         </AbsoluteFill>
       )}
 
-      {/* Part B: Moonlit Shamshan Reveal */}
+      {/* Part B: Rich Moonlit Kailash-Shamshan Reveal with Nandi, Ganas, Spirits & Dhuni Pyres */}
       {toShamshan > 0 && (
         <AbsoluteFill style={{ opacity: toShamshan }}>
           <ParallaxStage
@@ -81,23 +85,35 @@ export const S05ShamshanReveal: React.FC<{ globalStartFrame: number }> = ({ glob
             cameraY={interpolate(frame, [280, 440], [-70, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}
             zoom={camZoom}
           >
-            {/* Smoldering Pyre Flames with Physics Turbulence */}
-            <svg viewBox="0 0 1920 1080" width="100%" height="100%" style={{ position: "absolute", inset: 0 }}>
-              {[320, 1590].map((fx, idx) => {
+            {/* Background Gana & Spirit Watchers near the Shamshan Horizon */}
+            <BackgroundCrowdBand mode="shamshan" y={695} />
+
+            {/* Nandi Bull Waiting Calmly beside Mahadev */}
+            <NandiBullRig x={515} y={685} scale={0.78} walking={false} />
+
+            {/* Ganas & Bhoots Tending the Dhuni & Watching in Amusement */}
+            <ShivGanaRig x={365} y={715} variant="shringi" scale={0.94} phase={0.4} />
+            <ShivGanaRig x={1515} y={715} variant="bhringi" scale={0.92} phase={1.3} flipX />
+            <DetailedSpiritRig x={1695} y={705} kind="bhoot_maya" scale={0.82} phase={0.9} flipX />
+
+            {/* Foreground Smoldering Skull-Ringed Pyre Flames with Rising Ash & Smoke */}
+            <svg viewBox="0 0 1920 1080" width="100%" height="100%" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+              {[285, 1615].map((fx, idx) => {
                 const ft = fireTurbulence(t, idx + 1);
                 return (
-                  <g key={idx} transform={`translate(${fx}, 810)`}>
-                    <line x1={-48} y1={14} x2={48} y2={6} stroke="#3b2618" strokeWidth={13} strokeLinecap="round" />
-                    <line x1={-38} y1={4} x2={40} y2={18} stroke="#291a10" strokeWidth={11} strokeLinecap="round" />
+                  <g key={idx} transform={`translate(${fx}, 830)`}>
+                    <ellipse cx={0} cy={18} rx={72} ry={18} fill="#1e293b" opacity={0.85} />
+                    <line x1={-52} y1={14} x2={52} y2={6} stroke="#3b2618" strokeWidth={13} strokeLinecap="round" />
+                    <line x1={-40} y1={4} x2={42} y2={18} stroke="#291a10" strokeWidth={11} strokeLinecap="round" />
                     <path
-                      d={`M ${-30 * ft.scaleX},6 Q ${-18 + ft.leanX * 0.4},${-46 * ft.scaleY} ${ft.leanX},${-74 * ft.scaleY} Q ${18 + ft.leanX * 0.4},${-46 * ft.scaleY} ${30 * ft.scaleX},6 Z`}
+                      d={`M ${-32 * ft.scaleX},6 Q ${-20 + ft.leanX * 0.4},${-52 * ft.scaleY} ${ft.leanX},${-82 * ft.scaleY} Q ${20 + ft.leanX * 0.4},${-52 * ft.scaleY} ${32 * ft.scaleX},6 Z`}
                       fill="#f97316"
-                      opacity={0.85}
+                      opacity={0.88}
                     />
                     <path
-                      d={`M ${-15 * ft.scaleX},6 Q ${-8 + ft.leanX * 0.3},${-28 * ft.scaleY} ${ft.leanX * 0.7},${-48 * ft.scaleY} Q ${8 + ft.leanX * 0.3},${-28 * ft.scaleY} ${15 * ft.scaleX},6 Z`}
+                      d={`M ${-16 * ft.scaleX},6 Q ${-9 + ft.leanX * 0.3},${-32 * ft.scaleY} ${ft.leanX * 0.7},${-54 * ft.scaleY} Q ${9 + ft.leanX * 0.3},${-32 * ft.scaleY} ${16 * ft.scaleX},6 Z`}
                       fill="#fde047"
-                      opacity={0.94}
+                      opacity={0.95}
                     />
                   </g>
                 );
@@ -105,7 +121,7 @@ export const S05ShamshanReveal: React.FC<{ globalStartFrame: number }> = ({ glob
             </svg>
 
             {/* Mahadev Lounging Effortlessly wrapped in Baghambar ("हाथ की तकिया लगाए") */}
-            <MahadevRig x={960} y={625} scale={1.18} pose="lounging" speakingEnergy={vo * 0.3} />
+            <MahadevRig x={985} y={635} scale={1.16} pose="lounging" speakingEnergy={vo * 0.3} />
           </ParallaxStage>
         </AbsoluteFill>
       )}
