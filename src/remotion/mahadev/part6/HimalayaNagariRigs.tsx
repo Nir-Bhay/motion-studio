@@ -120,7 +120,8 @@ export const SakhiBandRig: React.FC<{
   y: number;
   scale?: number;
   askingNeg?: boolean;
-}> = ({ x, y, scale = 1, askingNeg = false }) => {
+  panic?: boolean;
+}> = ({ x, y, scale = 1, askingNeg = false, panic = false }) => {
   const frame = useCurrentFrame();
   const sakhis = [
     { dx: -165, col: "#ec4899", sari: "#fde047", phase: 0 },
@@ -141,8 +142,8 @@ export const SakhiBandRig: React.FC<{
     >
       <svg width={500} height={320} viewBox="-250 -160 500 320" overflow="visible">
         {sakhis.map((s, idx) => {
-          const bob = Math.sin(frame * 0.15 + s.phase) * 9;
-          const handRaise = askingNeg ? -34 : -18 + Math.sin(frame * 0.2 + s.phase) * 10;
+          const bob = panic ? Math.abs(Math.sin(frame * 0.42 + s.phase)) * -18 : Math.sin(frame * 0.15 + s.phase) * 9;
+          const handRaise = panic ? -58 + Math.sin(frame * 0.5 + s.phase) * 16 : askingNeg ? -34 : -18 + Math.sin(frame * 0.2 + s.phase) * 10;
           return (
             <g key={idx} transform={`translate(${s.dx}, ${bob})`}>
               <ellipse cx={0} cy={112} rx={36} ry={6} fill="#0b1120" opacity={0.35} />
