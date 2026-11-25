@@ -10,6 +10,13 @@ import { Asi05StyleSample } from "./compositions/asi05v2/Asi05StyleSample";
 import { Asi05Premium } from "./compositions/asi05v3/Asi05Premium";
 import { ASI05_FPS, ASI05_TOTAL_FRAMES } from "./compositions/asi05v3/shots";
 import { SamyojMaster } from "./samyoj/SamyojMaster";
+import { MahadevBarat2M } from "./mahadev/MahadevBarat2M";
+import {
+  MAHADEV_DURATION_FRAMES,
+  MAHADEV_FPS,
+  MAHADEV_HEIGHT,
+  MAHADEV_WIDTH,
+} from "./mahadev/timeline";
 import {
   SamyojCut45,
   SamyojLoop6,
@@ -29,6 +36,14 @@ import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./samyoj/timeline";
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="MahadevBarat2M"
+        component={MahadevBarat2M}
+        durationInFrames={MAHADEV_DURATION_FRAMES}
+        fps={MAHADEV_FPS}
+        width={MAHADEV_WIDTH}
+        height={MAHADEV_HEIGHT}
+      />
       <Composition
         id="SamyojMaster"
         component={SamyojMaster}

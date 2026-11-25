@@ -1,0 +1,324 @@
+import React from "react";
+import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+
+interface ParallaxStageProps {
+  mode: "devaloka" | "vishnu" | "shamshan";
+  cameraX?: number;
+  cameraY?: number;
+  zoom?: number;
+  children?: React.ReactNode;
+}
+
+// Deterministic seeded helpers for particles/stars/embers
+function seeded(i: number, salt: number): number {
+  const x = Math.sin(i * 127.1 + salt * 311.7) * 43758.5453123;
+  return x - Math.floor(x);
+}
+
+export const ParallaxStage: React.FC<ParallaxStageProps> = ({
+  mode,
+  cameraX = 0,
+  cameraY = 0,
+  zoom = 1,
+  children,
+}) => {
+  const frame = useCurrentFrame();
+
+  const isShamshan = mode === "shamshan";
+  const isVishnu = mode === "vishnu";
+
+  const bgGradient = isShamshan
+    ? "radial-gradient(ellipse at 50% 25%, #232b52 0%, #10152d 48%, #070914 100%)"
+    : isVishnu
+    ? "radial-gradient(ellipse at 50% 30%, #fff0b8 0%, #f5b96b 34%, #6a3472 72%, #24133d 100%)"
+    : "radial-gradient(ellipse at 50% 22%, #ffe99e 0%, #f79d4b 36%, #9b3556 72%, #2a113b 100%)";
+
+  return (
+    <AbsoluteFill
+      style={{
+        background: bgGradient,
+        overflow: "hidden",
+        perspective: 1400,
+      }}
+    >
+      {/* LAYER 0: Deep Celestial Sky, Stars, Mandala Sun or Crescent Moon (0.15x parallax) */}
+      <div
+        style={{
+          position: "absolute",
+          inset: -120,
+          transform: `translate3d(${cameraX * 0.15}px, ${cameraY * 0.15}px, 0) scale(${1 + (zoom - 1) * 0.25})`,
+        }}
+      >
+        <svg viewBox="0 0 1920 1080" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#fff8d6" stopOpacity="0.95" />
+              <stop offset="45%" stopColor="#ffd166" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="#ff9f1c" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#dceeff" stopOpacity="0.65" />
+              <stop offset="50%" stopColor="#7eb6ff" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="#26407a" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+
+          {/* Twinkling Starfield */}
+          {Array.from({ length: isShamshan ? 75 : 38 }).map((_, i) => {
+            const sx = seeded(i, 1) * 1920;
+            const sy = seeded(i, 2) * (isShamshan ? 640 : 420);
+            const r = 1.1 + seeded(i, 3) * 2.2;
+            const tw = 0.35 + 0.65 * Math.abs(Math.sin(frame * 0.04 + i * 1.3));
+            return (
+              <circle
+                key={i}
+                cx={sx}
+                cy={sy}
+                r={r}
+                fill={isShamshan ? "#d6ecff" : "#fff4cc"}
+                opacity={tw * (isShamshan ? 0.9 : 0.5)}
+              />
+            );
+          })}
+
+          {!isShamshan ? (
+            /* Rotating Sacred Mandala Sun Halo in Devaloka */
+            <g transform={`translate(960, 290)`}>
+              <circle r={420} fill="url(#sunGlow)" />
+              <g transform={`rotate(${frame * 0.14})`} opacity={0.28}>
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <polygon
+                    key={i}
+                    points="0,-340 16,-190 -16,-190"
+                    fill="#ffe59e"
+                    transform={`rotate(${i * 15})`}
+                  />
+                ))}
+              </g>
+              <g transform={`rotate(${-frame * 0.22})`} opacity={0.22}>
+                <circle r={210} fill="none" stroke="#fff3c4" strokeWidth={3} strokeDasharray="16 10" />
+                <circle r={155} fill="none" stroke="#ffd166" strokeWidth={2} />
+              </g>
+            </g>
+          ) : (
+            /* Luminous Crescent Moon & Mist Halo in Shamshan */
+            <g transform="translate(1480, 195)">
+              <circle r={240} fill="url(#moonGlow)" />
+              <path
+                d="M -25,-65 A 72,72 0 1,0 58,48 A 56,56 0 1,1 -25,-65 Z"
+                fill="#eef7ff"
+                opacity={0.92}
+              />
+            </g>
+          )}
+        </svg>
+      </div>
+
+      {/* LAYER 1: Distant Himalayan Peaks / Golden Devaloka Temple Spires (0.35x parallax) */}
+      <div
+        style={{
+          position: "absolute",
+          inset: -100,
+          transform: `translate3d(${cameraX * 0.35}px, ${cameraY * 0.35}px, 0) scale(${1 + (zoom - 1) * 0.45})`,
+        }}
+      >
+        <svg viewBox="0 0 1920 1080" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="templeGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#ffcf70" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#612046" stopOpacity="0.88" />
+            </linearGradient>
+            <linearGradient id="mtnFar" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3a4c7a" />
+              <stop offset="100%" stopColor="#12182d" />
+            </linearGradient>
+          </defs>
+
+          {!isShamshan ? (
+            /* Distant Golden Temple Palaces & Floating Cloud Banks */
+            <g>
+              {/* Floating clouds */}
+              {[0, 1, 2, 3, 4].map((c) => {
+                const cx = ((c * 460 - frame * 0.35) % 2300 + 2300) % 2300 - 200;
+                const cy = 240 + (c % 3) * 85;
+                return (
+                  <g key={c} transform={`translate(${cx}, ${cy})`} opacity={0.38}>
+                    <ellipse cx={0} cy={0} rx={150} ry={34} fill="#ffe9c7" />
+                    <ellipse cx={-60} cy={-16} rx={85} ry={28} fill="#fff3de" />
+                    <ellipse cx={65} cy={-12} rx={92} ry={25} fill="#fff3de" />
+                  </g>
+                );
+              })}
+              {/* Distant Heavenly Shikhara Silhouettes & Palaces */}
+              {[160, 480, 960, 1440, 1760].map((tx, idx) => (
+                <g key={idx} transform={`translate(${tx}, 700)`} opacity={idx === 2 ? 0.35 : 0.58}>
+                  <rect x={-55} y={10} width={110} height={110} fill="url(#templeGrad)" />
+                  <path
+                    d="M -68,12 L -44,-72 Q 0,-155 0,-195 Q 0,-155 44,-72 L 68,12 Z"
+                    fill="url(#templeGrad)"
+                  />
+                  {/* Palace Arch Windows */}
+                  <path d="M -18,120 L -18,56 Q 0,32 18,56 L 18,120 Z" fill="#ffe484" opacity={0.42} />
+                  <circle cx={0} cy={-205} r={8} fill="#ffe484" />
+                  <line x1={0} y1={-213} x2={0} y2={-244} stroke="#ffe484" strokeWidth={3} />
+                  <polygon
+                    points={`0,-242 ${32 + Math.sin(frame * 0.1 + idx) * 6},-233 0,-224`}
+                    fill="#ff6b35"
+                  />
+                </g>
+              ))}
+              {/* Ornate Carved Devaloka Marble Balustrade Horizon */}
+              <path
+                d="M -100,820 Q 220,745 520,790 T 1120,775 T 1720,805 T 2120,780 L 2120,1180 L -100,1180 Z"
+                fill="#4d1d4a"
+                opacity={0.76}
+              />
+              <path
+                d="M -100,822 Q 220,747 520,792 T 1120,777 T 1720,807 T 2120,782"
+                fill="none"
+                stroke="#fbbf24"
+                strokeWidth={3}
+                opacity={0.45}
+              />
+            </g>
+          ) : (
+            /* Distant Snow-Capped Kailash, Banyan Silhouettes & Craggy Shamshan Ridges */
+            <g>
+              <path
+                d="M -80,820 L 260,510 L 490,650 L 840,390 L 1160,640 L 1460,470 L 1820,660 L 2040,560 L 2040,1150 L -80,1150 Z"
+                fill="url(#mtnFar)"
+                opacity={0.88}
+              />
+              {/* Snow Highlight Cap on Kailash Peak */}
+              <path
+                d="M 840,390 L 750,485 L 810,475 L 845,510 L 890,470 L 940,490 Z"
+                fill="#cce5ff"
+                opacity={0.48}
+              />
+              {/* Gnarled Ancient Shamshan Trees on Left & Right Ridges */}
+              <g transform="translate(150, 775)" opacity={0.78}>
+                <path d="M -16,50 Q -8,-65 10,-150 M 2,-80 Q -52,-115 -88,-155 M 6,-110 Q 56,-142 82,-182" fill="none" stroke="#0f172a" strokeWidth={14} strokeLinecap="round" />
+                <path d="M -52,-115 Q -72,-145 -105,-140 M 46,-136 Q 74,-162 102,-148" fill="none" stroke="#1e293b" strokeWidth={6} strokeLinecap="round" />
+              </g>
+              <g transform="translate(1775, 785)" opacity={0.75}>
+                <path d="M 14,50 Q 6,-70 -14,-155 M -4,-88 Q 52,-125 84,-162 M -8,-118 Q -58,-148 -84,-186" fill="none" stroke="#0f172a" strokeWidth={13} strokeLinecap="round" />
+              </g>
+              {/* Drifting Moonlight Fog & Dhuna Smoke Ribbons */}
+              {[0, 1, 2, 3].map((m) => {
+                const mx = ((m * 580 + frame * 0.55) % 2400) - 300;
+                return (
+                  <ellipse
+                    key={m}
+                    cx={mx}
+                    cy={755 + (m % 2) * 42}
+                    rx={380}
+                    ry={42}
+                    fill="#93c5fd"
+                    opacity={0.11}
+                  />
+                );
+              })}
+            </g>
+          )}
+        </svg>
+      </div>
+
+      {/* LAYER 2: Midground Stage & Characters (1.0x camera) */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          transform: `translate3d(${cameraX}px, ${cameraY}px, 0) scale(${zoom})`,
+          transformOrigin: "50% 55%",
+        }}
+      >
+        {/* Ground Plane */}
+        <svg
+          viewBox="0 0 1920 1080"
+          width="100%"
+          height="100%"
+          style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+        >
+          <defs>
+            <linearGradient id="devaFloor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#ffcb77" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#3c113d" stopOpacity="0.95" />
+            </linearGradient>
+            <linearGradient id="shamshanFloor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#262c44" />
+              <stop offset="100%" stopColor="#0b0d17" />
+            </linearGradient>
+          </defs>
+          {!isShamshan ? (
+            <path
+              d="M -100,835 Q 960,775 2020,835 L 2020,1150 L -100,1150 Z"
+              fill="url(#devaFloor)"
+            />
+          ) : (
+            <g>
+              <path
+                d="M -100,835 Q 480,795 960,825 T 2020,810 L 2020,1150 L -100,1150 Z"
+                fill="url(#shamshanFloor)"
+              />
+              {/* Basalt rocks & glowing smoldering pyre embers */}
+              <ellipse cx={360} cy={875} rx={120} ry={22} fill="#ff5400" opacity={0.18 + 0.1 * Math.sin(frame * 0.18)} />
+              <ellipse cx={1540} cy={885} rx={135} ry={24} fill="#ff6d00" opacity={0.15 + 0.08 * Math.cos(frame * 0.15)} />
+            </g>
+          )}
+        </svg>
+
+        {children}
+      </div>
+
+      {/* LAYER 3: Foreground Atmospheric Particles — Petals / Golden Dust / Shamshan Embers (1.45x parallax) */}
+      <div
+        style={{
+          position: "absolute",
+          inset: -60,
+          pointerEvents: "none",
+          transform: `translate3d(${cameraX * 1.35}px, ${cameraY * 1.2}px, 0)`,
+        }}
+      >
+        <svg viewBox="0 0 1920 1080" width="100%" height="100%">
+          {Array.from({ length: isShamshan ? 34 : 30 }).map((_, i) => {
+            const baseX = seeded(i, 11) * 1920;
+            const speed = 0.8 + seeded(i, 12) * 1.4;
+            const drift = Math.sin(frame * 0.03 + i) * 38;
+            if (isShamshan) {
+              // Rising glowing embers & ash flecks
+              const ey = 1120 - ((seeded(i, 13) * 1150 + frame * speed * 1.6) % 1180);
+              const ex = baseX + drift;
+              const size = 2.2 + seeded(i, 14) * 4.5;
+              const isAsh = i % 3 === 0;
+              const op = interpolate(ey, [0, 300, 950, 1120], [0, 0.7, 0.85, 0], {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+              });
+              return (
+                <circle
+                  key={i}
+                  cx={ex}
+                  cy={ey}
+                  r={size}
+                  fill={isAsh ? "#9db2d9" : i % 2 === 0 ? "#ff7b00" : "#ffd166"}
+                  opacity={op * 0.75}
+                />
+              );
+            } else {
+              // Falling marigold & rose petals + golden sparkles
+              const py = ((seeded(i, 15) * 1150 + frame * speed * 1.55) % 1160) - 40;
+              const px = baseX + drift;
+              const rot = frame * (1.2 + seeded(i, 16) * 2) + i * 40;
+              const col = i % 3 === 0 ? "#ffbe0b" : i % 3 === 1 ? "#ff4d6d" : "#ff9f1c";
+              return (
+                <g key={i} transform={`translate(${px}, ${py}) rotate(${rot})`} opacity={0.78}>
+                  <ellipse cx={0} cy={0} rx={8} ry={4.5} fill={col} />
+                </g>
+              );
+            }
+          })}
+        </svg>
+      </div>
+    </AbsoluteFill>
+  );
+};
