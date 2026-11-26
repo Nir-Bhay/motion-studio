@@ -80,13 +80,24 @@ const routesFile = path.join(
 );
 if (existsSync(routesFile)) {
   let src = readFileSync(routesFile, "utf8");
+  let changed = false;
   const target = "    response.setHeader('content-type', 'text/html');";
   const replacement =
     "    response.setHeader('content-type', 'text/html');\n    response.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');\n    response.setHeader('Pragma', 'no-cache');";
   if (src.includes(target) && !src.includes("no-store, no-cache, must-revalidate, max-age=0")) {
     src = src.replace(target, replacement);
+    changed = true;
+  }
+  const htmlTarget = "        studioRuntimeConfig: getStudioRuntimeConfig(),\n    }));";
+  const htmlReplacement =
+    "        studioRuntimeConfig: getStudioRuntimeConfig(),\n    }).replace('src=\"/bundle.js\"', `src=\"/bundle.js?v=${hash}\"`));";
+  if (src.includes(htmlTarget) && !src.includes("/bundle.js?v=${hash}")) {
+    src = src.replace(htmlTarget, htmlReplacement);
+    changed = true;
+  }
+  if (changed) {
     writeFileSync(routesFile, src);
-    console.log("Patched routes.js to disable caching on index.html.");
+    console.log("Patched routes.js to disable caching on index.html & cache-bust bundle.js.");
   }
 }
 
