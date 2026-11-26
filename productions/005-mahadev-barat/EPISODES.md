@@ -29,3 +29,21 @@ Full Timestamped Transcript: `productions/005-mahadev-barat/transcript.txt`
 - `11:33 – 13:27` — भाग ८: ब्रह्मा-इंद्र भ्रम व बालकों का भय
 - `13:27 – 15:42` — भाग ९: शरबत स्नान, उल्टे नंदी व मैना मूर्छा
 - `15:42 – 17:50` — भाग १०: नारद प्रबोधन, दिव्य विवाह व मंगल बधाई
+
+## Instagram Reels & YouTube Shorts (`9:16` Vertical `1080x1920` @ `30fps`)
+
+All 10 parts re-staged for mobile vertical viewing (`ShortsCamera`, zero-gradient 8-mode portrait `ShortsBackdrop`, top episode progress bar & VO wave meter `ShortsHeader`, and IG/YT safe-zone bottom captions `ShortsCaptions`):
+
+| Short | Composition ID | Duration | Output File |
+|---|---|---|---|
+| **Short 01** | `MahadevBaratShort01` | `126.00s` (`3,780f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-01-1080x1920.mp4` |
+| **Short 02** | `MahadevBaratShort02` | `110.00s` (`3,300f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-02-1080x1920.mp4` |
+| **Short 03** | `MahadevBaratShort03` | `90.00s` (`2,700f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-03-1080x1920.mp4` |
+| **Short 04** | `MahadevBaratShort04` | `86.00s` (`2,580f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-04-1080x1920.mp4` |
+| **Short 05** | `MahadevBaratShort05` | `79.00s` (`2,370f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-05-1080x1920.mp4` |
+| **Short 06** | `MahadevBaratShort06` | `95.00s` (`2,850f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-06-1080x1920.mp4` |
+| **Short 07** | `MahadevBaratShort07` | `107.00s` (`3,210f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-07-1080x1920.mp4` |
+| **Short 08** | `MahadevBaratShort08` | `114.00s` (`3,420f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-08-1080x1920.mp4` |
+| **Short 09** | `MahadevBaratShort09` | `135.00s` (`4,050f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-09-1080x1920.mp4` |
+| **Short 10** | `MahadevBaratShort10` | `128.00s` (`3,840f`) | `productions/005-mahadev-barat/out/shorts/mahadev-barat-short-10-1080x1920.mp4` |
+

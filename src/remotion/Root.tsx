@@ -11,6 +11,21 @@ import { MahadevBaratPart08 } from "./mahadev/part8/MahadevBaratPart08";
 import { MahadevBaratPart09 } from "./mahadev/part9/MahadevBaratPart09";
 import { MahadevBaratPart10 } from "./mahadev/part10/MahadevBaratPart10";
 import {
+  MahadevBaratShort01,
+  MahadevBaratShort02,
+  MahadevBaratShort03,
+  MahadevBaratShort04,
+  MahadevBaratShort05,
+} from "./mahadev/shorts/ShortsParts01To05";
+import {
+  MahadevBaratShort06,
+  MahadevBaratShort07,
+  MahadevBaratShort08,
+  MahadevBaratShort09,
+  MahadevBaratShort10,
+} from "./mahadev/shorts/ShortsParts06To10";
+import { SHORTS_FPS, SHORTS_HEIGHT, SHORTS_WIDTH } from "./mahadev/shorts/ShortsChrome";
+import {
   MAHADEV_DURATION_FRAMES,
   MAHADEV_FPS,
   MAHADEV_HEIGHT,
@@ -112,6 +127,88 @@ export const RemotionRoot: React.FC = () => {
         fps={P10_FPS}
         width={MAHADEV_WIDTH}
         height={MAHADEV_HEIGHT}
+      />
+
+      {/* Instagram Reels & YouTube Shorts (9:16 Vertical 1080x1920 @ 30fps) */}
+      <Composition
+        id="MahadevBaratShort01"
+        component={MahadevBaratShort01}
+        durationInFrames={3780}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratShort02"
+        component={MahadevBaratShort02}
+        durationInFrames={P2_DURATION_FRAMES}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratShort03"
+        component={MahadevBaratShort03}
+        durationInFrames={P3_DURATION_FRAMES}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratShort04"
+        component={MahadevBaratShort04}
+        durationInFrames={P4_DURATION_FRAMES}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratShort05"
+        component={MahadevBaratShort05}
+        durationInFrames={P5_DURATION_FRAMES}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratShort06"
+        component={MahadevBaratShort06}
+        durationInFrames={P6_DURATION_FRAMES}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratShort07"
+        component={MahadevBaratShort07}
+        durationInFrames={P7_DURATION_FRAMES}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratShort08"
+        component={MahadevBaratShort08}
+        durationInFrames={P8_DURATION_FRAMES}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratShort09"
+        component={MahadevBaratShort09}
+        durationInFrames={P9_DURATION_FRAMES}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
+      />
+      <Composition
+        id="MahadevBaratShort10"
+        component={MahadevBaratShort10}
+        durationInFrames={P10_DURATION_FRAMES}
+        fps={SHORTS_FPS}
+        width={SHORTS_WIDTH}
+        height={SHORTS_HEIGHT}
       />
     </>
   );
