@@ -41,19 +41,18 @@ def main():
 
     p1_src = os.path.join(OUT_DIR, PARTS[0][0])
     p1_30 = os.path.join(tmp_dir, "part01-1080p30.mp4")
-    if not os.path.exists(p1_30):
-        print("Normalizing Part 01 (60fps -> 30fps)...")
-        subprocess.run(
-            [
-                FFMPEG, "-y", "-i", p1_src,
-                "-r", "30",
-                "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-                "-pix_fmt", "yuvj420p", "-video_track_timescale", "90000",
-                "-c:a", "copy",
-                p1_30,
-            ],
-            check=True,
-        )
+    print("Normalizing Part 01 (60fps -> 30fps, high quality CRF 15)...")
+    subprocess.run(
+        [
+            FFMPEG, "-y", "-i", p1_src,
+            "-r", "30",
+            "-c:v", "libx264", "-preset", "medium", "-crf", "15",
+            "-pix_fmt", "yuvj420p", "-video_track_timescale", "90000",
+            "-c:a", "copy",
+            p1_30,
+        ],
+        check=True,
+    )
 
     resolved_paths = [p1_30] + [os.path.join(OUT_DIR, fn) for fn, _ in PARTS[1:]]
 
