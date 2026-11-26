@@ -1,16 +1,16 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { interpolate, spring, useCurrentFrame } from "remotion";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { MahadevRig } from "../characters/MahadevRig";
 import { VishnuRig } from "../characters/VishnuRig";
 import { ShivGanaRig } from "../characters/ShivGanaRig";
 import { BackgroundCrowdBand, DetailedSpiritRig } from "../characters/DetailedGanasAndSpirits";
-import { getBedEnergy, getSmoothVoEnergy } from "../timeline";
+import { getBedEnergy, getSmoothVoEnergy, MAHADEV_FPS } from "../timeline";
 
 // S07 (01:38 - 02:00, 1320 frames): "इतने में शिव गण आ गए सारे... आज अपने तरीके का श्रृंगार हम करेंगे! महादेव बोले — जाको रुचि लग रही हो वही कर लो!"
 export const S07ShivGana: React.FC<{ globalStartFrame: number }> = ({ globalStartFrame }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const fps = MAHADEV_FPS;
   const gf = globalStartFrame + frame;
   const vo = getSmoothVoEnergy(gf);
   const bed = getBedEnergy(gf);

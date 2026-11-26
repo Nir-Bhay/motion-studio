@@ -26,7 +26,7 @@ const SCENE_HUD: Record<string, { title: string; subtitle: string }> = {
   S07: { title: "७. शिव-गणों का प्रवेश एवं हठ", subtitle: "श्रृंगी-भृंगी • भोले भंडारी की स्वीकृति" },
 };
 
-export const MahadevBaratPart01: React.FC = () => {
+export const MahadevBaratPart01: React.FC<{ muteAudio?: boolean }> = ({ muteAudio = false }) => {
   const frame = useCurrentFrame();
   const activeScene = SCENES.find((s) => frame >= s.startFrame && frame < s.startFrame + s.durationFrames) ?? SCENES[0];
   const hud = SCENE_HUD[activeScene.id];
@@ -35,7 +35,7 @@ export const MahadevBaratPart01: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#0a0714" }}>
       {/* Master Synchronized Katha Audio + Devotional Score */}
-      <Audio src={staticFile("audio/mahadev-barat-2m-master.mp3")} volume={1} />
+      {!muteAudio && <Audio src={staticFile("audio/mahadev-barat-2m-master.mp3")} volume={1} />}
 
       <Sequence from={SCENES[0].startFrame} durationInFrames={SCENES[0].durationFrames}>
         <S00Hook />

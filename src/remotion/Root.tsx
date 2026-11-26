@@ -1,5 +1,10 @@
 import React from "react";
 import { Composition } from "remotion";
+import {
+  FULL_MOVIE_DURATION_FRAMES,
+  FULL_MOVIE_FPS,
+  MahadevBaratFullMovie,
+} from "./mahadev/MahadevBaratFullMovie";
 import { MahadevBaratPart01 } from "./mahadev/MahadevBarat2M";
 import { MahadevBaratPart02 } from "./mahadev/part2/MahadevBaratPart02";
 import { MahadevBaratPart03 } from "./mahadev/part3/MahadevBaratPart03";
@@ -48,6 +53,14 @@ import { P10_DURATION_FRAMES, P10_FPS } from "./mahadev/part10/timelineP10";
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="MahadevBaratFullMovie"
+        component={MahadevBaratFullMovie}
+        durationInFrames={FULL_MOVIE_DURATION_FRAMES}
+        fps={FULL_MOVIE_FPS}
+        width={MAHADEV_WIDTH}
+        height={MAHADEV_HEIGHT}
+      />
       <Composition
         id="MahadevBaratPart01"
         component={MahadevBaratPart01}

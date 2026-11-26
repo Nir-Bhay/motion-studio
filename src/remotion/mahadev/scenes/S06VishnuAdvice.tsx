@@ -1,14 +1,14 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { interpolate, spring, useCurrentFrame } from "remotion";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { MahadevRig } from "../characters/MahadevRig";
 import { VishnuRig } from "../characters/VishnuRig";
-import { getSmoothVoEnergy } from "../timeline";
+import { getSmoothVoEnergy, MAHADEV_FPS } from "../timeline";
 
 // S06 (01:20.5 - 01:38, 1050 frames): "भगवान विष्णु ने जाकर कहा... आज आपका ब्याह होना है! अचकन, सेहरा, पाग पहन के चलो!"
 export const S06VishnuAdvice: React.FC<{ globalStartFrame: number }> = ({ globalStartFrame }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const fps = MAHADEV_FPS;
   const gf = globalStartFrame + frame;
   const vo = getSmoothVoEnergy(gf);
 

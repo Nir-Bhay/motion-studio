@@ -1,15 +1,15 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { interpolate, spring, useCurrentFrame } from "remotion";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { VishnuRig } from "../characters/VishnuRig";
 import { DevaHelperRig } from "../characters/ApsaraAndMusicians";
 import { BackgroundCrowdBand } from "../characters/DetailedGanasAndSpirits";
-import { getSmoothVoEnergy } from "../timeline";
+import { getSmoothVoEnergy, MAHADEV_FPS } from "../timeline";
 
 // S03 (00:34 - 00:56, 1320 frames): "भगवान विष्णु पधारे... शंख, चक्र, गदा, पद्म लेकर के... देख कर सब बलैया लेने लगे!"
 export const S03Vishnu: React.FC<{ globalStartFrame: number }> = ({ globalStartFrame }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const fps = MAHADEV_FPS;
   const gf = globalStartFrame + frame;
   const vo = getSmoothVoEnergy(gf);
 

@@ -15,7 +15,7 @@ Full Timestamped Transcript: `productions/005-mahadev-barat/transcript.txt`
 | **Part 08** | `22:32 – 28:00` | चतुर्मुख ब्रह्मा व इंद्र भ्रम, भूतों की हुंकार पर नारद का खिसकना, बारात देख बालकों का भागना व किवाड़ बंद करना, बिना मुख के बाराती की दस्तक | **Completed & Verified (`mahadev-barat-part08-1080p30.mp4`, 114.00s)** |
 | **Part 09** | `28:00 – 36:09` | सुनसान नगरी व शरबत में स्नान, नंदी पर उल्टे बैठे महादेव, मैना देवी का प्रश्न व श्रृंगी-भृंगी उत्तर, प्रचंड मुख दर्शन व मैना मूर्छा, श्मशान जनवासा व शिव-नारायण संवाद | **Completed & Verified (`mahadev-barat-part09-1080p30.mp4`, 135.00s)** |
 | **Part 10** | `36:09 – 45:53` | मैना जागृति व नारद प्रबोधन, पार्वती वंदना व दिव्य रूप दर्शन, जयमाला-पाणिग्रहण-वेद मंत्र, देव नृत्य व पुष्प वर्षा, महा-मंगल बधाई (समापन उत्सव) | **Completed & Verified (`mahadev-barat-part10-1080p30.mp4`, 128.00s)** |
-| **Full Movie** | `00:00 – 45:53` | संपूर्ण १० भागों (`Part 01` से `Part 10`) का 1080p30 संयुक्त चलचित्र (`17:50`, continuous 48 kHz AAC) | **Completed & Verified (`mahadev-barat-full-movie-1080p30.mp4`, 1070.12s)** |
+| **Full Movie** | `00:00 – 45:53` | संपूर्ण १० भागों (`Part 01` से `Part 10`) का `1080p30` संयुक्त चलचित्र (`17:50`, `MahadevBaratFullMovie` in Remotion Studio + `mahadev-barat-full-movie-1080p30.mp4`, `1070.12s`) | **Completed & Registered in Remotion Studio** |
 
 ## Full Movie Chapter Timestamps (`mahadev-barat-full-movie-1080p30.mp4`)
 

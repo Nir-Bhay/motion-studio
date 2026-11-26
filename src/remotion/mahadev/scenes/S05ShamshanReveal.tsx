@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { BrahmaRig, IndraOnAiravataRig } from "../characters/BrahmaIndraRigs";
 import { MahadevRig } from "../characters/MahadevRig";
@@ -7,12 +7,12 @@ import { ShivGanaRig } from "../characters/ShivGanaRig";
 import { BackgroundCrowdBand, DetailedSpiritRig } from "../characters/DetailedGanasAndSpirits";
 import { NandiBullRig } from "../part4/BhootPretAndNandiRigs";
 import { fireTurbulence } from "../motion/physics";
-import { getSmoothVoEnergy } from "../timeline";
+import { getSmoothVoEnergy, MAHADEV_FPS } from "../timeline";
 
 // S05 (01:06 - 01:20.5, 870 frames): "लेकिन तभी सब ने पूछा बोले कि दूल्हा राजा कहां है?... अभी भी श्मशान में ही बैठे हैं! बाघंबर लपेटे, हाथ की तकिया लगाए!"
 export const S05ShamshanReveal: React.FC<{ globalStartFrame: number }> = ({ globalStartFrame }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const fps = MAHADEV_FPS;
   const t = frame / fps;
   const gf = globalStartFrame + frame;
   const vo = getSmoothVoEnergy(gf);

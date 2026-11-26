@@ -1,13 +1,13 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { interpolate, spring, useCurrentFrame } from "remotion";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { BrahmaRig, IndraOnAiravataRig } from "../characters/BrahmaIndraRigs";
-import { getSmoothVoEnergy } from "../timeline";
+import { getSmoothVoEnergy, MAHADEV_FPS } from "../timeline";
 
 // S04 (00:56 - 01:06, 600 frames): "ब्रह्मा जी चतुर्मुख चारों का श्रृंगार करके आए, और सुंदर इंद्र भी आए"
 export const S04BrahmaIndra: React.FC<{ globalStartFrame: number }> = ({ globalStartFrame }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const fps = MAHADEV_FPS;
   const gf = globalStartFrame + frame;
   const vo = getSmoothVoEnergy(gf);
 

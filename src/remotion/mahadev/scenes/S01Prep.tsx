@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, spring, useCurrentFrame } from "remotion";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import {
   ApsaraRig,
@@ -8,7 +8,7 @@ import {
   DevaHelperRig,
 } from "../characters/ApsaraAndMusicians";
 import { BackgroundCrowdBand } from "../characters/DetailedGanasAndSpirits";
-import { getBedEnergy, getSmoothVoEnergy } from "../timeline";
+import { getBedEnergy, getSmoothVoEnergy, MAHADEV_FPS } from "../timeline";
 
 // S01 (00:00 - 00:15, 900 frames) — Dynamic 3-Shot Cinematic Hook synced line-by-line to VO!
 // Shot 1A (0–285f, 0.0–4.75s): "शंकर जी की बारात की तैयारी हो रही है। आहा!" -> Sweeping Aerial Push-In over Bustling Devaloka Courtyard + Grand Hook Crest
@@ -16,7 +16,7 @@ import { getBedEnergy, getSmoothVoEnergy } from "../timeline";
 // Shot 1C (575–900f, 9.6–15.0s): "होई शगुन मंगल शुभद, करहिं अप्सरा गान।" -> Swoop-In to Golden Lotus Mandap (3 Apsaras + Shankh/Dholak + Petal Shower!)
 export const S01Prep: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const fps = MAHADEV_FPS;
   const vo = getSmoothVoEnergy(frame);
   const bed = getBedEnergy(frame);
 

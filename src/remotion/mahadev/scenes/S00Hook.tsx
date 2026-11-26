@@ -1,5 +1,6 @@
 import React from "react";
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, spring, useCurrentFrame } from "remotion";
+import { MAHADEV_FPS } from "../timeline";
 import { ParallaxStage } from "../environment/ParallaxStage";
 import { VishnuRig } from "../characters/VishnuRig";
 import { BrahmaRig, IndraOnAiravataRig } from "../characters/BrahmaIndraRigs";
@@ -13,7 +14,7 @@ import { getSmoothVoEnergy } from "../timeline";
 // "भगवान विष्णु, ब्रह्मा जी, और ये भूत-प्रेत सब! आखिर ये क्यों आए हैं? आज किसकी शादी है!"
 export const S00Hook: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const fps = MAHADEV_FPS;
   const vo = getSmoothVoEnergy(frame);
 
   // Beat windows matched to measured p00-hook.wav (placed at 0.25s = f15):
