@@ -1,5 +1,12 @@
 import React from "react";
 import { Composition } from "remotion";
+import { SamyojLaunchV3, SamyojLaunchV3Hinglish } from "./samyoj-v3/SamyojLaunchV3";
+import {
+  V3_DURATION_FRAMES,
+  V3_FPS,
+  V3_HEIGHT,
+  V3_WIDTH,
+} from "./samyoj-v3/tokens";
 import {
   FULL_MOVIE_DURATION_FRAMES,
   FULL_MOVIE_FPS,
@@ -53,6 +60,22 @@ import { P10_DURATION_FRAMES, P10_FPS } from "./mahadev/part10/timelineP10";
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="SamyojLaunchV3"
+        component={SamyojLaunchV3}
+        durationInFrames={V3_DURATION_FRAMES}
+        fps={V3_FPS}
+        width={V3_WIDTH}
+        height={V3_HEIGHT}
+      />
+      <Composition
+        id="SamyojLaunchV3Hinglish"
+        component={SamyojLaunchV3Hinglish}
+        durationInFrames={V3_DURATION_FRAMES}
+        fps={V3_FPS}
+        width={V3_WIDTH}
+        height={V3_HEIGHT}
+      />
       <Composition
         id="MahadevBaratFullMovie"
         component={MahadevBaratFullMovie}

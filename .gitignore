@@ -21,3 +21,5 @@ productions/005-mahadev-barat/audio/*.wav
 productions/005-mahadev-barat/audio/vo/
 productions/005-mahadev-barat/audio/vo_p*/
 productions/005-mahadev-barat/out/*.mp4
+productions/005-mahadev-barat/out/shorts/*.mp4
+scripts/__pycache__/

@@ -1,9 +1,8 @@
 import { existsSync } from "node:fs";
 import { Config } from "@remotion/cli/config";
 
-// Render defaults: best-quality H.264, high-quality JPEG frames, crisp AAC audio.
-Config.setVideoImageFormat("jpeg");
-Config.setJpegQuality(95);
+// Render defaults: lossless PNG frames into high-quality H.264 (CRF 16) so thin UI borders & text stay razor-sharp.
+Config.setVideoImageFormat("png");
 Config.setCrf(16);
 Config.setAudioBitrate("320k");
 Config.setOverwriteOutput(true);
