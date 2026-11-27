@@ -9,8 +9,8 @@ Ye repo ek motion-graphics production workspace hai (Remotion: React → MP4). K
 4. `docs/10-STORY-TO-VIDEO-pipeline.md` — kaam ka process (gates ke saath)
 5. `docs/04-MOTION-DESIGN-BIBLE.md` — taste ke numbers
 6. Kaam ke hisaab se: formats `docs/05`, styles `docs/14`, SVG `docs/06`, camera/transitions `docs/07`, audio `docs/08`, quality gate `docs/09`, readiness `docs/16`
-7. **Deep Craft & Physics Playbooks (2026 Upgrade):** `docs/52` (motion math/IK/Verlet/springs), `docs/53` (character design, muscles, visemes), `docs/54` (multiplane backgrounds & consistency), `docs/55` (direction, camera, Pixar spine, AV script), `docs/56` (hybrid styles & tech stack). Reusable math module: `src/remotion/lib/motionMath.ts`.
-8. **Skills (`skill-pack/`):** `ractor-motion-direction/SKILL.md`, `character-rigging-and-physics/SKILL.md`, `cinematic-direction-and-script/SKILL.md`, `hybrid-render-tech-stack/SKILL.md`; Ractor episodes ke liye `ractor-video-production/SKILL.md` + `skill-pack/agents/`.
+7. **Deep Craft & Physics Playbooks (2026 Upgrade):** `docs/52` (motion math/IK/Verlet/springs), `docs/53` (character design, muscles, visemes), `docs/54` (multiplane backgrounds & consistency), `docs/55` (direction, camera, Pixar spine, AV script), `docs/56` (hybrid styles & tech stack), `docs/57` (cinema craft, 1s/2s cadence, J/L-cuts & 8 style variations). Reusable math module: `src/remotion/lib/motionMath.ts`.
+8. **Skills (`skill-pack/`):** `ractor-motion-direction/SKILL.md`, `character-rigging-and-physics/SKILL.md`, `cinematic-direction-and-script/SKILL.md`, `hybrid-render-tech-stack/SKILL.md`, `cinematic-polish-and-variations/SKILL.md`; Ractor episodes ke liye `ractor-video-production/SKILL.md` + `skill-pack/agents/`.
 9. Remotion API ka sawal ho to pehle `references/remotion-skills/skills/` ke official skills, phir docs.
 
 ## Video banane ka process (skip mat karo)

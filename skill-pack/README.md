@@ -20,6 +20,8 @@ skill-pack/
     SKILL.md                    ← Pixar story spine, AV scripts, multiplane camera, 180° rule
   hybrid-render-tech-stack/
     SKILL.md                    ← SVG vs Canvas vs Skia vs Three.js vs Manim vs Pixel/Cel
+  cinematic-polish-and-variations/
+    SKILL.md                    ← 8 style archetypes, 1s/2s cadence, Ma, smears, rack focus, J/L-cuts
   agents/                       ← 3 reviewer agents (geometry / portrait / story)
   episodes/
     asi05/DIRECTOR-NOTE.md      ← ASI05 episode ki poori director's note

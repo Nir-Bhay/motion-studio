@@ -359,3 +359,93 @@ export function breathingCycle(t: number, bpm = 15, phaseOffset = 0): number {
   const s = Math.sin(2 * Math.PI * hz * t + phaseOffset);
   return 0.5 + 0.5 * Math.sin(s * (Math.PI / 2) * 0.85);
 }
+
+/**
+ * Spider-Verse / Anime cadence modulation: quantize continuous `t` to `stepFps`
+ * (e.g. 12fps "on twos" for crunchy stylized character acting, 24/60fps "on ones" for fluid camera).
+ */
+export function posterizeTime(t: number, stepFps = 12): number {
+  return Math.floor(t * stepFps) / stepFps;
+}
+
+/**
+ * Dynamic eye pupil / head-turn gaze offset toward a target coordinate `(target.x, target.y)`.
+ */
+export function lookAtOffset(
+  origin: Vec2,
+  target: Vec2,
+  maxRadius = 4.5,
+  softRange = 220,
+): Vec2 {
+  const dx = target.x - origin.x;
+  const dy = target.y - origin.y;
+  const dist = Math.hypot(dx, dy) || 1;
+  const mag = maxRadius * Math.tanh(dist / softRange);
+  return { x: (dx / dist) * mag, y: (dy / dist) * mag };
+}
+
+/**
+ * Rack Focus optical transition between Plane A (`blurA`) and Plane B (`blurB`).
+ * Shifts sharpness smoothly across `[startSec, endSec]` to guide attention without cutting.
+ */
+export function rackFocusPair(
+  t: number,
+  startSec: number,
+  endSec: number,
+  maxBlurPx = 7,
+): { blurA: number; blurB: number } {
+  const u = clamp((t - startSec) / Math.max(0.001, endSec - startSec), 0, 1);
+  const eased = u * u * (3 - 2 * u);
+  return {
+    blurA: eased * maxBlurPx,
+    blurB: (1 - eased) * maxBlurPx,
+  };
+}
+
+/**
+ * Decaying band-limited impact camera shake (thunder, damaru strike, heavy landing).
+ * Deterministic multi-frequency sinusoid — zero harsh random jitter.
+ */
+export function bandLimitedShake(
+  t: number,
+  impactSec: number,
+  durSec = 0.45,
+  ampPx = 9,
+  freqHz = 22,
+): Vec2 {
+  const dt = t - impactSec;
+  if (dt <= 0 || dt >= durSec) return { x: 0, y: 0 };
+  const decay = Math.exp((-5.5 * dt) / durSec);
+  const w = 2 * Math.PI * freqHz;
+  return {
+    x: ampPx * decay * (0.65 * Math.sin(w * dt) + 0.35 * Math.sin(1.47 * w * dt + 1.1)),
+    y: ampPx * decay * (0.6 * Math.cos(1.13 * w * dt) + 0.4 * Math.sin(1.73 * w * dt + 2.3)),
+  };
+}
+
+/**
+ * Smear-frame stretch envelope [0..1] peaking sharply mid-strike for rapid 2-4 frame bursts.
+ */
+export function smearEnvelope(t: number, startSec: number, endSec: number): number {
+  if (t <= startSec || t >= endSec) return 0;
+  const u = (t - startSec) / (endSec - startSec);
+  return Math.sin(Math.PI * u) ** 2;
+}
+
+/**
+ * Grounded walk/gait cycle offsets from step frequency `stepHz` (strides/sec).
+ * Returns vertical hip bob (2x stride frequency), lateral weight sway, and normalized swing phase.
+ */
+export function weightShiftGait(
+  t: number,
+  stepHz = 1.6,
+  bobAmpPx = 7,
+  swayAmpPx = 5,
+): { hipBobY: number; swayX: number; stridePhase: number } {
+  const phase = 2 * Math.PI * stepHz * t;
+  return {
+    hipBobY: -bobAmpPx * Math.abs(Math.sin(phase)),
+    swayX: swayAmpPx * Math.sin(phase),
+    stridePhase: phase,
+  };
+}
