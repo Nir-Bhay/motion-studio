@@ -13,8 +13,13 @@ skill-pack/
     SKILL.md                    ← main skill entry
     references/                 ← 9 reference docs (visual, audio, brand, gates…)
   ractor-motion-direction/
-    references/                 ← style-system + review-gates
-    (SKILL.md is pack me NAHI aaya — REVIEW.md me flag hai)
+    SKILL.md                    ← visual hierarchy, POV spotlighting & MP4 parity gates
+  character-rigging-and-physics/
+    SKILL.md                    ← shape language, 2-bone/FABRIK IK, Verlet cloth, visemes
+  cinematic-direction-and-script/
+    SKILL.md                    ← Pixar story spine, AV scripts, multiplane camera, 180° rule
+  hybrid-render-tech-stack/
+    SKILL.md                    ← SVG vs Canvas vs Skia vs Three.js vs Manim vs Pixel/Cel
   agents/                       ← 3 reviewer agents (geometry / portrait / story)
   episodes/
     asi05/DIRECTOR-NOTE.md      ← ASI05 episode ki poori director's note

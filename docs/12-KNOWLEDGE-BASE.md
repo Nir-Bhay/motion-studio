@@ -21,7 +21,9 @@
 | Demo compositions (3) | `src/remotion/compositions/ShowcaseKinetic/ShortHook/DataStory` | 16:9 60fps · 9:16 · 1:1 |
 | Production P001 (50s short, final MP4) | `productions/001-chatgpt-google-connect/` + `public/videos/` | Rendered, −14.3 LUFS, review notes ke saath |
 | Procedural audio generator | `productions/001-.../make-audio.py` | 92 BPM bed + timeline SFX, numpy |
-| Docs (research + rules) | `docs/00`–`docs/16` | Knowledge base + synthesis + readiness included |
+| Docs (research + rules) | `docs/00`–`docs/16`, `docs/52`–`docs/56` | Knowledge base + math/rigging/direction/hybrid-stack encyclopedia |
+| Reusable Motion Math & Physics | `src/remotion/lib/motionMath.ts` | Springs, 2-bone IK, FABRIK, Verlet cloth, squash/stretch, Catmull-Rom, multiplane, blinks |
+| Studio Skills | `skill-pack/*/SKILL.md` | 5 skills: `ractor-video-production`, `ractor-motion-direction`, `character-rigging-and-physics`, `cinematic-direction-and-script`, `hybrid-render-tech-stack` |
 | Templates | `templates/01`–`05` | Synthesis ke baad upgrade hue (viewer-question, forbidden-states) |
 | Live preview + download page | `src/App.tsx` (`npm run preview`, :5173) | Remotion Studio: `npm run studio` (:3001) |
 
